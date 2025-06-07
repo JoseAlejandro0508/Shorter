@@ -1,0 +1,308 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&family=Roboto:wght@700&display=swap");
+
+
+.count{
+
+    opacity: 0.9;
+ 
+}
+#table_info{
+    opacity: 0.9;
+}
+#f1{
+
+    font-size: 20px;
+    background: linear-gradient(to right, #f29303, #fadd01);
+    animation: counter-pulse1 1s ease-in-out infinite; /* Animación de pulso */
+}
+#f2{
+    font-size: 20px;
+    background: linear-gradient(to right, #a6c1c2, #42ceed);
+    animation: counter-pulse1 1s ease-in-out infinite; /* Animación de pulso */
+}
+#f3{
+    font-size: 20px;
+    background: linear-gradient(to right, #7a4a03c8, #eed29d);
+    animation: counter-pulse1 1s ease-in-out infinite; /* Animación de pulso */
+}
+#f1_{
+
+    font-size: 15px;
+    background: linear-gradient(to right, #f29303, #fadd01);
+
+}
+   
+#f2_{
+    font-size: 15px;
+    background: linear-gradient(to right, #a6c1c2, #42ceed);
+
+}
+#f3_{
+    font-size: 15px;
+    background: linear-gradient(to right, #7a4a03c8, #eed29d);
+
+}
+#f4_{
+    font-size: 15px;
+    background: linear-gradient(to right, #696868c8, #000000);
+
+}
+counter-wrapper {
+    position: relative;
+    border-radius: 15px; /* Ajusta el valor para redondear más o menos */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Sombra alrededor del borde */
+    overflow: hidden; /* Para que la animación del borde no se salga */
+  }
+  
+  .counter-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 3px solid transparent; /* Ancho del borde */
+    border-radius: 15px;
+    animation: multicolor-border 3s linear infinite;
+
+  }
+
+  
+  
+  @keyframes multicolor-border {
+    0% {
+      border-color: red;
+    }
+    25% {
+      border-color: rgb(242, 242, 242);
+    }
+    50% {
+      border-color: rgb(235, 10, 156);
+    }
+    75% {
+      border-color: rgb(244, 244, 244);
+    }
+    100% {
+      border-color: rgb(239, 9, 9);
+    }
+  }
+  
+  #counterElement {
+    animation: counter-pulse 1s ease-in-out infinite; /* Animación de pulso */
+  }
+  
+  @keyframes counter-pulse1 {
+    0%, 100% {
+      transform: scale(1); /* Tamaño normal */
+    }
+    50% {
+      transform: scale(1.01); /* Aumenta ligeramente el tamaño */
+    }
+  }
+  @keyframes counter-pulse {
+    0%, 100% {
+      transform: scale(1); /* Tamaño normal */
+    }
+    50% {
+      transform: scale(1.08); /* Aumenta ligeramente el tamaño */
+    }
+  }
+
+
+.countdown {
+  background: #eee;
+  height: auto;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10rem;
+  flex-wrap: wrap;
+}
+
+.timer,
+.signup {
+    display: flex;
+    align-items: stretch;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+}
+
+.timer h3 {
+  font-weight: 700;
+  font-size: 22px;
+}
+
+
+
+
+
+.counter {
+
+  display: flex;
+  max-width: fit-content;
+  gap: 0.75em;
+  justify-content: center;
+  align-items: center;
+  color: rgba(243, 6, 53, 0.829);
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+}
+.counter__box {
+  text-align: center;
+  background: blue;
+  width: 59px;
+  height: 83px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0.25rem;
+}
+
+.counter__time {
+  font-size: 3rem;
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+}
+
+.counter__duration {
+  font-size: large;
+  text-transform: capitalize;
+  margin: 0;
+  padding: 0;
+  color: #eee;
+}
+
+/* HELPERS */
+
+.dots {
+  font-size: 52px;
+  color: #002e46;
+  margin: -0.75rem;
+  padding: 0;
+}
+
+.exp {
+  font-size: 52px;
+  font-family: "Roboto", sans-serif;
+}
+
+.black-white {
+  background: linear-gradient(
+    to top,
+    #002e46 0%,
+    #002e46 50%,
+    #4d707f 50%,
+    #4d707f 100%
+  );
+  border-radius: 15px;
+}
+
+.sky-blue {
+  background: linear-gradient(
+    to top,
+    #009edb 0%,
+    #009edb 50%,
+    rgba(127, 206, 236, 0.95) 50%,
+    rgba(127, 206, 236, 0.95) 100%
+  );
+  border-radius: 15px;
+}
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra con mayor intensidad */
+    border-radius: 15px; /* Bordes redondeados */
+    background: linear-gradient(
+      to right,
+      #800080,
+      #0000ff
+    ); /* Degradado de violeta a azul */
+    animation: border-blink 3s linear infinite; /* Animación de parpadeo */
+  }
+  
+  th,
+  td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 2px solid #ddd; /* Línea divisoria entre filas */
+    text-align: center;
+  }
+  td {
+    background-color: rgb(228, 233, 232);
+    
+  }
+  th {
+    background-color: transparent; /* Transparentes para que se vea el degradado */
+    color: white;
+  }
+  
+  tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.1); /* Fondo sutil para filas pares */
+  }
+  
+  tr:hover {
+    background-color: rgba(
+      255,
+      255,
+      255,
+      0.2
+    ); /* Fondo más intenso al pasar el cursor */
+  }
+  
+  .rank-figure {
+
+      padding: 10px; /* Espacio interno para el rango */
+      border-radius: 20px; /* Bordes redondeados */
+      text-align: center; /* Centrado del texto */
+      color: white; /* Color de texto blanco */
+  }
+  .animated-heading {
+      font-family: 'Arial Black', sans-serif; /* O la fuente que prefieras */
+      font-weight: 900; /* Grosor de fuente */
+      background: linear-gradient(to right, #ff0000, #0000ff); /* Gradiente inicial: rojo a azul */
+      padding: 10px 20px; /* Espacio interno */
+      border-radius: 10px; /* Bordes redondeados */
+      color: white; /* Color del texto */
+      text-align: center; /* Centrado del texto */
+      animation: colorShift 6s linear infinite; /* Animación */
+    }
+  
+  @keyframes colorShift {
+      0% {
+        background: linear-gradient(to right, #ff0000, #2206f5); /* Rojo a azul */
+      }
+      25% {
+        background: linear-gradient(to right, #f46505, #0000ff); /* Azul completo */
+      }
+      50% {
+          background: linear-gradient(to right, #04f310, #0000ff); /* Azul completo */
+        }
+      75% {
+          background: linear-gradient(to right, #e806bf, #0000ff); /* Azul completo */
+        }
+  
+      100% {
+        background: linear-gradient(to right, #080be9, #e90707); /* Rojo a azul */
+      }
+    }
+  /* Animación de parpadeo */
+  
+  @keyframes border-blink {
+    0% {
+      box-shadow: 0 0 10px rgba(128, 0, 128, 0.8);
+    }
+    50% {
+      box-shadow: 0 0 15px rgba(0, 0, 255, 0.8);
+    }
+    100% {
+      box-shadow: 0 0 10px rgba(128, 0, 128, 0.8);
+    }
+  }
+  

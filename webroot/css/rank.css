@@ -1,0 +1,91 @@
+table {
+  width: 80%;
+  margin: 20px auto;
+  border-collapse: collapse;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra con mayor intensidad */
+  border-radius: 15px; /* Bordes redondeados */
+  background: linear-gradient(
+    to right,
+    #800080,
+    #0000ff
+  ); /* Degradado de violeta a azul */
+  animation: border-blink 3s linear infinite; /* Animación de parpadeo */
+}
+
+th,
+td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 2px solid #ddd; /* Línea divisoria entre filas */
+  text-align: center;
+}
+td {
+  background-color: rgb(228, 233, 232);
+  
+}
+th {
+  background-color: transparent; /* Transparentes para que se vea el degradado */
+  color: white;
+}
+
+tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.1); /* Fondo sutil para filas pares */
+}
+
+tr:hover {
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.2
+  ); /* Fondo más intenso al pasar el cursor */
+}
+
+.rank-figure {
+    padding: 10px; /* Espacio interno para el rango */
+    border-radius: 5px; /* Bordes redondeados */
+    text-align: center; /* Centrado del texto */
+    color: white; /* Color de texto blanco */
+}
+.animated-heading {
+    font-family: 'Arial Black', sans-serif; /* O la fuente que prefieras */
+    font-weight: 900; /* Grosor de fuente */
+    background: linear-gradient(to right, #ff0000, #0000ff); /* Gradiente inicial: rojo a azul */
+    padding: 10px 20px; /* Espacio interno */
+    border-radius: 10px; /* Bordes redondeados */
+    color: white; /* Color del texto */
+    text-align: center; /* Centrado del texto */
+    animation: colorShift 6s linear infinite; /* Animación */
+  }
+
+@keyframes colorShift {
+    0% {
+      background: linear-gradient(to right, #ff0000, #2206f5); /* Rojo a azul */
+    }
+    25% {
+      background: linear-gradient(to right, #f46505, #0000ff); /* Azul completo */
+    }
+    50% {
+        background: linear-gradient(to right, #04f310, #0000ff); /* Azul completo */
+      }
+    75% {
+        background: linear-gradient(to right, #e806bf, #0000ff); /* Azul completo */
+      }
+
+    100% {
+      background: linear-gradient(to right, #080be9, #e90707); /* Rojo a azul */
+    }
+  }
+/* Animación de parpadeo */
+
+@keyframes border-blink {
+  0% {
+    box-shadow: 0 0 10px rgba(128, 0, 128, 0.8);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(0, 0, 255, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 10px rgba(128, 0, 128, 0.8);
+  }
+}
