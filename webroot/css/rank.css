@@ -9,7 +9,7 @@ table {
     #800080,
     #0000ff
   ); /* Degradado de violeta a azul */
-  animation: border-blink 3s linear infinite; /* Animación de parpadeo */
+
 }
 
 th,
@@ -55,7 +55,7 @@ tr:hover {
     border-radius: 10px; /* Bordes redondeados */
     color: white; /* Color del texto */
     text-align: center; /* Centrado del texto */
-    animation: colorShift 6s linear infinite; /* Animación */
+
   }
 
 @keyframes colorShift {

@@ -59,7 +59,7 @@ $withdrawal_methods = array_column_polyfill(get_withdrawal_methods(), 'name', 'i
     <div class="box-body">
         <?php if ((bool)get_option('enable_withdraw', 1)) : ?>
             <div class="text-center">
-                <button id="open-modal"><?= __('Withdraw') ?></button>
+                <button id="open-modal"><i class="fa fa-sign-out"></i><?= __('Withdraw') ?></button>
 
                 <div id="withdrawal-modal" class="modal">
                     <div class="modal-content">

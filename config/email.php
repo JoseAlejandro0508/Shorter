@@ -31,7 +31,7 @@ return [
             'port' => '',
             'timeout' => 30,
             'username' => '',
-            'password' => 'Espia*2020',
+            'password' => '',
             'client' => null,
             'tls' => false,
             'url' => env('EMAIL_TRANSPORT_DEFAULT_URL', null),
@@ -59,25 +59,25 @@ return [
     'Email' => [
         'default' => [
             'transport' => 'default',
-            'from' => ['no_reply@short.tunoticion.shop' => 'Tu Noticion'],
+            'from' => ['no_reply@localhost' => 'AdLinkFly'],
             //'charset' => 'utf-8',
             //'headerCharset' => 'utf-8',
         ],
         'smtp' => [
             'transport' => 'smtp',
-            'from' => ['no_reply@short.tunoticion.shop' => 'Tu Noticion'],
+            'from' => ['no_reply@localhost' => 'AdLinkFly'],
             //'charset' => 'utf-8',
             //'headerCharset' => 'utf-8',
         ],
         'mail2' => [
             'transport' => 'mail2',
-            'from' => ['no_reply@short.tunoticion.shop' => 'Tu Noticion'],
+            'from' => ['no_reply@localhost' => 'AdLinkFly'],
             //'charset' => 'utf-8',
             //'headerCharset' => 'utf-8',
         ],
         'sendmail' => [
             'transport' => 'sendmail',
-            'from' => ['no_reply@short.tunoticion.shop' => 'Tu Noticion'],
+            'from' => ['no_reply@localhost' => 'AdLinkFly'],
             //'charset' => 'utf-8',
             //'headerCharset' => 'utf-8',
         ],

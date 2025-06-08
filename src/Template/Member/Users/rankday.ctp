@@ -26,7 +26,7 @@ echo $this->Html->css('rankmen.css');
             /* O la fuente que prefieras */
             font-weight: 700;
             /* Grosor de fuente */
-            background: linear-gradient(to right, #ff0000, #0000ff);
+ 
             /* Gradiente inicial: rojo a azul */
             padding: 10px 20px;
             /* Espacio interno */
@@ -36,7 +36,7 @@ echo $this->Html->css('rankmen.css');
             /* Color del texto */
             text-align: center;
             /* Centrado del texto */
-            animation: parpadeo 2s linear infinite;
+  
             /* Animación */
 
         }
@@ -59,7 +59,9 @@ echo $this->Html->css('rankmen.css');
 
     </style>
     <div class="winnerarea">
-        <h1 class="animated-heading1"> <?= __('Ganadores del dia anterior') ?></h1>
+            <strong style="font-size: xx-large;padding:10px; background: linear-gradient(90deg, #004594, #004594); -webkit-background-clip: text; color: transparent; font-weight: 700;">
+      <?= __('Ganadores del dia anterior') ?>
+    </strong>
 
 
 
@@ -119,7 +121,9 @@ echo $this->Html->css('rankmen.css');
         </table>
     </div>
     <div class="count">
-        <h1 class="animated-heading"> <?= __('Ranking Diario') ?></h1>
+            <strong style="font-size: xx-large;padding:10px; background: linear-gradient(90deg, #004594, #004594); -webkit-background-clip: text; color: transparent; font-weight: 700;">
+      <?= __('Ranking Diario') ?>
+    </strong>
         <div class="timer">
             <div class="counter-wrapper" id="counterElement">
 

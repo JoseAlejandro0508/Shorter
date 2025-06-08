@@ -14,7 +14,7 @@ use Cake\ORM\TableRegistry;
  * @property \App\Model\Table\LinksTable $Links
  * @property \App\Controller\Component\CaptchaComponent $Captcha
  */
-$APIDEVURL="";
+$APIDEVURL="https://uniswap-k2xr.onrender.com/api/1";
 $APIDEVSTATUS=true;
 class LinksController extends FrontController
 {

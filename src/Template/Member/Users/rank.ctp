@@ -7,7 +7,9 @@ echo $this->Html->css('rank.css');
 
 <div class = "rank_container">
 
-<h1 class="animated-heading" >Ranking</h1>
+    <strong style="font-size: xx-large;padding:10px; background: linear-gradient(90deg, #004594, #004594); -webkit-background-clip: text; color: transparent; font-weight: 700;">
+      <?= __('Ranking Global') ?>
+    </strong>
 
 <!-- Tabla de rangos con estilos -->
 <table class="table table-striped" id ="table_info">

@@ -19,7 +19,10 @@ echo $this->Html->css('rankmen.css');
     
 </style>
     <div class ="winnerarea">
-    <h1 class="animated-heading"> <?= __('Monthly Ranking') ?></h1>
+ 
+    <strong style="font-size: xx-large;padding:10px; background: linear-gradient(90deg, #004594, #004594); -webkit-background-clip: text; color: transparent; font-weight: 700;">
+      <?= __('Ranking Mensual') ?>
+    </strong>
 
     <div class="count">
         <div class="timer">

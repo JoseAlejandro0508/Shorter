@@ -144,15 +144,23 @@
                                         'controller' => 'Users',
                                         'action' => 'profile',
                                         'prefix' => 'member',
-                                    ]); ?>" class="btn btn-default btn-flat"><?= __('Profile') ?></a>
+                                    ]); ?>" class="btn btn-default btn-flat"><i class="fa fa-group" style="font-size: 20px;
+    padding-right: 10px;"></i><?= __('Profile') ?></a>
                                 </div>
-                                <div class="pull-right">
+      
+                            </li>
+                            <li class="user-footer">
+                            
+                                <div class="pull-left">
+                                    
                                     <a href="<?= $this->Url->build([
                                         'controller' => 'Users',
                                         'action' => 'logout',
                                         'prefix' => 'auth',
-                                    ]); ?>" class="btn btn-default btn-flat"><?= __('Log out') ?></a>
+                                    ]); ?>" class="btn btn-default btn-flat"><i class="fa fa-power-off" style="font-size: 20px;
+    padding-right: 10px;"></i><?= __('Log out') ?></a>
                                 </div>
+      
                             </li>
                         </ul>
                     </li>
@@ -208,7 +216,7 @@
                 </li>
 
                 <li class="treeview">
-                    <a href="#"><img src="<?php echo $this->Url->image('corona.png'); ?>" style = "width:15px;height:15px"> <span><?= __('Rank') ?></span> <i
+                    <a href="#"><i class="fa fa-bar-chart"></i><span><?= __('Rank') ?></span> <i
                                 class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
                     <li><a href="<?php echo $this->Url->build(['controller' => 'Users', 'action' => 'rank']); ?>"><span><?= __('Global') ?></span></a></li>
@@ -218,7 +226,7 @@
                     </ul>
                 </li>
                 <li class="treeview">
-                    <a href="#" style = "left:-8px"><img src="<?php echo $this->Url->image('market.png'); ?>" style = "width:25px;height:25px"> <span><?= __('Market') ?></span> <i
+                    <a href="#"><i class="fa fa-line-chart"></i> <span><?= __('Market') ?></span> <i
                                 class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
                     <li><a href="<?php echo $this->Url->build(['controller' => 'Users', 'action' => 'oferts']); ?>"><span><?= __('Oferts') ?></span></a></li>

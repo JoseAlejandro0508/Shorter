@@ -2,6 +2,6 @@
 return array (
   'Adlinkfly' => 
   array (
-    'installed' => 0,
+    'installed' => 1,
   ),
 );

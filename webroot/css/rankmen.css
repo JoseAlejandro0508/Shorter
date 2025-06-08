@@ -63,7 +63,7 @@ counter-wrapper {
     height: 100%;
     border: 3px solid transparent; /* Ancho del borde */
     border-radius: 15px;
-    animation: multicolor-border 3s linear infinite;
+
 
   }
 
@@ -87,9 +87,7 @@ counter-wrapper {
     }
   }
   
-  #counterElement {
-    animation: counter-pulse 1s ease-in-out infinite; /* Animación de pulso */
-  }
+
   
   @keyframes counter-pulse1 {
     0%, 100% {
@@ -224,7 +222,7 @@ table {
       #800080,
       #0000ff
     ); /* Degradado de violeta a azul */
-    animation: border-blink 3s linear infinite; /* Animación de parpadeo */
+
   }
   
   th,

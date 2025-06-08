@@ -65,7 +65,8 @@ function convertUrlsToLinks($text) {
                     <p><?= __('Total Views') ?></p>
                 </div>
                 <div class="icon">
-                    <i class="fa fa-bar-chart"></i>
+                    
+                    <i class="fa fa-eye"></i>
                 </div>
             </div>
         </div>
@@ -79,7 +80,7 @@ function convertUrlsToLinks($text) {
                     <p><?= __('Total Earnings') ?></p>
                 </div>
                 <div class="icon">
-                    <i class="fa fa-shopping-bag"></i>
+                    <i class="fa fa-bank"></i>
                 </div>
             </div>
         </div>
@@ -94,7 +95,7 @@ function convertUrlsToLinks($text) {
                         <p><?= __('Referral Earnings') ?></p>
                     </div>
                     <div class="icon">
-                        <i class="fa fa-exchange"></i>
+                        <i class="fa fa-group"></i>
                     </div>
                 </div>
             </div>
@@ -111,7 +112,7 @@ function convertUrlsToLinks($text) {
                     <p><?= __('Average CPM') ?></p>
                 </div>
                 <div class="icon">
-                    <i class="fa fa-usd"></i>
+                    <i class="fa fa-bar-chart-o"></i>
                 </div>
             </div>
         </div>

@@ -25,7 +25,7 @@ echo $this->Html->css('rankmen.css');
             /* O la fuente que prefieras */
             font-weight: 700;
             /* Grosor de fuente */
-            background: linear-gradient(to right, #ff0000, #0000ff);
+
             /* Gradiente inicial: rojo a azul */
             padding: 10px 20px;
             /* Espacio interno */
@@ -35,7 +35,7 @@ echo $this->Html->css('rankmen.css');
             /* Color del texto */
             text-align: center;
             /* Centrado del texto */
-            animation: parpadeo 2s linear infinite;
+
             /* Animación */
 
         }
@@ -60,7 +60,9 @@ echo $this->Html->css('rankmen.css');
 
 
 
-    <h1 class="animated-heading1"> <?= __('Ganadores de la semana anterior') ?></h1>
+    <strong style="font-size: xx-large;padding:10px; background: linear-gradient(90deg, #004594, #004594); -webkit-background-clip: text; color: transparent; font-weight: 700;">
+      <?= __('Ganadores de la semana anterior') ?>
+    </strong>
 
         <!-- Tabla de rangos con estilos -->
         <table class="table table-striped" id="table_info">
@@ -117,7 +119,9 @@ echo $this->Html->css('rankmen.css');
     </div>
   
      <div class="count">
-     <h1 class="animated-heading"> <?= __('Ranking Semanal') ?></h1>
+         <strong style="font-size: xx-large;padding:10px; background: linear-gradient(90deg, #004594, #004594); -webkit-background-clip: text; color: transparent; font-weight: 700;">
+      <?= __('Ranking Semanal') ?>
+    </strong>
             <div class="timer">
                 <div class="counter-wrapper" id="counterElement">
 
