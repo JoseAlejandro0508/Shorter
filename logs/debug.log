@@ -526,3 +526,12 @@
 2025-06-08 00:46:15 Notice: Notice (8): date_default_timezone_set(): Timezone ID '' is invalid in [C:\laragon\www\Acortador\src\Controller\Member\UsersController.php, line 791]
 
 
+2025-06-14 14:18:53 Notice: Notice (8): date_default_timezone_set(): Timezone ID '' is invalid in [C:\laragon\www\Acortador\src\Controller\Member\UsersController.php, line 791]
+
+
+2025-06-14 19:14:06 Notice: Notice (1024): Undefined property: UsersController::$Links in C:\laragon\www\Acortador\src\Controller\Member\UsersController.php on line 817 in [C:\laragon\www\Acortador\vendor\cakephp\cakephp\src\Controller\Controller.php, line 384]
+
+
+2025-06-14 19:57:45 Notice: Notice (1024): Undefined property: UsersController::$Links in C:\laragon\www\Acortador\src\Controller\Member\UsersController.php on line 817 in [C:\laragon\www\Acortador\vendor\cakephp\cakephp\src\Controller\Controller.php, line 384]
+
+

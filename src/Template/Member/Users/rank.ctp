@@ -83,7 +83,7 @@ echo $this->Html->css('rank.css');
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>Rank</th> <!-- Nueva columna para el rango -->
+            <th><?=__('Lugar')?></th> <!-- Nueva columna para el rango -->
             <th>ID</th>
             <th>Nombre de Usuario</th>
             <th>Cantidad de Vistas</th>

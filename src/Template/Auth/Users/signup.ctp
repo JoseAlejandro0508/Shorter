@@ -16,7 +16,7 @@ $this->assign('description', __('Register a new membership'));
 <?=
 $this->Form->control('username', [
     'label' => false,
-    'placeholder' => __('Username'),
+    'placeholder' => __('Usuario'),
     'class' => 'form-control'
 ])
 ?>
@@ -32,7 +32,7 @@ $this->Form->control('email', [
 <?=
 $this->Form->control('password', [
     'label' => false,
-    'placeholder' => __('Password'),
+    'placeholder' => __('Clave'),
     'class' => 'form-control'
 ])
 ?>
@@ -41,7 +41,7 @@ $this->Form->control('password', [
 $this->Form->control('password_compare', [
     'type' => 'password',
     'label' => false,
-    'placeholder' => __('Re-enter Password'),
+    'placeholder' => __('Introduce la clave nuevamente'),
     'class' => 'form-control'
 ])
 ?>
@@ -56,9 +56,9 @@ $this->Form->control('password_compare', [
     <?= $this->Form->control('accept', [
         'type' => 'checkbox',
         'label' => "<b>" . __(
-                "I agree to the {0} and {1}.",
+                "Estoy de acuerdo con {0} y {1}.",
                 "<a href='" . $this->Url->build('/') . 'pages/terms' . "' target='_blank'>" .
-                __('Terms of Use') . "</a>",
+                __('Terminos de uso') . "</a>",
                 "<a href='" . $this->Url->build('/') . 'pages/privacy' . "' target='_blank'>" .
                 __('Privacy Policy') . "</a>"
             ) . "</b>",
@@ -66,7 +66,7 @@ $this->Form->control('password_compare', [
     ]) ?>
 </div>
 
-<?= $this->Form->button(__('Register'), [
+<?= $this->Form->button(__('Registrar'), [
     'class' => 'btn btn-primary btn-block btn-flat btn-captcha',
     'id' => 'invisibleCaptchaSignup'
 ]); ?>
@@ -74,7 +74,7 @@ $this->Form->control('password_compare', [
 <?= $this->Form->end() ?>
 
 <div class="social-auth-links text-center">
-    <p>- <?= __("OR") ?> -</p>
+    <p>- <?= __("O") ?> -</p>
 
     <?php if ((bool)get_option('social_login_facebook', false)) : ?>
         <?php

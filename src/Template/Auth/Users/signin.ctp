@@ -16,7 +16,7 @@ $this->assign('description', __('Sign in to start your session'));
 <?=
 $this->Form->control('username', [
     'label' => false,
-    'placeholder' => __('Username or email address'),
+    'placeholder' => __('Usuario o correo electronico'),
     'class' => 'form-control',
 ])
 ?>
@@ -24,14 +24,14 @@ $this->Form->control('username', [
 <?=
 $this->Form->control('password', [
     'label' => false,
-    'placeholder' => __('Password'),
+    'placeholder' => __('Clave'),
     'class' => 'form-control',
 ])
 ?>
 
 <?= $this->Form->control('remember_me', [
     'type' => 'checkbox',
-    'label' => __('Remember me'),
+    'label' => __('Recordarme'),
 ]) ?>
 
 
@@ -49,7 +49,7 @@ $this->Form->control('password', [
 <?= $this->Form->end() ?>
 
 <div class="social-auth-links text-center">
-    <p>- <?= __("OR") ?> -</p>
+    <p>- <?= __("O") ?> -</p>
 
     <?php if ((bool)get_option('social_login_facebook', false)) : ?>
         <?php

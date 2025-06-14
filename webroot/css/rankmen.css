@@ -169,7 +169,7 @@ counter-wrapper {
 }
 
 .counter__duration {
-  font-size: large;
+  font-size: 10px;
   text-transform: capitalize;
   margin: 0;
   padding: 0;

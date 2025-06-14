@@ -40,7 +40,7 @@ $this->Form->setTemplates([
             $this->Form->control('description', [
                 'label' => __('Description'),
                 'type' => 'textarea',
-                'placeholder' => __('Wake up call'),
+                'placeholder' => __('Escribe una descripcion'),
                 'class' => 'form-control input-sm',
                 'id' => 'description',
             ]);

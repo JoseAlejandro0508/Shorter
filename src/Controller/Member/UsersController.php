@@ -809,6 +809,37 @@ GROUP BY
         $this->set('pos', $pos);
         $this->set('pos_', $pos_);
     }
+        public function ranklinks()
+
+    {
+        $Users = TableRegistry::getTableLocator()->get('Users');
+
+
+        $popularLinks = $Users->Statistics->find()
+            ->contain(['Links','Links.Users'])
+            ->select([
+                'Links.id',
+                'Links.alias',
+                'Links.url',
+                'Links.title',
+                'Links.domain',
+                'Links.created',
+                'Links.user_id',
+                'Users.username',
+
+                'views' => "count(case when Statistics.publisher_earn > 0 then Statistics.publisher_earn end)",
+                'publisher_earnings' => 'SUM(Statistics.publisher_earn)'
+            ])
+
+            ->order(['views' => 'DESC'])
+
+            ->group('Statistics.link_id')
+
+            ->toArray();
+
+        $this->set('rank', $popularLinks);
+
+    }
     public function dashboard()
     {
         $auth_user_id = $this->Auth->user('id');

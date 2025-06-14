@@ -31,21 +31,21 @@ echo $this->Html->css('rankmen.css');
             <div class="counter">
                 <div class="counter__box black-white">
                     <p class="counter__time" id="days"></p>
-                    <p class="counter__duration">days</p>
+                    <p class="counter__duration"><?=__('dias')?></p>
                 </div>
                 <div class="counter__box sky-blue">
                     <p class="counter__time" id="hours"></p>
-                    <p class="counter__duration">hours</p>
+                    <p class="counter__duration"><?=__('horas')?></p>
                 </div>
                 <p class="dots">:</p>
                 <div class="counter__box sky-blue">
                     <p class="counter__time" id="minutes"></p>
-                    <p class="counter__duration">minutes</p>
+                    <p class="counter__duration"><?=__('minutos')?></p>
                 </div>
                 <p class="dots">:</p>
                 <div class="counter__box sky-blue">
                     <p class="counter__time" id="seconds"></p>
-                    <p class="counter__duration">seconds</p>
+                    <p class="counter__duration"><?=__('segundos')?></p>
                 </div>
 
             </div>
@@ -60,15 +60,15 @@ echo $this->Html->css('rankmen.css');
     <table class="table table-striped" id="table_info">
         <thead>
             <tr>
-                <th>Position</th>
-                <th>Winner</th>
+                <th><?=__('Posicion')?></th>
+                <th><?=__('Ganador')?></th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <td>
                     <figure class="rank-figure" id="f1"><img src="<?php echo $this->Url->image('medalla-de-oro.png'); ?>" style = "width:45px;height:45px"> 
-                        GOLD<img src="<?php echo $this->Url->image('cinta.png'); ?>" id = "counterElement" style = "width:65px;height:65px"> 
+                        <?=__('Oro')?><img src="<?php echo $this->Url->image('cinta.png'); ?>" id = "counterElement" style = "width:65px;height:65px"> 
                     </figure>
                 </td>
                 <td ><figure class="rank-figure" id="f1"><?= h($pos[0]->username) ?></figure></td>
@@ -76,7 +76,7 @@ echo $this->Html->css('rankmen.css');
             <tr>
                 <td>
                     <figure class="rank-figure" id="f2" > <img src="<?php echo $this->Url->image('medalla-de-plata.png'); ?>" style = "width:45px;height:45px"> 
-                        SILVER
+                        Plata
                     </figure>
                 </td>
                 <td ><figure class="rank-figure" id="f2"><?= h($pos[1]->username) ?></figure></td>
@@ -84,7 +84,7 @@ echo $this->Html->css('rankmen.css');
             <tr>
                 <td>
                     <figure class="rank-figure" id = "f3" ><img src="<?php echo $this->Url->image('medalla-de-bronce.png'); ?>" style = "width:45px;height:45px"> 
-                        BRONZE
+                        Bronce
                     </figure>
                 </td>
                 <td><figure class="rank-figure" id="f3"><?= h($pos[2]->username) ?></figure></td>
@@ -98,11 +98,11 @@ echo $this->Html->css('rankmen.css');
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Rank</th> <!-- Nueva columna para el rango -->
+                <th><?=__('Lugar')?></th> <!-- Nueva columna para el rango -->
                 <th>ID</th>
-                <th>Username</th>
-                <th>Number of Views</th>
-                <th>Member Since</th>
+                <th><?=__('Usuario')?></th>
+                <th><?=__('Vistas')?></th>
+                <th><?=__('Miembro desde')?></th>
             </tr>
         </thead>
         <tbody>
@@ -174,10 +174,10 @@ function getRank($id,$pos,$pos_)
     if($id == $pos[0]->id){
         return "GOLDEN";
     }elseif($id == $pos[1]->id){
-        return "SILVER";
+        return "Plata";
     }
     elseif($id == $pos[2]->id){
-        return "BRONZE";
+        return "Bronce";
     }
     return $pos_[$id];
 }

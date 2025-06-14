@@ -82,6 +82,7 @@ class LinksController extends AppMemberController
                 'user_id' => $this->Auth->user('id'),
                 'status' => 1,
             ]);
+            
         $links = $this->paginate($query);
 
 
