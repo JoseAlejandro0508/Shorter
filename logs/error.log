@@ -42955,3 +42955,33 @@ Request URL: /member/users/ranklinks
 2025-06-14 21:46:03 Warning: Warning (2): Undefined variable $data_json in [C:\laragon\www\Acortador\src\Template\Member\Users\ranklinks.ctp, line 177]
 
 
+2025-06-17 07:45:47 Warning: Warning (2): Attempt to read property "views" on null in [C:\laragon\www\Acortador\src\Template\Member\Links\index.ctp, line 119]
+
+
+2025-06-17 07:45:47 Warning: Warning (2): Attempt to read property "publisher_earnings" on null in [C:\laragon\www\Acortador\src\Template\Member\Links\index.ctp, line 122]
+
+
+2025-06-17 07:45:47 Warning: Warning (2): Attempt to read property "views" on null in [C:\laragon\www\Acortador\src\Template\Member\Links\index.ctp, line 119]
+
+
+2025-06-17 07:45:47 Warning: Warning (2): Attempt to read property "publisher_earnings" on null in [C:\laragon\www\Acortador\src\Template\Member\Links\index.ctp, line 122]
+
+
+2025-06-17 07:45:47 Warning: Warning (2): Attempt to read property "views" on null in [C:\laragon\www\Acortador\src\Template\Member\Links\index.ctp, line 119]
+
+
+2025-06-17 07:45:47 Warning: Warning (2): Attempt to read property "publisher_earnings" on null in [C:\laragon\www\Acortador\src\Template\Member\Links\index.ctp, line 122]
+
+
+2025-06-17 07:46:57 Warning: Warning (2): Undefined array key "isocode" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 117]
+
+
+2025-06-17 07:46:57 Warning: Warning (2): Undefined array key "proxy" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 118]
+
+
+2025-06-17 08:20:48 Warning: Warning (2): Undefined array key "isocode" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 117]
+
+
+2025-06-17 08:20:48 Warning: Warning (2): Undefined array key "proxy" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 118]
+
+

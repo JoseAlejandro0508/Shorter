@@ -17,6 +17,7 @@ $this->assign('content_title', get_option('site_name'));
 $this->assign('og_title', $link->title);
 $this->assign('og_description', $link->description);
 $this->assign('og_image', $link->image);
+
 ?>
 
 <?php $this->start('scriptTop'); ?>
