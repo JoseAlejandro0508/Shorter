@@ -12,14 +12,7 @@ echo $this->Html->css('rankmen.css');
     
 
     <style>
-        .winnerarea {
-            background-image: url("<?php echo $this->Url->image('bg1.png') ?>");
-            background-size: cover;
-            /* O contain, o repeat-x, etc. */
-            background-repeat: no-repeat;
-            /* O repeat, etc. */
 
-        }
         .animated-heading1 {
             font-family: 'Arial Black', sans-serif;
             /* O la fuente que prefieras */
@@ -60,9 +53,8 @@ echo $this->Html->css('rankmen.css');
 
 
 
-    <strong style="font-size: xx-large;padding:10px; background: linear-gradient(90deg, #004594, #004594); -webkit-background-clip: text; color: transparent; font-weight: 700;">
-      <?= __('Ganadores de la semana anterior') ?>
-    </strong>
+<strong style="font-size: 50px;padding:10px;background: linear-gradient(90deg, #ff00d6, #0777f7);-webkit-background-clip: text;color: #00000000;font-weight: 700;">
+      Ganadores de la Semanal    </strong>
 
         <!-- Tabla de rangos con estilos -->
         <table class="table table-striped" id="table_info">
@@ -118,10 +110,8 @@ echo $this->Html->css('rankmen.css');
         </table>
     </div>
   
-     <div class="count">
-         <strong style="font-size: xx-large;padding:10px; background: linear-gradient(90deg, #004594, #004594); -webkit-background-clip: text; color: transparent; font-weight: 700;">
-      <?= __('Ranking Semanal') ?>
-    </strong>
+<strong style="font-size: 50px;padding:10px;background: linear-gradient(90deg, #ff00d6, #0777f7);-webkit-background-clip: text;color: #00000000;font-weight: 700;">
+      Ranking Semanal    </strong>
             <div class="timer">
                 <div class="counter-wrapper" id="counterElement">
 

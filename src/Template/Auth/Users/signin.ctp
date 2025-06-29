@@ -9,8 +9,9 @@ $this->assign('title', __('Sign In'));
 $this->assign('description', __('Sign in to start your session'));
 ?>
 
-<p class="login-box-msg"><?= __('Sign in to start your session') ?></p>
 
+<strong class="login-box-msg" style="font-size: 50px;padding:10px;background: linear-gradient(90deg, #ff00d6, #0777f7);-webkit-background-clip: text;color: #00000000;font-weight: 700;">
+      <?= __('Sign in to start your session') ?></strong>
 <?= $this->Form->create($user, ['id' => 'signin-form']); ?>
 
 <?=

@@ -9,7 +9,8 @@ $this->assign('title', __('Create an Account'));
 $this->assign('description', __('Register a new membership'));
 ?>
 
-<p class="login-box-msg"><?= __('Register a new membership') ?></p>
+<strong class="login-box-msg" style="font-size: 50px;padding:10px;background: linear-gradient(90deg, #ff00d6, #0777f7);-webkit-background-clip: text;color: #00000000;font-weight: 700;">
+      <?= __('Register a new membership') ?></strong>
 
 <?= $this->Form->create($user, ['id' => 'signup-form']); ?>
 

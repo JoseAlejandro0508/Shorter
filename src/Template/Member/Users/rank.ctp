@@ -7,9 +7,8 @@ echo $this->Html->css('rank.css');
 
 <div class = "rank_container">
 
-    <strong style="font-size: xx-large;padding:10px; background: linear-gradient(90deg, #004594, #004594); -webkit-background-clip: text; color: transparent; font-weight: 700;">
-      <?= __('Ranking Global') ?>
-    </strong>
+<strong style="font-size: 50px;padding:10px;background: linear-gradient(90deg, #ff00d6, #0777f7);-webkit-background-clip: text;color: #00000000;font-weight: 700;">
+      Ranking Global    </strong>
 
 <!-- Tabla de rangos con estilos -->
 <table class="table table-striped" id ="table_info">

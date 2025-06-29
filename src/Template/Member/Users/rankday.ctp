@@ -12,14 +12,7 @@ echo $this->Html->css('rankmen.css');
 
 
     <style>
-        .winnerarea {
-            background-image: url("<?php echo $this->Url->image('bg1.png') ?>");
-            background-size: cover;
-            /* O contain, o repeat-x, etc. */
-            background-repeat: no-repeat;
-            /* O repeat, etc. */
 
-        }
 
         .animated-heading1 {
             font-family: 'Arial Black', sans-serif;
@@ -46,10 +39,7 @@ echo $this->Html->css('rankmen.css');
             100% {opacity: 1; }
         }
         .count{
-            background-image: url("<?php echo $this->Url->image('relbg.png') ?>");
-            background-size: cover;
-            /* O contain, o repeat-x, etc. */
-            background-repeat: no-repeat;
+
             /* O repeat, etc. */
             height: 200px;
 
@@ -59,9 +49,8 @@ echo $this->Html->css('rankmen.css');
 
     </style>
     <div class="winnerarea">
-            <strong style="font-size: xx-large;padding:10px; background: linear-gradient(90deg, #004594, #004594); -webkit-background-clip: text; color: transparent; font-weight: 700;">
-      <?= __('Ganadores del dia anterior') ?>
-    </strong>
+<strong style="font-size: 50px;padding:10px;background: linear-gradient(90deg, #ff00d6, #0777f7);-webkit-background-clip: text;color: #00000000;font-weight: 700;">
+      Ganadores del Dia </strong>
 
 
 
@@ -121,9 +110,8 @@ echo $this->Html->css('rankmen.css');
         </table>
     </div>
     <div class="count">
-            <strong style="font-size: xx-large;padding:10px; background: linear-gradient(90deg, #004594, #004594); -webkit-background-clip: text; color: transparent; font-weight: 700;">
-      <?= __('Ranking Diario') ?>
-    </strong>
+<strong style="font-size: 50px;padding:10px;background: linear-gradient(90deg, #ff00d6, #0777f7);-webkit-background-clip: text;color: #00000000;font-weight: 700;">
+      Ranking Diario    </strong>
         <div class="timer">
             <div class="counter-wrapper" id="counterElement">
 

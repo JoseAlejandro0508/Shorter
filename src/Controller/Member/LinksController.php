@@ -14,6 +14,7 @@ class LinksController extends AppMemberController
 {
     public function initialize()
     {
+
         parent::initialize();
         $this->loadComponent('Paginator');
     }

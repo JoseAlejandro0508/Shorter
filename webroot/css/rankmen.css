@@ -7,7 +7,7 @@
  
 }
 #table_info{
-    opacity: 0.9;
+    opacity: 0.75;
 }
 #f1{
 
@@ -212,6 +212,7 @@ counter-wrapper {
   border-radius: 15px;
 }
 table {
+  opacity: 0.75;
     width: 80%;
     margin: 20px auto;
     border-collapse: collapse;

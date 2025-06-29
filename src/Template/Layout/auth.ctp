@@ -44,12 +44,34 @@
     <script src="//oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+        <style>
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2; /* Detrás del contenido */
+            background: linear-gradient(135deg, #a30391, #01518a);
+        }
+        .content-wrapper {
+            position: relative;
+            background: transparent !important;
+            z-index: 2!important; /* Encima del fondo */
+        }
+    </style>
 </head>
 <body class="hold-transition login-page">
+        <?= $this->Html->script('tsparticles.min.js') ?>
+    <div id="particles-js"></div>
 
 <div class="login-box">
     <div class="login-logo">
-        <a href="<?php echo $this->Url->build('/'); ?>"><?= get_logo_alt()['content'] ?></a>
+        <a href="<?php echo $this->Url->build('/'); ?>">
+           <strong class="login-box-msg" style="font-size: 80px;padding:10px;background: linear-gradient(90deg, #ff0000, #0777f7);-webkit-background-clip: text;color: #00000000;font-weight: 700;">
+       <?= get_logo_alt()['content'] ?></strong>
+       
+    </a>
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
@@ -85,5 +107,60 @@ if ((bool)get_option('combine_minify_css_js', false)) {
 ?>
 
 <?= $this->fetch('scriptBottom') ?>
+ <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        particlesJS('particles-js', {
+            particles: {
+                number: {
+                    value: 150,
+                    density: {
+                        enable: true,
+                        value_area: 800
+                    }
+                },
+                color: {
+                    value: '#ffffff'
+                },
+                shape: {
+                    type: 'circle',
+                    stroke: {
+                        width: 0,
+                        color: '#000000'
+                    }
+                },
+                opacity: {
+                    value: 0.5,
+                    random: true,
+                },
+                size: {
+                    value: 3,
+                    random: true,
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: 'none',
+                    random: true,
+                    straight: false,
+                    out_mode: 'out'
+                }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: {
+                    onhover: {
+                        enable: true,
+                        mode: 'repulse'
+                    },
+                    onclick: {
+                        enable: true,
+                        mode: 'push'
+                    },
+                    resize: true
+                }
+            }
+        });
+    });
+    </script>
 </body>
 </html>

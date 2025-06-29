@@ -10,6 +10,7 @@
 <head>
     <?= $this->Html->charset(); ?>
     <title><?= h($this->fetch('title')); ?></title>
+    
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="<?= h($this->fetch('description')); ?>">
@@ -30,9 +31,11 @@
         echo $this->Assets->css('/css/app.css?ver=' . APP_VERSION);
     }
 
+
     echo $this->fetch('meta');
     echo $this->fetch('css');
     echo $this->fetch('script');
+
     ?>
 
     <?= get_option('member_head_code'); ?>
@@ -45,9 +48,28 @@
     <script src="//oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+     
+    <style>
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1; /* Detrás del contenido */
+            background: linear-gradient(135deg, #1a2980, #26d0ce); /* Gradiente de fondo */
+        }
+        .content-wrapper {
+            position: relative;
+            background: transparent !important;
+            z-index: 2!important; /* Encima del fondo */
+        }
+    </style>
 </head>
 <body class="member-dashboard hold-transition <?= get_option('member_adminlte_theme_skin',
     'skin-blue') ?> sidebar-mini">
+    <?= $this->Html->script('tsparticles.min.js') ?>
+    <div id="particles-js"></div>
 <div class="wrapper">
 
     <!-- Main Header -->
@@ -484,5 +506,60 @@ if ((bool)get_option('combine_minify_css_js', false)) {
 ?>
 
 <?= $this->fetch('scriptBottom') ?>
+ <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        particlesJS('particles-js', {
+            particles: {
+                number: {
+                    value: 120,
+                    density: {
+                        enable: true,
+                        value_area: 800
+                    }
+                },
+                color: {
+                    value: '#ffffff'
+                },
+                shape: {
+                    type: 'circle',
+                    stroke: {
+                        width: 0,
+                        color: '#000000'
+                    }
+                },
+                opacity: {
+                    value: 0.5,
+                    random: true,
+                },
+                size: {
+                    value: 3,
+                    random: true,
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: 'none',
+                    random: true,
+                    straight: false,
+                    out_mode: 'out'
+                }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: {
+                    onhover: {
+                        enable: true,
+                        mode: 'repulse'
+                    },
+                    onclick: {
+                        enable: true,
+                        mode: 'push'
+                    },
+                    resize: true
+                }
+            }
+        });
+    });
+    </script>
 </body>
 </html>

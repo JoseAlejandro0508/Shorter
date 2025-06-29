@@ -27,29 +27,32 @@ $withdrawal_methods = array_column_polyfill(get_withdrawal_methods(), 'name', 'i
 <div class="row">
     <div class="col-sm-4">
         <div class="small-box bg-aqua">
+             <div class="icon"><i class="fa fa-money"></i></div>
             <div class="inner">
                 <h3><?= display_price_currency($user->publisher_earnings + $user->referral_earnings); ?></h3>
                 <p><?= __('Available Balance') ?></p>
             </div>
-            <div class="icon"><i class="fa fa-money"></i></div>
+           
         </div>
     </div>
     <div class="col-sm-4">
         <div class="small-box bg-red">
+            <div class="icon"><i class="fa fa-share"></i></div>
             <div class="inner">
                 <h3><?= display_price_currency($pending_withdrawn); ?></h3>
                 <p><?= __('Pending Withdrawn') ?></p>
             </div>
-            <div class="icon"><i class="fa fa-share"></i></div>
+            
         </div>
     </div>
     <div class="col-sm-4">
         <div class="small-box bg-green">
+            <div class="icon"><i class="fa fa-usd"></i></div>
             <div class="inner">
                 <h3><?= display_price_currency($total_withdrawn); ?></h3>
                 <p><?= __('Total Withdraw') ?></p>
             </div>
-            <div class="icon"><i class="fa fa-usd"></i></div>
+            
         </div>
     </div>
 </div>
