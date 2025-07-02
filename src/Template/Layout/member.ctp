@@ -82,7 +82,12 @@
                 <?= preg_replace('/(\B.|\s+)/', '', get_option('site_name')) ?>
             </span>
             <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><?= get_option('site_name') ?></span>
+            <span class="logo-lg">
+            <strong  style="font-size: 40px;padding:10px;background: linear-gradient(90deg, #948c93, #11fff2);-webkit-background-clip: text;color: #00000000;font-weight: 700;">
+     <?= get_option('site_name') ?></strong>
+        
+        </span>
+            
         </a>
 
         <!-- Header Navbar -->

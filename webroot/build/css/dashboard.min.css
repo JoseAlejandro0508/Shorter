@@ -11183,7 +11183,7 @@ a:hover {
 .box {
   position: relative;
   border-radius: 3px;
-background: #00ffbb4f;
+background: linear-gradient(45deg, #920295, transparent);
 
   border-top: 3px solid #d2d6de;
   margin-bottom: 20px;
