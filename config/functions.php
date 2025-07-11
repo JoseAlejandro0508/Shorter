@@ -911,14 +911,14 @@ function get_user_plan($user_id)
      * @var \App\Model\Entity\User $user
      */
     $today = FrozenTime::now();
-    $lastSunday = $today->modify('last sunday')->startOfDay(); // Domingo pasado (00:00:00)
-    $nextSunday = $today->modify('next sunday')->endOfDay();
+    $nextSunday = $today->modify('last sunday')->endOfDay(); // Domingo pasado (00:00:00)
+    $lastSunday = $nextSunday->subDays(7)->endOfDay();
     $user = \Cake\ORM\TableRegistry::getTableLocator()->get('Users')->find()
         ->contain(['Plans'])->where(['Users.id' => $user_id])->first();
 
     $Stats = \Cake\ORM\TableRegistry::getTableLocator()->get('Statistics')->find()
     ->where(function (QueryExpression $exp) use($user_id,$lastSunday,$nextSunday) {
-    return $exp->eq('user_id',3)
+    return $exp->eq('user_id',$user_id)
     ->gt('publisher_earn',0)
     ->between('created',$lastSunday,$nextSunday);
 })->count();
