@@ -67,7 +67,7 @@ $withdrawal_methods = array_column_polyfill(get_withdrawal_methods(), 'name', 'i
                 <div id="withdrawal-modal" class="modal">
                     <div class="modal-content">
                         <span class="close-modal">&times;</span>
-                        <h2><?= __('Withdraw') ?></h2>
+                        <h2 style="font-weight: 800;"><?= __('Withdraw') ?></h2>
                         <?= $this->Form->create(null, ['type' => 'post', 'url' => ['action' => 'request']]); ?>
                         <?= $this->Form->control('amount', [
                             'label' => 'Amount',
@@ -205,20 +205,20 @@ $withdrawal_methods = array_column_polyfill(get_withdrawal_methods(), 'name', 'i
         }
 
         .modal-content {
-            background-color: #f2f2f2;
+            background: linear-gradient(45deg, #5800c5, #01efabdb);
             /* Gris claro */
             margin: 15% auto;
             padding: 20px;
-            border: 2px solid #007bff;
+            top: 50px;
             /* Bordes azules */
             width: 90%;
             border-radius: 5px;
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 7px 0px rgb(0 0 0 / 16%);
             text-align: center;
         }
 
         .close-modal {
-            color: #aaa;
+            color: #f8fdfb;
             float: right;
             font-size: 28px;
             font-weight: bold;

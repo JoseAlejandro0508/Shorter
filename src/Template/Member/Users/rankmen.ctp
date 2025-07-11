@@ -93,7 +93,7 @@ echo $this->Html->css('rankmen.css');
         <thead>
             <tr>
                 <th><?=__('Lugar')?></th> <!-- Nueva columna para el rango -->
-                <th>ID</th>
+                <th>Plan</th>
                 <th><?=__('Usuario')?></th>
                 <th><?=__('Vistas')?></th>
                 <th><?=__('Miembro desde')?></th>
@@ -107,7 +107,12 @@ echo $this->Html->css('rankmen.css');
                             <?= getRank($user->id,$pos,$pos_) ?>
                         </figure>
                     </td>
-                    <td><?= h($user->id) ?></td>
+                <td>
+                        <?php  $logged_userPlan=get_user_plan($user->id)?>
+                        
+                        <i style="<?=  $logged_userPlan->Style ?>"id="PlanIco"class="fa fa-<?=  $logged_userPlan->Icon ?>"></i> 
+                        <span style="<?=  $logged_userPlan->Style ?>" id="PlanText"><?=   $logged_userPlan->title ?></span>
+                    </td>
                     <td><?= h($user->username) ?></td>
                     <td><?= h($total_views_per_user[$user->id]) ?></td>
                     <td><?= h($user->created ? $user->created->format('Y-m-d H:i:s') : 'Sin fecha') ?></td>

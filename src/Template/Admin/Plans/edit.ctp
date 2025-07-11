@@ -105,6 +105,20 @@ $this->assign('content_title', __('Edit Plan'));
             'type' => 'text',
         ]);
         ?>
+        <?=
+        $this->Form->control('Icon', [
+            'label' => __('Icono'),
+            'class' => 'form-control',
+            'type' => 'text',
+        ]);
+        ?>
+            <?=
+        $this->Form->control('Style', [
+            'label' => __('Estilo'),
+            'class' => 'form-control',
+            'type' => 'text',
+        ]);
+        ?>
 
         <div class="row">
             <div class="col-sm-6">
@@ -227,6 +241,41 @@ $this->assign('content_title', __('Edit Plan'));
                     ]);
                     ?>
                 </td>
+
+            </tr>
+            <tr>
+                <td>
+                    <span style="font-weight: bold;"><?= __('Modo automatico') ?></span>
+                    <span
+                        class="help-block"><?= __(
+                            "Se activara automaticamente cuando el usuario alcance la cantidad de vistas establecidas durante la semana"
+                        ) ?></span>
+                </td>
+     <td><label class="switch"><?= $this->Form->checkbox('AutoActivate', ['required' => false]); ?>
+                        <span class="slider round"></span></label></td>
+
+            </tr>
+            <tr>
+                <td>
+                    <span style="font-weight: bold;"><?= __('Cantidad de Vistas') ?></span>
+                    <span
+                        class="help-block"><?= __(
+                            "Cantidad de vistas que debe alcanzar el usuario para la activacion del plan"
+                        ) ?></span>
+                </td>
+                <td>
+                    <?=
+                    $this->Form->control('WViewsLimit', [
+                        'label' => false,
+                        'placeholder' => __('Numero de Vistas'),
+                        'class' => 'form-control',
+                        'type' => 'number',
+                        'step' => 1,
+                        'min' => 0,
+                    ]);
+                    ?>
+                </td>
+
             </tr>
             <tr>
                 <td colspan="2">
@@ -453,6 +502,7 @@ $this->assign('content_title', __('Edit Plan'));
                             class="slider round"></span></label></td>
             </tr>
         </table>
+        
 
         <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-primary']); ?>
 

@@ -127,7 +127,7 @@
                             </li>
                             <!-- Menu Footer-->
                             <li class="user-footer">
-                                <div class="pull-left">
+                                <div style="padding-bottom: 20px;"class="pull-left">
                                     <a href="<?= $this->Url->build([
                                         'controller' => 'Users',
                                         'action' => 'profile',

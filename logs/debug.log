@@ -547,3 +547,21 @@
 2025-06-29 00:34:35 Notice: Notice (8): date_default_timezone_set(): Timezone ID '' is invalid in [C:\laragon\www\Acortador\src\Controller\Member\UsersController.php, line 791]
 
 
+2025-07-05 23:43:28 Notice: Notice (1024): Undefined property: PlansController::$getRequest in C:\laragon\www\Acortador\src\Controller\Admin\PlansController.php on line 52 in [C:\laragon\www\Acortador\vendor\cakephp\cakephp\src\Controller\Controller.php, line 384]
+
+
+2025-07-05 23:43:53 Notice: Notice (1024): Undefined property: PlansController::$getRequest in C:\laragon\www\Acortador\src\Controller\Admin\PlansController.php on line 76 in [C:\laragon\www\Acortador\vendor\cakephp\cakephp\src\Controller\Controller.php, line 384]
+
+
+2025-07-05 23:44:32 Notice: Notice (1024): Undefined property: PlansController::$getRequest in C:\laragon\www\Acortador\src\Controller\Admin\PlansController.php on line 58 in [C:\laragon\www\Acortador\vendor\cakephp\cakephp\src\Controller\Controller.php, line 384]
+
+
+2025-07-05 23:44:37 Notice: Notice (1024): Undefined property: PlansController::$getRequest in C:\laragon\www\Acortador\src\Controller\Admin\PlansController.php on line 58 in [C:\laragon\www\Acortador\vendor\cakephp\cakephp\src\Controller\Controller.php, line 384]
+
+
+2025-07-05 22:15:26 Notice: Notice (8): date_default_timezone_set(): Timezone ID '' is invalid in [C:\laragon\www\Acortador\src\Controller\Member\UsersController.php, line 791]
+
+
+2025-07-05 22:16:25 Notice: Notice (8): date_default_timezone_set(): Timezone ID '' is invalid in [C:\laragon\www\Acortador\src\Controller\Member\UsersController.php, line 791]
+
+

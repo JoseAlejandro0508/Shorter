@@ -1313,7 +1313,7 @@ p {
     background: #3ac1c169;
     box-shadow: 1px 1px 4px;
     font-weight: 540;
-    color: #455050;
+    color: #ecefef;
 }
 .lead {
   margin-bottom: 20px;
@@ -2728,7 +2728,7 @@ color: #ffffffcf;
 .form-control[disabled],
 .form-control[readonly],
 fieldset[disabled] .form-control {
-  background-color: #eee;
+
   opacity: 1;
 }
 .form-control[disabled],
@@ -3549,6 +3549,7 @@ fieldset[disabled] .btn-link:hover {
   line-height: 1.5;
   border-radius: 3px;
 }
+
 .btn-group-xs > .btn,
 .btn-xs {
     padding: 6px 10px;
@@ -3560,6 +3561,25 @@ fieldset[disabled] .btn-link:hover {
 
   
 }
+.table-responsive>.table>tbody>tr>td>.btn-xs{
+    padding: 6px 15px;
+    font-weight: 700;
+    font-size: 10px;
+    left: 0;
+    position: relative;
+    
+}
+.withdraw-order-table{
+      display: flex;
+    /* text-align: justify; */
+    align-items: flex-end;
+    flex-direction: row;
+    align-content: flex-start;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+}
+  
+
 .btn-block {
   display: block;
   width: 100%;
@@ -7220,6 +7240,7 @@ button.close {
   float: right;
 }
 .pull-left {
+  
   float: left;
 }
 .fa.pull-left {
@@ -9765,8 +9786,11 @@ a:hover {
 .content-header > h1 {
     margin: 0;
     font-size: 24px;
-    color: #024effe2;
+
+    background: linear-gradient(90deg, #fcfcfc, #000000);
     font-weight: 800;
+    -webkit-background-clip: text;
+    color: #f0ffff00;
 }
 .content-header > h1 > small {
   font-size: 15px;
@@ -10601,12 +10625,12 @@ a:hover {
   }
 }
 .navbar-nav > .user-menu > .dropdown-menu > .user-footer {
-  background-color: #f9f9f9;
-  padding: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-bottom: 20px;
+    background-color: #f9f9f9;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    padding-bottom: 20px;
+    flex-direction: column;
 }
 .navbar-nav > .user-menu > .dropdown-menu > .user-footer:after,
 .navbar-nav > .user-menu > .dropdown-menu > .user-footer:before {
@@ -11183,7 +11207,7 @@ a:hover {
 .box {
   position: relative;
   border-radius: 3px;
-background: linear-gradient(45deg, #920295, transparent);
+background: linear-gradient(45deg, #920295, #131675de);
 
   border-top: 3px solid #d2d6de;
   margin-bottom: 20px;
@@ -15800,6 +15824,9 @@ background: linear-gradient(45deg, #e7099de3, transparent);
     > .treeview-menu {
     border-left: 1px solid #d2d6de;
   }
+}
+#short-button{
+  display: block!important;
 }
 .skin-yellow .main-header .navbar {
   background-color: #f39c12;

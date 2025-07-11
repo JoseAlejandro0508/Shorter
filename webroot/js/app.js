@@ -745,14 +745,9 @@ $(document).ready(function() {
     }
   }
 
-  $(window).resize(function() {
-    shortenButton();
-  }).resize();
 
-  $('button.shorten-button').click(function(e) {
-    e.preventDefault();
-    $('.box-short').toggle('fast');
-  });
+
+
 
 });
 

@@ -4,6 +4,7 @@
  * @var \App\Model\Entity\User $logged_user
  * @var \App\Model\Entity\Plan $logged_user_plan
  */
+    $logged_userPlan= get_user_plan($logged_user->id);
 ?>
 <!DOCTYPE html>
 <html lang="<?= locale_get_primary_language(null) ?>">
@@ -50,6 +51,7 @@
     <![endif]-->
      
     <style>
+
         #particles-js {
             position: fixed;
             top: 0;
@@ -99,7 +101,13 @@
             <!-- Navbar Right Menu -->
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
-
+                <li class="dropdown messages-menu">
+                    <a href="">
+                        <i  style="<?=  $logged_userPlan->Style ?>" id="PlanIco"class="fa fa-<?=  $logged_userPlan->Icon ?>"></i> 
+                        <span  style="<?=  $logged_userPlan->Style ?>" id="PlanText"><?=  $logged_userPlan->title ?></span>
+                    </a>
+       
+                    </li>
                     <?php if (in_array($logged_user->role, ['admin', 'demo'])) : ?>
                         <li class="dropdown messages-menu">
                             <!-- Menu toggle button -->
@@ -193,6 +201,8 @@
                     </li>
                 </ul>
             </div>
+
+
         </nav>
     </header>
 
@@ -205,7 +215,7 @@
 
             <br>
 
-            <button type="button" class="btn btn-block btn-social btn-github btn-lg shorten-button" data-toggle="modal"
+            <button id="short-button" type="button" class="btn btn-block btn-social btn-github btn-lg shorten-button" data-toggle="modal"
                     data-target="#myModal"><i class="fa fa-paper-plane"></i> <span><?= __("New Shorten Link") ?></span>
             </button>
 

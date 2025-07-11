@@ -1,7 +1,8 @@
 <?php
 
 use Cake\Core\Configure;
-
+use Cake\Database\Expression\QueryExpression;
+use Cake\I18n\FrozenTime;
 //\Cake\Cache\Cache::disable();
 
 function database_connect()
@@ -909,9 +910,30 @@ function get_user_plan($user_id)
     /**
      * @var \App\Model\Entity\User $user
      */
+    $today = FrozenTime::now();
+    $lastSunday = $today->modify('last sunday')->startOfDay(); // Domingo pasado (00:00:00)
+    $nextSunday = $today->modify('next sunday')->endOfDay();
     $user = \Cake\ORM\TableRegistry::getTableLocator()->get('Users')->find()
         ->contain(['Plans'])->where(['Users.id' => $user_id])->first();
 
+    $Stats = \Cake\ORM\TableRegistry::getTableLocator()->get('Statistics')->find()
+    ->where(function (QueryExpression $exp) use($user_id,$lastSunday,$nextSunday) {
+    return $exp->eq('user_id',3)
+    ->gt('publisher_earn',0)
+    ->between('created',$lastSunday,$nextSunday);
+})->count();
+    $AutoPlans= \Cake\ORM\TableRegistry::getTableLocator()->get('Plans')->find()->select(['id','WViewsLimit'])->where(['AutoActivate'=>1])->orderDesc('WViewsLimit')->all()->toList();
+    $plan_selected_id=null;
+   foreach ($AutoPlans as $key) {
+        if($key->WViewsLimit==null)
+        {
+            continue;
+        }
+        if($key->WViewsLimit<$Stats){
+            $plan=\Cake\ORM\TableRegistry::getTableLocator()->get('Plans')->get($key->id);
+            return $plan;
+        }
+    }
     $expiration = $user->expiration;
 
     /*

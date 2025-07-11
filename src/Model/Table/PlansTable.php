@@ -55,6 +55,7 @@ class PlansTable extends Table
             ->boolean('api_full', __('Choose a valid value.'))
             ->boolean('api_developer', __('Choose a valid value.'))
             ->notBlank('plan_replace', __('Choose a valid value.'));
+            
 
         return $validator;
     }

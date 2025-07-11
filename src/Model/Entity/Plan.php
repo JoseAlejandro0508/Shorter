@@ -47,6 +47,11 @@ use Cake\ORM\Entity;
  * @property int $banner_redirect
  * @property int $interstitial_redirect
  * @property int $random_redirect
+* @property int $AutoActivate
+*@property int $WViewsLimit
+*@property string $Icon
+*@property string $Style
+
  */
 class Plan extends Entity
 {

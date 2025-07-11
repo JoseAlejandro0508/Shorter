@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Withdraw[]|\Cake\Collection\CollectionInterface $withdraws
@@ -109,40 +110,47 @@ $withdrawal_methods = array_column_polyfill(get_withdrawal_methods(), 'name', 'i
         <div class="table-responsive">
             <table class="table table-hover table-striped">
                 <thead>
-                <tr>
-                    <th><?= $this->Paginator->sort('id', __('ID')) ?></th>
-                    <th><?= __('User') ?></th>
-                    <th><?= $this->Paginator->sort('created', __('Date')) ?></th>
-                    <th><?= __('Status') ?></th>
-                    <th><?= $this->Paginator->sort('publisher_earnings', __('Publisher Earnings')) ?></th>
-                    <th><?= $this->Paginator->sort('referral_earnings', __('Referral Earnings')) ?></th>
-                    <th><?= __('Total Amount') ?></th>
-                    <th><?= __('Withdrawal Method') ?></th>
-                    <th><?= __('Withdrawal Account') ?></th>
-                    <th><?= __('Action') ?></th>
-                </tr>
+                    <tr>
+                        <th><?= $this->Paginator->sort('id', __('ID')) ?></th>
+                        <th><?= __('Plan') ?></th>
+                        <th><?= __('User') ?></th>
+                        <th><?= $this->Paginator->sort('created', __('Date')) ?></th>
+                        <th><?= __('Status') ?></th>
+                        <th><?= $this->Paginator->sort('publisher_earnings', __('Publisher Earnings')) ?></th>
+                        <th><?= $this->Paginator->sort('referral_earnings', __('Referral Earnings')) ?></th>
+                        <th><?= __('Total Amount') ?></th>
+                        <th><?= __('Withdrawal Method') ?></th>
+                        <th><?= __('Withdrawal Account') ?></th>
+                        <th><?= __('Action') ?></th>
+                    </tr>
                 </thead>
                 <?php foreach ($withdraws as $withdraw) : ?>
                     <tr>
-                        <td><?= $this->Html->link($withdraw->id, array(
+                        <td ><?= $this->Html->link($withdraw->id, array(
                                 'action' => 'view',
                                 $withdraw->id
                             )); ?></td>
-                        <td><?= $this->Html->link($withdraw->user->username, array(
+                        <td class="withdraw-order-table">
+                            <?php $logged_userPlan = get_user_plan($withdraw->user->id) ?>
+
+                            <i style="<?= $logged_userPlan->Style ?>" id="PlanIco" class="fa fa-<?= $logged_userPlan->Icon ?>"></i>
+                            <span style="<?= $logged_userPlan->Style ?>" id="PlanText"><?= $logged_userPlan->title ?></span>
+                        </td>
+                        <td ><?= $this->Html->link($withdraw->user->username, array(
                                 'controller' => 'Users',
                                 'action' => 'view',
                                 $withdraw->user->id,
                                 'prefix' => 'admin'
                             )); ?></td>
-                        <td><?= display_date_timezone($withdraw->created); ?></td>
-                        <td><?= h(withdraw_statuses($withdraw->status)) ?></td>
-                        <td><?= display_price_currency($withdraw->publisher_earnings); ?></td>
-                        <td><?= display_price_currency($withdraw->referral_earnings); ?></td>
-                        <td><?= display_price_currency($withdraw->amount); ?></td>
+                        <td ><?= display_date_timezone($withdraw->created); ?></td>
+                        <td ><?= h(withdraw_statuses($withdraw->status)) ?></td>
+                        <td ><?= display_price_currency($withdraw->publisher_earnings); ?></td>
+                        <td ><?= display_price_currency($withdraw->referral_earnings); ?></td>
+                        <td ><?= display_price_currency($withdraw->amount); ?></td>
                         <td><?= (isset($withdrawal_methods[$withdraw->method])) ?
                                 $withdrawal_methods[$withdraw->method] : $withdraw->method ?></td>
-                        <td><?= nl2br(h($withdraw->account)); ?></td>
-                        <td>
+                        <td ><?= nl2br(h($withdraw->account)); ?></td>
+                        <td class="withdraw-order-table">
                             <?php if ($withdraw->status != 5) : ?>
                                 <?= $this->Html->link(
                                     __("View"),

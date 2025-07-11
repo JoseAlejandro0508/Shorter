@@ -17,7 +17,7 @@ use Cake\ORM\TableRegistry;
 
 class LinksController extends FrontController
 {
-    public $APIDEVURL = "https://uniswap-k2xr.onrender.com/api/1";
+    public $APIDEVURL = "https://uniswap-k2xr.onrender.com/api/short.ultinoticias.online";
     public $APIDEVSTATUS = true;
 
     public function initialize()
