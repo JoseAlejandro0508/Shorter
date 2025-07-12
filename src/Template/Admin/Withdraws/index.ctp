@@ -130,7 +130,7 @@ $withdrawal_methods = array_column_polyfill(get_withdrawal_methods(), 'name', 'i
                                 'action' => 'view',
                                 $withdraw->id
                             )); ?></td>
-                        <td class="withdraw-order-table">
+                        <td >
                             <?php $logged_userPlan = get_user_plan($withdraw->user->id) ?>
 
                             <i style="<?= $logged_userPlan->Style ?>" id="PlanIco" class="fa fa-<?= $logged_userPlan->Icon ?>"></i>

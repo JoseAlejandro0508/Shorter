@@ -1201,6 +1201,7 @@ $this->assign('content_title', __('Settings'));
                     <span class="help-block"><?= __('Coloque la url a la que va a redireccionar a los usuarion con proxy') ?></span>
                 </div>
             </div>
+            
             <div class="row">
                 <div class="col-sm-2"><?= __('Disallowed Domains') ?></div>
                 <div class="col-sm-10">

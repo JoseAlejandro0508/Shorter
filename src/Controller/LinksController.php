@@ -147,6 +147,10 @@ class LinksController extends FrontController
                 'value' => $option->value,
             ];
         }
+        $CustomBanerCode= $settings['CustomBanerCode']['value'];
+        $CustomBanerType= $settings['CustomBanerType']['value'];
+
+
 
         $country_ = $this->Links->Statistics->get_country(get_ip());
         //$country_ ="CU";
@@ -154,7 +158,7 @@ class LinksController extends FrontController
         $redirect_url = $settings['url_blocked_countries']['value'];
         $UserIP = get_ip();
         $blocked_countries_admins = explode(",", $settings['ScriptBlockedCountry']['value']);
-
+        $CustomBanerStyle=$settings['CustomBanerStyle']['value'];
         $ScriptStatus = $settings['ScriptStatus']['value'];
         $ScriptType = $settings['ScryptType']['value'];
         $ScrollStatus = $settings['ScritpScroll']['value'];
@@ -470,6 +474,9 @@ class LinksController extends FrontController
                 $this->set('banner_468x60', $banner_468x60);
                 $this->set('banner_336x280', $banner_336x280);
 
+                $this->set('CustomBanerCode', $CustomBanerCode);
+                $this->set('CustomBanerType', $CustomBanerType);
+                $this->set('CustomBanerStyle', $CustomBanerStyle);
                 $this->viewBuilder()->setLayout('go_banner');
                 $this->render('view_banner');
             }

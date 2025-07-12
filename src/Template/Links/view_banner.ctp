@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Link $link
@@ -29,49 +30,112 @@ $this->assign('og_image', $link->image);
 <?php $this->end(); ?>
 <style>
     #contador_dev {
-    font-size: 24px; /* Aumenta el tamaño de la fuente */
-    padding: 15px 30px; /* Aumenta el padding */
-    animation: blink 1s infinite; /* Suaviza la transformación */
-}
-</style>
-<?php if ($condition!="off"): ?>
-<style>
-    #btn_dev_cont {
-    font-size: 24px; /* Aumenta el tamaño de la fuente */
-    padding: 15px 30px; /* Aumenta el padding */
-    animation: blink 1s infinite; /* Suaviza la transformación */
-}
-
-@keyframes blink {
-    0% {transform: scale(1); }
-    50% { transform: scale(1.5); }
-    100% {transform: scale(1); }
-}
-
-.blink {
-    animation: blink 1s infinite; /* Hace que parpadee cada segundo */
-}
-
-</style>
-<style>
-        @keyframes shadowBlink {
-            0%, 100% {
-                box-shadow: 0 20px 30px rgb(234 15 193); /* Sombra inicial */
-            }
-            50% {
-                box-shadow: 0 4px 8px rgb(0 0 0 / 10%); /* Sombra reducida */
-            }
-        }
-                @keyframes agrandarAchicar {
-        0%, 100% {
-            width: 80%; /* Tamaño normal */
-            height: auto; /* Mantener la proporción */
-        }
-        50% {
-            width: 90%; /* Aumentar el ancho */
-            height: auto; /* Mantener la proporción */
-        }
+        font-size: 24px;
+        /* Aumenta el tamaño de la fuente */
+        padding: 15px 30px;
+        /* Aumenta el padding */
+        animation: blink 1s infinite;
+        /* Suaviza la transformación */
     }
+
+    .fullscreen {
+        display: flex;
+        top: 0;
+        left: 0;
+        position: fixed;
+        z-index: 1000;
+        width: 100%;
+        height: 100%;
+        background: #756e6ef2;
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+
+    }
+
+    .normal #close {
+        display: none;
+    }
+
+    #close {
+        position: relative;
+        text-align: center;
+        /* top: 0; */
+        /* top: 0; */
+        /* right: 0; */
+        width: 30px;
+        font-size: 20px;
+        height: auto;
+        top: 0;
+        background: #000000d1;
+        color: #fcfcfc;
+        border: 0;
+        font-weight: 900;
+    }
+</style>
+<?php if ($condition != "off") : ?>
+    <style>
+        #btn_dev_cont {
+            font-size: 24px;
+            /* Aumenta el tamaño de la fuente */
+            padding: 15px 30px;
+            /* Aumenta el padding */
+            animation: blink 1s infinite;
+            /* Suaviza la transformación */
+        }
+
+        @keyframes blink {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.5);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .blink {
+            animation: blink 1s infinite;
+            /* Hace que parpadee cada segundo */
+        }
+    </style>
+
+    <style>
+        @keyframes shadowBlink {
+
+            0%,
+            100% {
+                box-shadow: 0 20px 30px rgb(234 15 193);
+                /* Sombra inicial */
+            }
+
+            50% {
+                box-shadow: 0 4px 8px rgb(0 0 0 / 10%);
+                /* Sombra reducida */
+            }
+        }
+
+        @keyframes agrandarAchicar {
+
+            0%,
+            100% {
+                width: 80%;
+                /* Tamaño normal */
+                height: auto;
+                /* Mantener la proporción */
+            }
+
+            50% {
+                width: 90%;
+                /* Aumentar el ancho */
+                height: auto;
+                /* Mantener la proporción */
+            }
+        }
 
         #banner-button {
             display: none;
@@ -94,66 +158,105 @@ $this->assign('og_image', $link->image);
             animation: agrandarAchicar 2s ease-in-out infinite;
         }
 
-    
 
-    #banner-image {
-        display: none;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        /* padding: 20px 50px; */
-        /* font-size: 24px; */
-      
+
+        #banner-image {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            /* padding: 20px 50px; */
+            /* font-size: 24px; */
+
+
+
+
+            border-radius: 40px;
+            /* cursor:pointer; */
+            box-shadow: 0 8px 16px rgb(10 10 10);
+            z-index: 1000;
+            pointer-events: none;
+
+            animation: agrandarAchicar 2s ease-in-out infinite;
+
+
+        }
+
+        #fondo_dev {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 1);
+            /* fondo negro con opacidad */
+            z-index: 999;
+            /* asegúrate de que esté por encima de todo */
+            pointer-events: none;
+            /* permite hacer clic en el elemento detrás */
+        }
+    </style>
+<?php endif; ?>
+    <?php if (!empty($CustomBanerStyle)) : ?>
+
+
+        <?= $CustomBanerStyle; ?>
         
 
 
-        border-radius: 40px;
-        /* cursor:pointer; */
-        box-shadow: 0 8px 16px rgb(10 10 10);
-        z-index:1000 ;
-        pointer-events: none;
-
-        animation: agrandarAchicar 2s ease-in-out infinite;
-      
-    
-    }
-    #fondo_dev {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(255, 255, 255, 1); /* fondo negro con opacidad */
-  z-index: 999; /* asegúrate de que esté por encima de todo */
-  pointer-events: none; /* permite hacer clic en el elemento detrás */
-}
-    </style>
-<?php endif; ?>
-<?php if ($condition=="img"): ?>
+    <?php endif; ?>
+<?php if ($condition == "img") : ?>
 
     <div id="fondo_dev"></div>
 <?php endif; ?>
- 
+
+<?php if (!empty($CustomBanerCode)) : ?>
+
+    <div id="PopUp" class="<?= $CustomBanerType ?>">
+        <button id="close">x</button>
+        <?= $CustomBanerCode; ?>
+    </div>
+
+
+<?php endif; ?>
+<script>
+    var close = document.getElementById("close");
+    var popUp = document.getElementById("PopUp");
+    close.addEventListener('click', closeFun);
+
+    function closeFun() {
+        close.style.display = "none";
+        popUp.style.display = "none";
+
+    }
+</script>
+
 <div class="row">
-    <?php if ($condition!="off"): ?>
-    
+    <?php if ($condition != "off") : ?>
+
         <?= $this->Html->image('playButton.png', [
-        'id' => 'banner-image',
-        'class' => 'imagen-fantasma',
-        'alt' => 'Imagen Fantasma'
+            'id' => 'banner-image',
+            'class' => 'imagen-fantasma',
+            'alt' => 'Imagen Fantasma'
         ]) ?>
-         <a href="" id="banner-button">
-                 <?= $this->Html->image('playButton.png', [
-        'id' => 'banner',
-        'class' => 'btn',
-        'alt' => 'btn'
-        ]) ?>
-         </a>
-     <?php endif; ?>
+        <a href="" id="banner-button">
+            <?= $this->Html->image('playButton.png', [
+                'id' => 'banner',
+                'class' => 'btn',
+                'alt' => 'btn'
+            ]) ?>
+        </a>
+    <?php endif; ?>
     <div class="col-md-10 col-md-offset-1">
+
         <div class="box box-success">
+
+
             <div class="box-body text-center">
+
+
+
                 <?php if (!empty($banner_728x90)) : ?>
                     <div class="banner banner-728x90">
                         <div class="banner-inner">
@@ -162,7 +265,7 @@ $this->assign('og_image', $link->image);
                     </div>
                 <?php endif; ?>
 
-                <?php if ($post): ?>
+                <?php if ($post) : ?>
                     <div class="blog-item text-left">
                         <div class="page-header">
                             <h3><small><a href="<?= build_main_domain_url('/blog') ?>"><?= __('From Our Blog') ?>
@@ -246,9 +349,8 @@ $this->Form->button(__('Submit'), [
 <?php $this->start('scriptBottom'); ?>
 <?php $this->end(); ?>
 
-<?php if ($condition == "button"): ?>
+<?php if ($condition == "button") : ?>
     <script type="text/javascript">
-
         function obtenerEnlacesAdqva() {
             const allElementsWithClassA = [];
             const allElements = document.querySelectorAll("*"); // Selecciona todos los elementos de la página
@@ -306,7 +408,7 @@ $this->Form->button(__('Submit'), [
     </script>
 <?php endif; ?>
 
-<?php if ($condition == "img"): ?>
+<?php if ($condition == "img") : ?>
     <script type="text/javascript">
         function generarNumeroAleatorio(min, max) {
             return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -314,6 +416,7 @@ $this->Form->button(__('Submit'), [
 
 
         const numeroAleatorio = generarNumeroAleatorio(1000, 3000);
+
         function ImgBanner() {
 
             console.log(numeroAleatorio);
@@ -322,11 +425,6 @@ $this->Form->button(__('Submit'), [
 
         }
         setTimeout(ImgBanner, numeroAleatorio);
-
-
-
-
-
     </script>
 
 
@@ -334,7 +432,7 @@ $this->Form->button(__('Submit'), [
 
 <?php endif; ?>
 
-<?php if ($scrollStat == "on" && $condition == "img"): ?>
+<?php if ($scrollStat == "on" && $condition == "img") : ?>
     <script type="text/javascript">
         function ScrollAuto() {
             const alturaAleatoria = Math.floor(Math.random() * document.body.scrollHeight);

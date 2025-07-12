@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @var \App\View\AppView $this
  * @var mixed $options
@@ -112,6 +113,51 @@ $this->assign('content_title', __('Ads'));
                 ?>
             </div>
         </div>
+        <h3 class="page-header"><?= __('Custom Baner') ?></h3>
+        <div class="row">
+            <div class="col-sm-2"><?= __('Custom Baner Type') ?></div>
+                        <div class="col-sm-10">
+                    <?=
+                    $this->Form->control('Options.' . $settings['CustomBanerType']['id'] . '.value', [
+                        'label' => false,
+                        'options' => [
+                            'fullscreen' => __('PantallaCompleta'),
+                            'normal' => __('Normal'),
+                        ],
+                        'value' => $settings['CustomBanerType']['value'],
+                        'class' => 'form-control',
+                    ]);
+                    ?>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-sm-2"><?= __('Custom Banner') ?></div>
+            <div class="col-sm-10">
+                <?=
+                $this->Form->control('Options.' . $settings['CustomBanerCode']['id'] . '.value', [
+                    'label' => false,
+                    'class' => 'form-control',
+                    'type' => 'textarea',
+                    'value' => $settings['CustomBanerCode']['value'],
+                ]);
+                ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-2"><?= __('Style') ?></div>
+            <div class="col-sm-10">
+                <?=
+                $this->Form->control('Options.' . $settings['CustomBanerStyle']['id'] . '.value', [
+                    'label' => false,
+                    'class' => 'form-control',
+                    'type' => 'textarea',
+                    'value' => $settings['CustomBanerStyle']['value'],
+                ]);
+                ?>
+            </div>
+        </div>
+
 
         <h3 class="page-header"><?= __('Banner Ads') ?></h3>
 
@@ -166,6 +212,6 @@ $this->assign('content_title', __('Ads'));
 
 <?php $this->start('scriptBottom'); ?>
 <script>
-  $('.conditional').conditionize();
+    $('.conditional').conditionize();
 </script>
 <?php $this->end(); ?>

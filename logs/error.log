@@ -29077,3 +29077,717 @@
 2025-07-11 07:20:18 Warning: Warning (2): Undefined variable $minWithdrawalAmount in [C:\laragon\www\Acortador\src\Template\Member\Withdraws\index.ctp, line 78]
 
 
+2025-07-12 07:08:48 Warning: Warning (2): Attempt to read property "views" on null in [C:\laragon\www\Acortador\src\Template\Member\Links\index.ctp, line 119]
+
+
+2025-07-12 07:08:48 Warning: Warning (2): Attempt to read property "publisher_earnings" on null in [C:\laragon\www\Acortador\src\Template\Member\Links\index.ctp, line 122]
+
+
+2025-07-12 07:08:48 Warning: Warning (2): Attempt to read property "views" on null in [C:\laragon\www\Acortador\src\Template\Member\Links\index.ctp, line 119]
+
+
+2025-07-12 07:08:48 Warning: Warning (2): Attempt to read property "publisher_earnings" on null in [C:\laragon\www\Acortador\src\Template\Member\Links\index.ctp, line 122]
+
+
+2025-07-12 07:08:48 Warning: Warning (2): Attempt to read property "views" on null in [C:\laragon\www\Acortador\src\Template\Member\Links\index.ctp, line 119]
+
+
+2025-07-12 07:08:48 Warning: Warning (2): Attempt to read property "publisher_earnings" on null in [C:\laragon\www\Acortador\src\Template\Member\Links\index.ctp, line 122]
+
+
+2025-07-12 07:09:06 Warning: Warning (2): Undefined array key "customBanerState" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 150]
+
+
+2025-07-12 07:09:06 Warning: Warning (2): Trying to access array offset on value of type null in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 150]
+
+
+2025-07-12 07:09:06 Warning: Warning (2): Undefined array key "customBanerStyle" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 151]
+
+
+2025-07-12 07:09:06 Warning: Warning (2): Trying to access array offset on value of type null in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 151]
+
+
+2025-07-12 07:09:06 Warning: Warning (2): Undefined array key "customBanerImage" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 152]
+
+
+2025-07-12 07:09:06 Warning: Warning (2): Trying to access array offset on value of type null in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 152]
+
+
+2025-07-12 07:09:06 Warning: Warning (2): Undefined array key "customBanerURL" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 153]
+
+
+2025-07-12 07:09:06 Warning: Warning (2): Trying to access array offset on value of type null in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 153]
+
+
+2025-07-12 07:09:06 Warning: Warning (2): Undefined array key "isocode" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 178]
+
+
+2025-07-12 07:09:06 Warning: Warning (2): Undefined array key "proxy" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 179]
+
+
+2025-07-12 07:11:07 Warning: Warning (2): Undefined array key "customBanerState" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 150]
+
+
+2025-07-12 07:11:07 Warning: Warning (2): Trying to access array offset on value of type null in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 150]
+
+
+2025-07-12 07:11:07 Warning: Warning (2): Undefined array key "customBanerStyle" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 151]
+
+
+2025-07-12 07:11:07 Warning: Warning (2): Trying to access array offset on value of type null in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 151]
+
+
+2025-07-12 07:11:07 Warning: Warning (2): Undefined array key "customBanerImage" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 152]
+
+
+2025-07-12 07:11:07 Warning: Warning (2): Trying to access array offset on value of type null in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 152]
+
+
+2025-07-12 07:11:07 Warning: Warning (2): Undefined array key "customBanerURL" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 153]
+
+
+2025-07-12 07:11:07 Warning: Warning (2): Trying to access array offset on value of type null in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 153]
+
+
+2025-07-12 07:11:07 Warning: Warning (2): Undefined array key "isocode" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 178]
+
+
+2025-07-12 07:11:07 Warning: Warning (2): Undefined array key "proxy" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 179]
+
+
+2025-07-12 07:12:36 Warning: Warning (2): Undefined array key "customBanerState" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 150]
+
+
+2025-07-12 07:12:36 Warning: Warning (2): Trying to access array offset on value of type null in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 150]
+
+
+2025-07-12 07:12:36 Warning: Warning (2): Undefined array key "customBanerStyle" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 151]
+
+
+2025-07-12 07:12:36 Warning: Warning (2): Trying to access array offset on value of type null in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 151]
+
+
+2025-07-12 07:12:36 Warning: Warning (2): Undefined array key "customBanerImage" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 152]
+
+
+2025-07-12 07:12:36 Warning: Warning (2): Trying to access array offset on value of type null in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 152]
+
+
+2025-07-12 07:12:36 Warning: Warning (2): Undefined array key "customBanerURL" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 153]
+
+
+2025-07-12 07:12:36 Warning: Warning (2): Trying to access array offset on value of type null in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 153]
+
+
+2025-07-12 07:12:36 Warning: Warning (2): Undefined array key "isocode" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 178]
+
+
+2025-07-12 07:12:36 Warning: Warning (2): Undefined array key "proxy" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 179]
+
+
+2025-07-12 07:12:55 Warning: Warning (2): Undefined array key "customBanerState" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 150]
+
+
+2025-07-12 07:12:55 Warning: Warning (2): Trying to access array offset on value of type null in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 150]
+
+
+2025-07-12 07:12:55 Warning: Warning (2): Undefined array key "customBanerStyle" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 151]
+
+
+2025-07-12 07:12:55 Warning: Warning (2): Trying to access array offset on value of type null in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 151]
+
+
+2025-07-12 07:12:55 Warning: Warning (2): Undefined array key "customBanerImage" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 152]
+
+
+2025-07-12 07:12:55 Warning: Warning (2): Trying to access array offset on value of type null in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 152]
+
+
+2025-07-12 07:12:55 Warning: Warning (2): Undefined array key "customBanerURL" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 153]
+
+
+2025-07-12 07:12:55 Warning: Warning (2): Trying to access array offset on value of type null in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 153]
+
+
+2025-07-12 07:12:56 Warning: Warning (2): Undefined array key "isocode" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 178]
+
+
+2025-07-12 07:12:56 Warning: Warning (2): Undefined array key "proxy" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 179]
+
+
+2025-07-12 07:13:32 Warning: Warning (2): Undefined array key "customBanerState" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 150]
+
+
+2025-07-12 07:13:32 Warning: Warning (2): Trying to access array offset on value of type null in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 150]
+
+
+2025-07-12 07:13:32 Warning: Warning (2): Undefined array key "customBanerStyle" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 151]
+
+
+2025-07-12 07:13:32 Warning: Warning (2): Trying to access array offset on value of type null in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 151]
+
+
+2025-07-12 07:13:32 Warning: Warning (2): Undefined array key "customBanerImage" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 152]
+
+
+2025-07-12 07:13:32 Warning: Warning (2): Trying to access array offset on value of type null in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 152]
+
+
+2025-07-12 07:13:32 Warning: Warning (2): Undefined array key "customBanerURL" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 153]
+
+
+2025-07-12 07:13:32 Warning: Warning (2): Trying to access array offset on value of type null in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 153]
+
+
+2025-07-12 07:13:32 Warning: Warning (2): Undefined array key "isocode" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 178]
+
+
+2025-07-12 07:13:32 Warning: Warning (2): Undefined array key "proxy" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 179]
+
+
+2025-07-12 07:14:52 Warning: Warning (2): Undefined array key "customBanerState" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 150]
+
+
+2025-07-12 07:14:52 Warning: Warning (2): Trying to access array offset on value of type null in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 150]
+
+
+2025-07-12 07:14:52 Warning: Warning (2): Undefined array key "customBanerStyle" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 151]
+
+
+2025-07-12 07:14:52 Warning: Warning (2): Trying to access array offset on value of type null in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 151]
+
+
+2025-07-12 07:14:52 Warning: Warning (2): Undefined array key "customBanerImage" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 152]
+
+
+2025-07-12 07:14:52 Warning: Warning (2): Trying to access array offset on value of type null in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 152]
+
+
+2025-07-12 07:14:52 Warning: Warning (2): Undefined array key "customBanerURL" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 153]
+
+
+2025-07-12 07:14:52 Warning: Warning (2): Trying to access array offset on value of type null in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 153]
+
+
+2025-07-12 07:14:52 Warning: Warning (2): Undefined array key "isocode" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 178]
+
+
+2025-07-12 07:14:52 Warning: Warning (2): Undefined array key "proxy" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 179]
+
+
+2025-07-12 07:57:24 Warning: Warning (2): Undefined array key "CustomBannerType" in [C:\laragon\www\Acortador\src\Template\Admin\Options\ads.ctp, line 121]
+
+
+2025-07-12 07:57:24 Warning: Warning (2): Trying to access array offset on value of type null in [C:\laragon\www\Acortador\src\Template\Admin\Options\ads.ctp, line 121]
+
+
+2025-07-12 07:57:24 Warning: Warning (2): Undefined array key "CustomBannerType" in [C:\laragon\www\Acortador\src\Template\Admin\Options\ads.ctp, line 127]
+
+
+2025-07-12 07:57:24 Warning: Warning (2): Trying to access array offset on value of type null in [C:\laragon\www\Acortador\src\Template\Admin\Options\ads.ctp, line 127]
+
+
+2025-07-12 07:58:54 Warning: Warning (2): Undefined array key "CustomBannerType" in [C:\laragon\www\Acortador\src\Template\Admin\Options\ads.ctp, line 121]
+
+
+2025-07-12 07:58:54 Warning: Warning (2): Trying to access array offset on value of type null in [C:\laragon\www\Acortador\src\Template\Admin\Options\ads.ctp, line 121]
+
+
+2025-07-12 07:58:54 Warning: Warning (2): Undefined array key "CustomBannerType" in [C:\laragon\www\Acortador\src\Template\Admin\Options\ads.ctp, line 127]
+
+
+2025-07-12 07:58:54 Warning: Warning (2): Trying to access array offset on value of type null in [C:\laragon\www\Acortador\src\Template\Admin\Options\ads.ctp, line 127]
+
+
+2025-07-12 07:59:19 Warning: Warning (2): Undefined array key "CustomBannerType" in [C:\laragon\www\Acortador\src\Template\Admin\Options\ads.ctp, line 121]
+
+
+2025-07-12 07:59:19 Warning: Warning (2): Trying to access array offset on value of type null in [C:\laragon\www\Acortador\src\Template\Admin\Options\ads.ctp, line 121]
+
+
+2025-07-12 07:59:19 Warning: Warning (2): Undefined array key "CustomBannerType" in [C:\laragon\www\Acortador\src\Template\Admin\Options\ads.ctp, line 127]
+
+
+2025-07-12 07:59:19 Warning: Warning (2): Trying to access array offset on value of type null in [C:\laragon\www\Acortador\src\Template\Admin\Options\ads.ctp, line 127]
+
+
+2025-07-12 08:00:03 Warning: Warning (2): Undefined array key "customBanerCode" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 150]
+
+
+2025-07-12 08:00:03 Warning: Warning (2): Trying to access array offset on value of type null in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 150]
+
+
+2025-07-12 08:00:03 Warning: Warning (2): Undefined array key "CustomBannerType" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 151]
+
+
+2025-07-12 08:00:03 Warning: Warning (2): Trying to access array offset on value of type null in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 151]
+
+
+2025-07-12 08:00:04 Warning: Warning (2): Undefined array key "isocode" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 178]
+
+
+2025-07-12 08:00:04 Warning: Warning (2): Undefined array key "proxy" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 179]
+
+
+2025-07-12 08:00:04 Warning: Warning (2): Undefined variable $ in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 478]
+
+
+2025-07-12 08:00:47 Warning: Warning (2): Undefined array key "customBanerCode" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 150]
+
+
+2025-07-12 08:00:47 Warning: Warning (2): Trying to access array offset on value of type null in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 150]
+
+
+2025-07-12 08:00:47 Warning: Warning (2): Undefined array key "CustomBannerType" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 151]
+
+
+2025-07-12 08:00:47 Warning: Warning (2): Trying to access array offset on value of type null in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 151]
+
+
+2025-07-12 08:00:48 Warning: Warning (2): Undefined array key "isocode" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 178]
+
+
+2025-07-12 08:00:48 Warning: Warning (2): Undefined array key "proxy" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 179]
+
+
+2025-07-12 08:00:48 Warning: Warning (2): Undefined variable $ in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 478]
+
+
+2025-07-12 08:01:53 Warning: Warning (2): Undefined array key "customBanerCode" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 150]
+
+
+2025-07-12 08:01:53 Warning: Warning (2): Trying to access array offset on value of type null in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 150]
+
+
+2025-07-12 08:01:53 Warning: Warning (2): Undefined array key "CustomBannerType" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 151]
+
+
+2025-07-12 08:01:53 Warning: Warning (2): Trying to access array offset on value of type null in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 151]
+
+
+2025-07-12 08:01:59 Warning: Warning (2): Undefined array key "isocode" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 178]
+
+
+2025-07-12 08:01:59 Warning: Warning (2): Undefined array key "proxy" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 179]
+
+
+2025-07-12 08:02:00 Warning: Warning (2): Undefined variable $ in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 478]
+
+
+2025-07-12 08:02:18 Warning: Warning (2): Undefined array key "customBanerCode" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 150]
+
+
+2025-07-12 08:02:18 Warning: Warning (2): Trying to access array offset on value of type null in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 150]
+
+
+2025-07-12 08:02:18 Warning: Warning (2): Undefined array key "CustomBannerType" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 151]
+
+
+2025-07-12 08:02:18 Warning: Warning (2): Trying to access array offset on value of type null in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 151]
+
+
+2025-07-12 08:02:21 Warning: Warning (2): Undefined array key "isocode" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 178]
+
+
+2025-07-12 08:02:21 Warning: Warning (2): Undefined array key "proxy" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 179]
+
+
+2025-07-12 08:02:22 Warning: Warning (2): Undefined variable $ in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 478]
+
+
+2025-07-12 08:02:22 Warning: Warning (2): Undefined variable $logged_user in [xdebug://debug-eval, line 1]
+
+
+2025-07-12 08:02:22 Warning: Warning (2): Attempt to read property "Icon" on null in [xdebug://debug-eval, line 1]
+
+
+2025-07-12 08:02:52 Warning: Warning (2): Undefined array key "customBanerCode" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 150]
+
+
+2025-07-12 08:02:52 Warning: Warning (2): Trying to access array offset on value of type null in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 150]
+
+
+2025-07-12 08:02:52 Warning: Warning (2): Undefined array key "CustomBannerType" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 151]
+
+
+2025-07-12 08:02:52 Warning: Warning (2): Trying to access array offset on value of type null in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 151]
+
+
+2025-07-12 08:02:54 Warning: Warning (2): Undefined array key "isocode" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 178]
+
+
+2025-07-12 08:02:54 Warning: Warning (2): Undefined array key "proxy" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 179]
+
+
+2025-07-12 08:02:55 Warning: Warning (2): Undefined variable $ in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 478]
+
+
+2025-07-12 08:02:55 Warning: Warning (2): Undefined variable $logged_user in [xdebug://debug-eval, line 1]
+
+
+2025-07-12 08:02:55 Warning: Warning (2): Attempt to read property "Icon" on null in [xdebug://debug-eval, line 1]
+
+
+2025-07-12 08:02:58 Warning: Warning (2): Undefined variable $ in [xdebug://debug-eval, line 1]
+
+
+2025-07-12 08:03:28 Warning: Warning (2): Undefined variable $ in [xdebug://debug-eval, line 1]
+
+
+2025-07-12 08:04:09 Warning: Warning (2): Undefined variable $logged_user in [xdebug://debug-eval, line 1]
+
+
+2025-07-12 08:04:09 Warning: Warning (2): Attempt to read property "Icon" on null in [xdebug://debug-eval, line 1]
+
+
+2025-07-12 08:04:12 Warning: Warning (2): Undefined variable $logged_user in [xdebug://debug-eval, line 1]
+
+
+2025-07-12 08:04:12 Warning: Warning (2): Attempt to read property "Icon" on null in [xdebug://debug-eval, line 1]
+
+
+2025-07-12 08:04:14 Warning: Warning (2): Undefined variable $logged_user in [xdebug://debug-eval, line 1]
+
+
+2025-07-12 08:04:14 Warning: Warning (2): Attempt to read property "Icon" on null in [xdebug://debug-eval, line 1]
+
+
+2025-07-12 08:05:04 Warning: Warning (2): Undefined array key "isocode" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 178]
+
+
+2025-07-12 08:05:04 Warning: Warning (2): Undefined array key "proxy" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 179]
+
+
+2025-07-12 08:05:04 Warning: Warning (2): Undefined variable $fullscreen in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 478]
+
+
+2025-07-12 08:05:05 Warning: Warning (2): Undefined variable $logged_user in [xdebug://debug-eval, line 1]
+
+
+2025-07-12 08:05:05 Warning: Warning (2): Attempt to read property "Icon" on null in [xdebug://debug-eval, line 1]
+
+
+2025-07-12 08:05:07 Warning: Warning (2): Undefined variable $fullscreen in [xdebug://debug-eval, line 1]
+
+
+2025-07-12 08:06:09 Warning: Warning (2): Undefined array key "isocode" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 178]
+
+
+2025-07-12 08:06:09 Warning: Warning (2): Undefined array key "proxy" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 179]
+
+
+2025-07-12 08:06:09 Warning: Warning (2): Undefined variable $fullscreen in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 478]
+
+
+2025-07-12 08:06:09 Warning: Warning (2): Undefined variable $logged_user in [xdebug://debug-eval, line 1]
+
+
+2025-07-12 08:06:09 Warning: Warning (2): Attempt to read property "Icon" on null in [xdebug://debug-eval, line 1]
+
+
+2025-07-12 08:06:12 Warning: Warning (2): Undefined variable $fullscreen in [xdebug://debug-eval, line 1]
+
+
+2025-07-12 08:06:35 Warning: Warning (2): Undefined variable $fullscreen in [xdebug://debug-eval, line 1]
+
+
+2025-07-12 08:06:49 Warning: Warning (2): Undefined array key "isocode" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 178]
+
+
+2025-07-12 08:06:49 Warning: Warning (2): Undefined array key "proxy" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 179]
+
+
+2025-07-12 08:06:49 Warning: Warning (2): Undefined variable $logged_user in [xdebug://debug-eval, line 1]
+
+
+2025-07-12 08:06:49 Warning: Warning (2): Attempt to read property "Icon" on null in [xdebug://debug-eval, line 1]
+
+
+2025-07-12 08:06:55 Warning: Warning (2): Undefined variable $logged_user in [xdebug://debug-eval, line 1]
+
+
+2025-07-12 08:06:55 Warning: Warning (2): Attempt to read property "Icon" on null in [xdebug://debug-eval, line 1]
+
+
+2025-07-12 08:06:55 Warning: Warning (2): Undefined variable $logged_user in [xdebug://debug-eval, line 1]
+
+
+2025-07-12 08:06:55 Warning: Warning (2): Attempt to read property "Icon" on null in [xdebug://debug-eval, line 1]
+
+
+2025-07-12 08:07:59 Warning: Warning (2): Undefined array key "isocode" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 178]
+
+
+2025-07-12 08:07:59 Warning: Warning (2): Undefined array key "proxy" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 179]
+
+
+2025-07-12 08:07:59 Warning: Warning (2): Undefined variable $logged_user in [xdebug://debug-eval, line 1]
+
+
+2025-07-12 08:07:59 Warning: Warning (2): Attempt to read property "Icon" on null in [xdebug://debug-eval, line 1]
+
+
+2025-07-12 08:08:01 Warning: Warning (2): Undefined variable $logged_user in [xdebug://debug-eval, line 1]
+
+
+2025-07-12 08:08:01 Warning: Warning (2): Attempt to read property "Icon" on null in [xdebug://debug-eval, line 1]
+
+
+2025-07-12 08:08:30 Warning: Warning (2): Undefined array key "isocode" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 178]
+
+
+2025-07-12 08:08:30 Warning: Warning (2): Undefined array key "proxy" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 179]
+
+
+2025-07-12 08:08:30 Warning: Warning (2): Undefined variable $logged_user in [xdebug://debug-eval, line 1]
+
+
+2025-07-12 08:08:30 Warning: Warning (2): Attempt to read property "Icon" on null in [xdebug://debug-eval, line 1]
+
+
+2025-07-12 08:08:34 Warning: Warning (2): Undefined variable $logged_user in [xdebug://debug-eval, line 1]
+
+
+2025-07-12 08:08:34 Warning: Warning (2): Attempt to read property "Icon" on null in [xdebug://debug-eval, line 1]
+
+
+2025-07-12 08:08:34 Warning: Warning (2): Undefined variable $logged_user in [xdebug://debug-eval, line 1]
+
+
+2025-07-12 08:08:34 Warning: Warning (2): Attempt to read property "Icon" on null in [xdebug://debug-eval, line 1]
+
+
+2025-07-12 08:09:28 Warning: Warning (2): Undefined array key "isocode" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 178]
+
+
+2025-07-12 08:09:28 Warning: Warning (2): Undefined array key "proxy" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 179]
+
+
+2025-07-12 08:13:42 Warning: Warning (2): Undefined array key "isocode" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 178]
+
+
+2025-07-12 08:13:42 Warning: Warning (2): Undefined array key "proxy" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 179]
+
+
+2025-07-12 08:17:32 Warning: Warning (2): Undefined array key "isocode" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 178]
+
+
+2025-07-12 08:17:32 Warning: Warning (2): Undefined array key "proxy" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 179]
+
+
+2025-07-12 08:18:53 Warning: Warning (2): Undefined array key "isocode" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 178]
+
+
+2025-07-12 08:18:53 Warning: Warning (2): Undefined array key "proxy" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 179]
+
+
+2025-07-12 08:19:00 Warning: Warning (2): Undefined array key "isocode" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 178]
+
+
+2025-07-12 08:19:00 Warning: Warning (2): Undefined array key "proxy" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 179]
+
+
+2025-07-12 08:23:05 Warning: Warning (2): Undefined array key "isocode" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 178]
+
+
+2025-07-12 08:23:05 Warning: Warning (2): Undefined array key "proxy" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 179]
+
+
+2025-07-12 08:23:22 Warning: Warning (2): Undefined array key "isocode" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 178]
+
+
+2025-07-12 08:23:22 Warning: Warning (2): Undefined array key "proxy" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 179]
+
+
+2025-07-12 08:24:04 Warning: Warning (2): Undefined array key "isocode" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 178]
+
+
+2025-07-12 08:24:04 Warning: Warning (2): Undefined array key "proxy" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 179]
+
+
+2025-07-12 08:27:43 Warning: Warning (2): Undefined array key "isocode" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 178]
+
+
+2025-07-12 08:27:43 Warning: Warning (2): Undefined array key "proxy" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 179]
+
+
+2025-07-12 08:28:03 Warning: Warning (2): Undefined array key "isocode" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 178]
+
+
+2025-07-12 08:28:03 Warning: Warning (2): Undefined array key "proxy" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 179]
+
+
+2025-07-12 08:29:01 Warning: Warning (2): Undefined array key "isocode" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 178]
+
+
+2025-07-12 08:29:01 Warning: Warning (2): Undefined array key "proxy" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 179]
+
+
+2025-07-12 08:30:26 Warning: Warning (2): Undefined array key "isocode" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 178]
+
+
+2025-07-12 08:30:26 Warning: Warning (2): Undefined array key "proxy" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 179]
+
+
+2025-07-12 08:31:31 Warning: Warning (2): Undefined array key "isocode" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 178]
+
+
+2025-07-12 08:31:31 Warning: Warning (2): Undefined array key "proxy" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 179]
+
+
+2025-07-12 08:42:59 Warning: Warning (2): Undefined array key "isocode" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 178]
+
+
+2025-07-12 08:42:59 Warning: Warning (2): Undefined array key "proxy" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 179]
+
+
+2025-07-12 08:43:07 Warning: Warning (2): Undefined array key "isocode" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 178]
+
+
+2025-07-12 08:43:07 Warning: Warning (2): Undefined array key "proxy" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 179]
+
+
+2025-07-12 08:44:19 Warning: Warning (2): Undefined array key "isocode" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 178]
+
+
+2025-07-12 08:44:19 Warning: Warning (2): Undefined array key "proxy" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 179]
+
+
+2025-07-12 08:45:47 Warning: Warning (2): Undefined array key "isocode" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 178]
+
+
+2025-07-12 08:45:47 Warning: Warning (2): Undefined array key "proxy" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 179]
+
+
+2025-07-12 08:45:57 Warning: Warning (2): Undefined array key "isocode" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 178]
+
+
+2025-07-12 08:45:57 Warning: Warning (2): Undefined array key "proxy" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 179]
+
+
+2025-07-12 08:47:18 Warning: Warning (2): Undefined array key "isocode" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 178]
+
+
+2025-07-12 08:47:18 Warning: Warning (2): Undefined array key "proxy" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 179]
+
+
+2025-07-12 08:57:57 Warning: Warning (2): Undefined array key "$CustomBanerStyle" in [C:\laragon\www\Acortador\src\Template\Admin\Options\ads.ctp, line 155]
+
+
+2025-07-12 08:57:57 Warning: Warning (2): Trying to access array offset on value of type null in [C:\laragon\www\Acortador\src\Template\Admin\Options\ads.ctp, line 155]
+
+
+2025-07-12 08:59:02 Warning: Warning (2): Undefined array key "$CustomBanerStyle" in [C:\laragon\www\Acortador\src\Template\Admin\Options\ads.ctp, line 155]
+
+
+2025-07-12 08:59:02 Warning: Warning (2): Trying to access array offset on value of type null in [C:\laragon\www\Acortador\src\Template\Admin\Options\ads.ctp, line 155]
+
+
+2025-07-12 08:59:11 Warning: Warning (2): Undefined array key "isocode" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 178]
+
+
+2025-07-12 08:59:11 Warning: Warning (2): Undefined array key "proxy" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 179]
+
+
+2025-07-12 09:00:09 Warning: Warning (2): Undefined array key "$CustomBanerStyle" in [C:\laragon\www\Acortador\src\Template\Admin\Options\ads.ctp, line 155]
+
+
+2025-07-12 09:00:09 Warning: Warning (2): Trying to access array offset on value of type null in [C:\laragon\www\Acortador\src\Template\Admin\Options\ads.ctp, line 155]
+
+
+2025-07-12 09:01:34 Warning: Warning (2): Undefined array key "$CustomBanerStyle" in [C:\laragon\www\Acortador\src\Template\Admin\Options\ads.ctp, line 155]
+
+
+2025-07-12 09:01:34 Warning: Warning (2): Trying to access array offset on value of type null in [C:\laragon\www\Acortador\src\Template\Admin\Options\ads.ctp, line 155]
+
+
+2025-07-12 09:02:16 Warning: Warning (2): Undefined array key "isocode" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 178]
+
+
+2025-07-12 09:02:16 Warning: Warning (2): Undefined array key "proxy" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 179]
+
+
+2025-07-12 09:02:22 Warning: Warning (2): Undefined array key "isocode" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 178]
+
+
+2025-07-12 09:02:22 Warning: Warning (2): Undefined array key "proxy" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 179]
+
+
+2025-07-12 09:02:36 Warning: Warning (2): Undefined array key "isocode" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 178]
+
+
+2025-07-12 09:02:36 Warning: Warning (2): Undefined array key "proxy" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 179]
+
+
+2025-07-12 09:03:11 Warning: Warning (2): Undefined array key "isocode" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 178]
+
+
+2025-07-12 09:03:11 Warning: Warning (2): Undefined array key "proxy" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 179]
+
+
+2025-07-12 09:03:11 Warning: Warning (2): Undefined variable $logged_user in [xdebug://debug-eval, line 1]
+
+
+2025-07-12 09:03:11 Warning: Warning (2): Attempt to read property "Icon" on null in [xdebug://debug-eval, line 1]
+
+
+2025-07-12 09:03:19 Warning: Warning (2): Undefined variable $logged_user in [xdebug://debug-eval, line 1]
+
+
+2025-07-12 09:03:19 Warning: Warning (2): Attempt to read property "Icon" on null in [xdebug://debug-eval, line 1]
+
+
+2025-07-12 09:03:21 Warning: Warning (2): Undefined variable $logged_user in [xdebug://debug-eval, line 1]
+
+
+2025-07-12 09:03:21 Warning: Warning (2): Attempt to read property "Icon" on null in [xdebug://debug-eval, line 1]
+
+
+2025-07-12 09:03:21 Warning: Warning (2): Undefined variable $logged_user in [xdebug://debug-eval, line 1]
+
+
+2025-07-12 09:03:21 Warning: Warning (2): Attempt to read property "Icon" on null in [xdebug://debug-eval, line 1]
+
+
+2025-07-12 09:03:22 Warning: Warning (2): Undefined variable $logged_user in [xdebug://debug-eval, line 1]
+
+
+2025-07-12 09:03:22 Warning: Warning (2): Attempt to read property "Icon" on null in [xdebug://debug-eval, line 1]
+
+
+2025-07-12 09:03:23 Warning: Warning (2): Undefined variable $logged_user in [xdebug://debug-eval, line 1]
+
+
+2025-07-12 09:03:23 Warning: Warning (2): Attempt to read property "Icon" on null in [xdebug://debug-eval, line 1]
+
+
+2025-07-12 09:03:23 Warning: Warning (2): Undefined variable $logged_user in [xdebug://debug-eval, line 1]
+
+
+2025-07-12 09:03:23 Warning: Warning (2): Attempt to read property "Icon" on null in [xdebug://debug-eval, line 1]
+
+
+2025-07-12 09:03:24 Warning: Warning (2): Undefined variable $logged_user in [xdebug://debug-eval, line 1]
+
+
+2025-07-12 09:03:24 Warning: Warning (2): Attempt to read property "Icon" on null in [xdebug://debug-eval, line 1]
+
+
+2025-07-12 09:03:39 Warning: Warning (2): Undefined array key "isocode" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 178]
+
+
+2025-07-12 09:03:39 Warning: Warning (2): Undefined array key "proxy" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 179]
+
+
+2025-07-12 09:03:45 Warning: Warning (2): Undefined array key "isocode" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 178]
+
+
+2025-07-12 09:03:45 Warning: Warning (2): Undefined array key "proxy" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 179]
+
+
+2025-07-12 09:04:44 Warning: Warning (2): Undefined array key "isocode" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 178]
+
+
+2025-07-12 09:04:44 Warning: Warning (2): Undefined array key "proxy" in [C:\laragon\www\Acortador\src\Controller\LinksController.php, line 179]
+
+
