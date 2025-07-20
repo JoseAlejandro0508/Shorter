@@ -39,6 +39,37 @@
     <?= get_option('head_code'); ?>
 
     <?= $this->fetch('scriptTop') ?>
+            <style>
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1; /* Detrás del contenido */
+           background: linear-gradient(135deg, #ebeced, #c7c7c7);/* Gradiente de fondo */
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 1; /* Encima del fondo */
+        }
+    </style>
+<script>
+
+    // Agregar una entrada al historial de navegación
+       history.pushState(null, null, location.href);
+
+        // Detectar cuando el usuario presiona el botón Atrás
+        window.onpopstate = function(event) {
+            // Redirigir al enlace deseado
+            history.go(1);
+    
+            var Back=document.getElementById("BackDisplay");
+            Back.style.display="block";
+      
+        };
+</script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -46,8 +77,15 @@
     <script src="//oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    
 </head>
+
 <body class="banner-page layout-top-nav skin-blue">
+    <?= $this->Html->script('tsparticles.min.js') ?>
+    
+<div id="particles-js"></div>
+
+
 <?= get_option('after_body_tag_code'); ?>
 
 <div class="wrapper">
@@ -65,7 +103,16 @@
                     }
                     ?>
                     <a class="navbar-brand <?= $class ?>"
-                       href="<?= build_main_domain_url('/'); ?>"><?= $logo['content'] ?></a>
+                       href="<?= build_main_domain_url('/'); ?>"
+                        style="
+    margin: 0;
+    font-size: 24px;
+    background: linear-gradient(90deg, #fcfcfc, #757575);
+    font-weight: 800;
+    -webkit-background-clip: text;
+    color: #f0ffff00;
+    /* font-weight: 900; */
+"><?= $logo['content'] ?></a>
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                             data-target="#navbar-collapse">
                         <i class="fa fa-bars"></i>
@@ -133,5 +180,61 @@
 
 <?= $this->fetch('scriptBottom') ?>
 <?= get_option('footer_code'); ?>
+ <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        particlesJS('particles-js', {
+            particles: {
+                number: {
+                    value: 80,
+                    density: {
+                        enable: true,
+                        value_area: 800
+                    }
+                },
+                color: {
+                    value: '#ffffff'
+                },
+                shape: {
+                    type: 'circle',
+                    stroke: {
+                        width: 0,
+                        color: '#000000'
+                    }
+                },
+                opacity: {
+                    value: 0.5,
+                    random: true,
+                },
+                size: {
+                    value: 3,
+                    random: true,
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: 'none',
+                    random: true,
+                    straight: false,
+                    out_mode: 'out'
+                }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: {
+                    onhover: {
+                        enable: true,
+                        mode: 'repulse'
+                    },
+                    onclick: {
+                        enable: true,
+                        mode: 'push'
+                    },
+                    resize: true
+                }
+            }
+        });
+    });
+    </script>
 </body>
+
 </html>

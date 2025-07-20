@@ -51,13 +51,13 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 1; /* Detrás del contenido */
-            background: linear-gradient(135deg, #1a2980, #26d0ce); /* Gradiente de fondo */
+            z-index: -1; /* Detrás del contenido */
+           background: linear-gradient(135deg, #909d09, #c80000); /* Gradiente de fondo */
         }
         .content-wrapper {
             position: relative;
             background: transparent !important;
-            z-index: 2!important; /* Encima del fondo */
+            z-index: -1!important; /* Encima del fondo */
         }
     </style>
 

@@ -223,12 +223,12 @@ img {
 /** Banner Ads **/
 
 .countdown {
-    border: 2px solid #888;
+    border: 2px solid #fff8f8;
     border-radius: 50%;
-    color: #888;
+    color: #ffffff;
     display: block;
     font-size: 16px;
-    font-weight: 300;
+    font-weight: 800;
     height: 100px;
     line-height: 18px;
     margin: 25px auto;

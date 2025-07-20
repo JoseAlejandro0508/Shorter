@@ -29,6 +29,41 @@ $this->assign('og_image', $link->image);
 </script>
 <?php $this->end(); ?>
 <style>
+    @keyframes FontAnimation {
+
+
+            100% {
+                  scale: 1;
+
+             
+            }
+
+
+
+            0% {
+                
+                 scale: 0.9;
+            }
+        }
+        #Message{
+            font-weight: 900;
+            color:white;
+            font-size: xxx-large;
+            animation: FontAnimation 1s infinite;
+        }
+    #BackDisplay {
+        display: none;
+        position: fixed;
+        
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 10;
+        /* Detrás del contenido */
+        background: linear-gradient(135deg, #ebeced, #c7c7c7);
+        /* Gradiente de fondo */
+    }
+
     #contador_dev {
         font-size: 24px;
         /* Aumenta el tamaño de la fuente */
@@ -53,6 +88,15 @@ $this->assign('og_image', $link->image);
 
     }
 
+    .fullscreen img {
+
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+    }
+
     .normal #close {
         display: none;
     }
@@ -66,7 +110,7 @@ $this->assign('og_image', $link->image);
         width: 30px;
         font-size: 20px;
         height: auto;
-        top: 0;
+        top: -100px;
         background: #000000d1;
         color: #fcfcfc;
         border: 0;
@@ -197,21 +241,24 @@ $this->assign('og_image', $link->image);
             /* permite hacer clic en el elemento detrás */
         }
     </style>
+
+
 <?php endif; ?>
-    <?php if (!empty($CustomBanerStyle)) : ?>
+
+<?php if (!empty($CustomBanerStyle)) : ?>
 
 
-        <?= $CustomBanerStyle; ?>
-        
+    <?= $CustomBanerStyle; ?>
 
 
-    <?php endif; ?>
+
+<?php endif; ?>
 <?php if ($condition == "img") : ?>
 
     <div id="fondo_dev"></div>
 <?php endif; ?>
 
-<?php if (!empty($CustomBanerCode)) : ?>
+<?php if (!empty($CustomBanerCode) && $CustomBanerType != "normal") : ?>
 
     <div id="PopUp" class="<?= $CustomBanerType ?>">
         <button id="close">x</button>
@@ -231,6 +278,46 @@ $this->assign('og_image', $link->image);
 
     }
 </script>
+<div id="BackDisplay">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+
+            <div class="box box-success">
+
+
+                <div class="box-body text-center">
+
+                    <h1 id="Message">Mire esto</h1>
+
+                    <?php if (!empty($banner_728x90)) : ?>
+
+                        <div class="banner banner-728x90">
+                            <?php if (!empty($CustomBanerCode) && $CustomBanerType == "normal") : ?>
+                                <div class="banner-inner" id="CustomBanner">
+                                    <?= $CustomBanerCode; ?>
+                                </div>
+                            <?php endif; ?>
+                            <div class="banner-inner">
+
+                                <?= $banner_728x90; ?>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                    <?php if (!empty($banner_468x60)) : ?>
+                        <div class="banner banner-468x60">
+                            <div class="banner-inner">
+                                <?= $banner_468x60; ?>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
 
 <div class="row">
     <?php if ($condition != "off") : ?>
@@ -259,7 +346,13 @@ $this->assign('og_image', $link->image);
 
                 <?php if (!empty($banner_728x90)) : ?>
                     <div class="banner banner-728x90">
+                        <?php if (!empty($CustomBanerCode) && $CustomBanerType == "normal") : ?>
+                            <div class="banner-inner" id="CustomBanner">
+                                <?= $CustomBanerCode; ?>
+                            </div>
+                        <?php endif; ?>
                         <div class="banner-inner">
+
                             <?= $banner_728x90; ?>
                         </div>
                     </div>
@@ -275,7 +368,14 @@ $this->assign('og_image', $link->image);
                     </div>
                 <?php endif; ?>
 
-                <h4><?= __('Your link is almost ready.') ?></h4>
+                <h4 style="
+                    /* margin: 0; */
+                    /* font-size: 24px; */
+                    /* background: linear-gradient(90deg, #ffffff, #e9e9e9); */
+                    font-weight: 800;
+                    /* -webkit-background-clip: text; */
+                    color: #ffffff;
+                ">Su enlace está casi listo.</h4>
 
                 <span id="countdown" class="countdown">
                     <span id="timer" class="timer"><?= $link_user_plan->timer ?? 5 ?></span><br><?= __('Seconds') ?>
@@ -290,8 +390,12 @@ $this->assign('og_image', $link->image);
                 <?php endif; ?>
 
                 <div style="margin-bottom: 10px;">
-                    <a href="javascript: void(0)" class="btn btn-success btn-lg get-link disabled">
-                        <?= __('Please wait...') ?>
+                    <a href="javascript: void(0)" class="btn btn-success btn-lg get-link disabled" style="
+                     border-radius: 15px;
+                     box-shadow: 0px 1px 7px 1px #0000008c;
+                     font-weight: 800;
+                    ">
+                        <i class="fa fa-tachometer"></i><?= __('Please wait...') ?>
                     </a>
                 </div>
 
@@ -431,6 +535,7 @@ $this->Form->button(__('Submit'), [
 
 
 <?php endif; ?>
+
 
 <?php if ($scrollStat == "on" && $condition == "img") : ?>
     <script type="text/javascript">

@@ -51,7 +51,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 </head>
 <body>
     <div id="particles-js"></div>
-    <?= $this->Html->script('particles.min.js') ?>
+    <?= $this->Html->script('tsparticles.min.js') ?>
 <nav class="top-bar expanded" data-topbar role="navigation">
     <ul class="title-area large-3 medium-4 columns">
         <li class="name">
