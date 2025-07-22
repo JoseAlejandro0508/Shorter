@@ -1,14 +1,15 @@
 <?php 
 use Cake\View\Helper\HtmlHelper;
 $this->loadHelper('Html');
-
+echo $this->Html->css('allRank.css');
 echo $this->Html->css('rank.css');
 ?>
 
 <div class = "rank_container">
-
-<strong style="font-size: 50px;padding:10px;background: linear-gradient(90deg, #ff00d6, #0777f7);-webkit-background-clip: text;color: #00000000;font-weight: 700;">
+ <div class="TitleContainer">
+<strong style="padding:10px;background: linear-gradient(90deg, #ff00d6, #0777f7);-webkit-background-clip: text;color: #00000000;font-weight: 700;">
       Ranking Global    </strong>
+ </div>
 
 <!-- Tabla de rangos con estilos -->
 <table class="table table-striped" id ="table_info">
@@ -86,7 +87,7 @@ echo $this->Html->css('rank.css');
             <th>Plan</th>
             <th>Nombre de Usuario</th>
             <th>Cantidad de Vistas</th>
-            <th>Miembro Desde</th>
+
         </tr>
     </thead>
     <tbody>
@@ -105,7 +106,7 @@ echo $this->Html->css('rank.css');
                     </td>
                 <td><?= h($user->username) ?></td>
                 <td><?= h($total_views_per_user[$user->id]) ?></td>
-                <td><?= h($user->created ? $user->created->format('Y-m-d H:i:s') : 'Sin fecha') ?></td>
+
             </tr>
         <?php endforeach; ?>
     </tbody>

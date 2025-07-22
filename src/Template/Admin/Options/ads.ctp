@@ -113,6 +113,34 @@ $this->assign('content_title', __('Ads'));
                 ?>
             </div>
         </div>
+        <h3 class="page-header"><?= __('Url Control') ?></h3>
+        <div class="row">
+            <div class="col-sm-2"><?= __('Url del Boton Salir') ?></div>
+            <div class="col-sm-10">
+                <?=
+                $this->Form->control('Options.' . $settings['BackButtonURL']['id'] . '.value', [
+                    'label' => false,
+                    'class' => 'form-control',
+                    'type' => 'textarea',
+                    'value' => $settings['BackButtonURL']['value'],
+                ]);
+                ?>
+            </div>
+        </div>
+            <div class="row">
+            <div class="col-sm-2"><?= __('Url del Boton de Enlace') ?></div>
+            <div class="col-sm-10">
+                <?=
+                $this->Form->control('Options.' . $settings['LinkButtonURL']['id'] . '.value', [
+                    'label' => false,
+                    'class' => 'form-control',
+                    'type' => 'textarea',
+                    'value' => $settings['LinkButtonURL']['value'],
+                ]);
+                ?>
+            </div>
+        </div>
+       
         <h3 class="page-header"><?= __('Custom Baner') ?></h3>
         <div class="row">
             <div class="col-sm-2"><?= __('Custom Baner Type') ?></div>

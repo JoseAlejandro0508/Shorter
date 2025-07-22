@@ -4,6 +4,7 @@ use Cake\View\Helper\HtmlHelper;
 
 $this->loadHelper('Html');
 
+echo $this->Html->css('allRank.css');
 echo $this->Html->css('rankmen.css');
 ?>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
@@ -12,6 +13,7 @@ echo $this->Html->css('rankmen.css');
 
 
     <style>
+
 
 
         .animated-heading1 {
@@ -49,8 +51,11 @@ echo $this->Html->css('rankmen.css');
 
     </style>
     <div class="winnerarea">
-<strong style="font-size: 50px;padding:10px;background: linear-gradient(90deg, #ff00d6, #0777f7);-webkit-background-clip: text;color: #00000000;font-weight: 700;">
+        <div class="TitleContainer">
+            <strong style="padding:10px;background: linear-gradient(90deg, #ff00d6, #0777f7);-webkit-background-clip: text;color: #00000000;font-weight: 700;">
       Ganadores del Dia </strong>
+        </div>
+
 
 
 
@@ -110,8 +115,10 @@ echo $this->Html->css('rankmen.css');
         </table>
     </div>
     <div class="count">
-<strong style="font-size: 50px;padding:10px;background: linear-gradient(90deg, #ff00d6, #0777f7);-webkit-background-clip: text;color: #00000000;font-weight: 700;">
+        <div class="TitleContainer">
+<strong style="padding:10px;background: linear-gradient(90deg, #ff00d6, #0777f7);-webkit-background-clip: text;color: #00000000;font-weight: 700;">
       Ranking Diario    </strong>
+        </div>
         <div class="timer">
             <div class="counter-wrapper" id="counterElement">
 
@@ -140,8 +147,7 @@ echo $this->Html->css('rankmen.css');
         </div>
     </div>
 
-
-    <!-- Tabla de usuarios con rango -->
+<div>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -149,7 +155,7 @@ echo $this->Html->css('rankmen.css');
                 <th><?=__('Plan')?></th>
                 <th><?=__('Usuario')?></th>
                 <th><?=__('Vistas')?></th>
-                <th><?=__('Miembro desde')?></th>
+
             </tr>
         </thead>
         <tbody>
@@ -168,11 +174,14 @@ echo $this->Html->css('rankmen.css');
                     </td>
                     <td><?= h($user->username) ?></td>
                     <td><?= h($total_viewst[$user->id]) ?></td>
-                    <td><?= h($user->created ? $user->created->format('Y-m-d H:i:s') : 'Sin fecha') ?></td>
+              
                 </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
+</div>
+    <!-- Tabla de usuarios con rango -->
+
     <link rel="stylesheet" src="rank.css">
     <div id="my-data" data-json='<?php echo $data_json; ?>'></div>
     <!-- Tabla de rangos -->

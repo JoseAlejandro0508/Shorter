@@ -565,3 +565,6 @@
 2025-07-05 22:16:25 Notice: Notice (8): date_default_timezone_set(): Timezone ID '' is invalid in [C:\laragon\www\Acortador\src\Controller\Member\UsersController.php, line 791]
 
 
+2025-07-21 00:02:14 Notice: Notice (8): date_default_timezone_set(): Timezone ID '' is invalid in [C:\laragon\www\Acortador\src\Controller\Member\UsersController.php, line 791]
+
+

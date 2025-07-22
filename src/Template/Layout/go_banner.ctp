@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @var \App\View\AppView $this
  */
@@ -6,6 +7,7 @@
 <?php $user = $this->request->session()->read('Auth.User'); ?>
 <!DOCTYPE html>
 <html lang="<?= locale_get_primary_language('') ?>">
+
 <head>
     <?= $this->Html->charset(); ?>
     <title><?= h($this->fetch('title')); ?></title>
@@ -16,10 +18,9 @@
     <meta name="keywords" content="<?= h(get_option('seo_keywords')); ?>">
     <meta name="og:title" content="<?= h($this->fetch('og_title')); ?>">
     <meta name="og:description" content="<?= h($this->fetch('og_description')); ?>">
-    <meta property="og:image" content="<?= h($this->fetch('og_image')); ?>"/>
+    <meta property="og:image" content="<?= h($this->fetch('og_image')); ?>" />
 
-    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"
-          rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic" rel="stylesheet">
 
     <?php
     echo $this->Html->meta('icon');
@@ -39,37 +40,27 @@
     <?= get_option('head_code'); ?>
 
     <?= $this->fetch('scriptTop') ?>
-            <style>
+    <style>
         #particles-js {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 1; /* Detrás del contenido */
-           background: linear-gradient(135deg, #ebeced, #c7c7c7);/* Gradiente de fondo */
+            z-index: 1;
+            /* Detrás del contenido */
+            background: linear-gradient(135deg, #ebeced, #c7c7c7);
+            /* Gradiente de fondo */
         }
 
         .content-wrapper {
             position: relative;
-            z-index: 1; /* Encima del fondo */
+            z-index: 1;
+            /* Encima del fondo */
         }
     </style>
-<script>
-
-    // Agregar una entrada al historial de navegación
-       history.pushState(null, null, location.href);
-
-        // Detectar cuando el usuario presiona el botón Atrás
-        window.onpopstate = function(event) {
-            // Redirigir al enlace deseado
-            history.go(1);
     
-            var Back=document.getElementById("BackDisplay");
-            Back.style.display="block";
-      
-        };
-</script>
+
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -77,34 +68,32 @@
     <script src="//oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    
+
 </head>
 
 <body class="banner-page layout-top-nav skin-blue">
     <?= $this->Html->script('tsparticles.min.js') ?>
-    
-<div id="particles-js"></div>
+
+    <div id="particles-js"></div>
 
 
-<?= get_option('after_body_tag_code'); ?>
+    <?= get_option('after_body_tag_code'); ?>
 
-<div class="wrapper">
+    <div class="wrapper">
 
-    <header class="main-header">
-        <!-- Fixed navbar -->
-        <nav class="navbar">
-            <div class="container">
-                <div class="navbar-header">
-                    <?php
-                    $logo = get_logo();
-                    $class = '';
-                    if ($logo['type'] == 'image') {
-                        $class = 'logo-image';
-                    }
-                    ?>
-                    <a class="navbar-brand <?= $class ?>"
-                       href="<?= build_main_domain_url('/'); ?>"
-                        style="
+        <header class="main-header">
+            <!-- Fixed navbar -->
+            <nav class="navbar">
+                <div class="container">
+                    <div class="navbar-header">
+                        <?php
+                        $logo = get_logo();
+                        $class = '';
+                        if ($logo['type'] == 'image') {
+                            $class = 'logo-image';
+                        }
+                        ?>
+                        <a class="navbar-brand <?= $class ?>" href="<?= build_main_domain_url('/'); ?>" style="
     margin: 0;
     font-size: 24px;
     background: linear-gradient(90deg, #fcfcfc, #757575);
@@ -113,127 +102,126 @@
     color: #f0ffff00;
     /* font-weight: 900; */
 "><?= $logo['content'] ?></a>
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                            data-target="#navbar-collapse">
-                        <i class="fa fa-bars"></i>
-                    </button>
-                </div>
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                    </div>
 
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="navbar-collapse">
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="navbar-collapse">
+                        <?=
+                        menu_display('menu_short', [
+                            'ul_class' => 'nav navbar-nav navbar-right',
+                            'li_class' => '',
+                            'a_class' => '',
+                        ], true);
+                        ?>
+                    </div>
+                    <!-- /.navbar-collapse -->
+                </div>
+            </nav>
+        </header>
+
+        <div class="content-wrapper">
+            <div class="container banner-container">
+
+                <!-- Main content -->
+                <section class="content">
+
+                    <?= $this->Flash->render() ?>
+                    <?= $this->fetch('content') ?>
+
+                </section>
+                <!-- /.content -->
+            </div>
+            <!-- /.container -->
+        </div>
+        <!-- /.content-wrapper -->
+
+        <footer class="main-footer">
+            <div class="container">
+                <div class="pull-right hidden-xs">
                     <?=
-                    menu_display('menu_short', [
-                        'ul_class' => 'nav navbar-nav navbar-right',
+                    menu_display('menu_footer', [
+                        'ul_class' => 'list-inline',
                         'li_class' => '',
                         'a_class' => '',
-                    ], true);
+                    ]);
                     ?>
                 </div>
-                <!-- /.navbar-collapse -->
+
             </div>
-        </nav>
-    </header>
+            <!-- /.container -->
+        </footer>
 
-    <div class="content-wrapper">
-        <div class="container banner-container">
-
-            <!-- Main content -->
-            <section class="content">
-
-                <?= $this->Flash->render() ?>
-                <?= $this->fetch('content') ?>
-
-            </section>
-            <!-- /.content -->
-        </div>
-        <!-- /.container -->
     </div>
-    <!-- /.content-wrapper -->
 
-    <footer class="main-footer">
-        <div class="container">
-            <div class="pull-right hidden-xs">
-                <?=
-                menu_display('menu_footer', [
-                    'ul_class' => 'list-inline',
-                    'li_class' => '',
-                    'a_class' => '',
-                ]);
-                ?>
-            </div>
+    <?= $this->element('js_vars'); ?>
 
-        </div>
-        <!-- /.container -->
-    </footer>
+    <script data-cfasync="false" src="<?= $this->Assets->url('/js/ads.js?ver=' . APP_VERSION) ?>"></script>
 
-</div>
+    <?= $this->Assets->script('/vendor/jquery.min.js?ver=' . APP_VERSION); ?>
+    <?= $this->Assets->script('/vendor/bootstrap/js/bootstrap.min.js?ver=' . APP_VERSION); ?>
+    <?= $this->Assets->script('/vendor/clipboard.min.js?ver=' . APP_VERSION); ?>
+    <?= $this->Assets->script('/js/app.js?ver=' . APP_VERSION); ?>
+    <?= $this->Assets->script('/vendor/dashboard/js/app.min.js?ver=' . APP_VERSION); ?>
 
-<?= $this->element('js_vars'); ?>
-
-<script data-cfasync="false" src="<?= $this->Assets->url('/js/ads.js?ver=' . APP_VERSION) ?>"></script>
-
-<?= $this->Assets->script('/vendor/jquery.min.js?ver=' . APP_VERSION); ?>
-<?= $this->Assets->script('/vendor/bootstrap/js/bootstrap.min.js?ver=' . APP_VERSION); ?>
-<?= $this->Assets->script('/vendor/clipboard.min.js?ver=' . APP_VERSION); ?>
-<?= $this->Assets->script('/js/app.js?ver=' . APP_VERSION); ?>
-<?= $this->Assets->script('/vendor/dashboard/js/app.min.js?ver=' . APP_VERSION); ?>
-
-<?= $this->fetch('scriptBottom') ?>
-<?= get_option('footer_code'); ?>
- <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        particlesJS('particles-js', {
-            particles: {
-                number: {
-                    value: 80,
-                    density: {
+    <?= $this->fetch('scriptBottom') ?>
+    <?= get_option('footer_code'); ?>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            particlesJS('particles-js', {
+                particles: {
+                    number: {
+                        value: 80,
+                        density: {
+                            enable: true,
+                            value_area: 800
+                        }
+                    },
+                    color: {
+                        value: '#ffffff'
+                    },
+                    shape: {
+                        type: 'circle',
+                        stroke: {
+                            width: 0,
+                            color: '#000000'
+                        }
+                    },
+                    opacity: {
+                        value: 0.5,
+                        random: true,
+                    },
+                    size: {
+                        value: 3,
+                        random: true,
+                    },
+                    move: {
                         enable: true,
-                        value_area: 800
+                        speed: 2,
+                        direction: 'none',
+                        random: true,
+                        straight: false,
+                        out_mode: 'out'
                     }
                 },
-                color: {
-                    value: '#ffffff'
-                },
-                shape: {
-                    type: 'circle',
-                    stroke: {
-                        width: 0,
-                        color: '#000000'
+                interactivity: {
+                    detect_on: 'canvas',
+                    events: {
+                        onhover: {
+                            enable: true,
+                            mode: 'repulse'
+                        },
+                        onclick: {
+                            enable: true,
+                            mode: 'push'
+                        },
+                        resize: true
                     }
-                },
-                opacity: {
-                    value: 0.5,
-                    random: true,
-                },
-                size: {
-                    value: 3,
-                    random: true,
-                },
-                move: {
-                    enable: true,
-                    speed: 2,
-                    direction: 'none',
-                    random: true,
-                    straight: false,
-                    out_mode: 'out'
                 }
-            },
-            interactivity: {
-                detect_on: 'canvas',
-                events: {
-                    onhover: {
-                        enable: true,
-                        mode: 'repulse'
-                    },
-                    onclick: {
-                        enable: true,
-                        mode: 'push'
-                    },
-                    resize: true
-                }
-            }
+            });
         });
-    });
     </script>
 </body>
 

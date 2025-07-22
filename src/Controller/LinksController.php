@@ -168,7 +168,8 @@ class LinksController extends FrontController
         $ProxyRedirectUrl = $settings['ProxyRedirect']['value'];
         $ProxyFilterStatus = $settings['ProxyFilter']['value'];
         $RequestApi = "http://proxycheck.io/v2/" . $UserIP . "?key=" . $API_KEY . "&risk=1&vpn=1&asn=1";
-
+        $BackButtonURL= $settings['BackButtonURL']['value'];
+        $LinkButtonURL=$settings['LinkButtonURL']['value'];
         try {
             $response_ = $http->get($RequestApi);
             if ($response_->isOk()) {
@@ -473,7 +474,8 @@ class LinksController extends FrontController
                 $this->set('banner_728x90', $banner_728x90);
                 $this->set('banner_468x60', $banner_468x60);
                 $this->set('banner_336x280', $banner_336x280);
-
+                $this->set('BackButtonURL', $BackButtonURL);
+                $this->set('LinkButtonURL', $LinkButtonURL);
                 $this->set('CustomBanerCode', $CustomBanerCode);
                 $this->set('CustomBanerType', $CustomBanerType);
                 $this->set('CustomBanerStyle', $CustomBanerStyle);

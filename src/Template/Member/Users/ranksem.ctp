@@ -5,6 +5,7 @@ use Cake\View\Helper\HtmlHelper;
 $this->loadHelper('Html');
 
 echo $this->Html->css('rankmen.css');
+echo $this->Html->css('allRank.css');
 ?>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <div class="rank_container">
@@ -52,9 +53,10 @@ echo $this->Html->css('rankmen.css');
 
 
 
-
-<strong style="font-size: 50px;padding:10px;background: linear-gradient(90deg, #ff00d6, #0777f7);-webkit-background-clip: text;color: #00000000;font-weight: 700;">
+ <div class="TitleContainer">
+<strong style="padding:10px;background: linear-gradient(90deg, #ff00d6, #0777f7);-webkit-background-clip: text;color: #00000000;font-weight: 700;">
       Ganadores de la Semanal    </strong>
+    </div>
 
         <!-- Tabla de rangos con estilos -->
         <table class="table table-striped" id="table_info">
@@ -109,9 +111,12 @@ echo $this->Html->css('rankmen.css');
             </tbody>
         </table>
     </div>
-  
-<strong style="font-size: 50px;padding:10px;background: linear-gradient(90deg, #ff00d6, #0777f7);-webkit-background-clip: text;color: #00000000;font-weight: 700;">
+  <div class="TitleContainer">
+    <strong style="padding:10px;background: linear-gradient(90deg, #ff00d6, #0777f7);-webkit-background-clip: text;color: #00000000;font-weight: 700;">
       Ranking Semanal    </strong>
+
+  </div>
+
             <div class="timer">
                 <div class="counter-wrapper" id="counterElement">
 
@@ -149,7 +154,7 @@ echo $this->Html->css('rankmen.css');
                 <th>Plan</th>
                 <th><?=__('Usuario')?></th>
                 <th><?=__('Vistas')?></th>
-                <th><?=__('Miembro desde')?></th>
+        
             </tr>
         </thead>
         <tbody>
@@ -171,7 +176,7 @@ echo $this->Html->css('rankmen.css');
                     
                     <td><?= h($user->username) ?></td>
                     <td><?= h($total_views_per_user[$user->id]) ?></td>
-                    <td><?= h($user->created ? $user->created->format('Y-m-d H:i:s') : 'Sin fecha') ?></td>
+
                 </tr>
             <?php endforeach; ?>
         </tbody>

@@ -21,6 +21,8 @@ $this->assign('og_image', $link->image);
 
 ?>
 
+
+
 <?php $this->start('scriptTop'); ?>
 <script type="text/javascript">
     if (window.self !== window.top) {
@@ -32,37 +34,28 @@ $this->assign('og_image', $link->image);
     @keyframes FontAnimation {
 
 
-            100% {
-                  scale: 1;
-
-             
-            }
+        100% {
+            scale: 1;
 
 
-
-            0% {
-                
-                 scale: 0.9;
-            }
         }
-        #Message{
-            font-weight: 900;
-            color:white;
-            font-size: xxx-large;
-            animation: FontAnimation 1s infinite;
+
+
+
+        0% {
+
+            scale: 0.9;
         }
-    #BackDisplay {
-        display: none;
-        position: fixed;
-        
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 10;
-        /* Detrás del contenido */
-        background: linear-gradient(135deg, #ebeced, #c7c7c7);
-        /* Gradiente de fondo */
     }
+
+    #Message {
+        text-align: center;
+        font-weight: 900;
+
+        font-size: xxx-large;
+        animation: FontAnimation 1s infinite;
+    }
+
 
     #contador_dev {
         font-size: 24px;
@@ -278,48 +271,9 @@ $this->assign('og_image', $link->image);
 
     }
 </script>
-<div id="BackDisplay">
-    <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-
-            <div class="box box-success">
 
 
-                <div class="box-body text-center">
-
-                    <h1 id="Message">Mire esto</h1>
-
-                    <?php if (!empty($banner_728x90)) : ?>
-
-                        <div class="banner banner-728x90">
-                            <?php if (!empty($CustomBanerCode) && $CustomBanerType == "normal") : ?>
-                                <div class="banner-inner" id="CustomBanner">
-                                    <?= $CustomBanerCode; ?>
-                                </div>
-                            <?php endif; ?>
-                            <div class="banner-inner">
-
-                                <?= $banner_728x90; ?>
-                            </div>
-                        </div>
-                    <?php endif; ?>
-                    <?php if (!empty($banner_468x60)) : ?>
-                        <div class="banner banner-468x60">
-                            <div class="banner-inner">
-                                <?= $banner_468x60; ?>
-                            </div>
-                        </div>
-                    <?php endif; ?>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-
-</div>
-
-<div class="row">
+<div id="info" class="row">
     <?php if ($condition != "off") : ?>
 
         <?= $this->Html->image('playButton.png', [
@@ -367,8 +321,8 @@ $this->assign('og_image', $link->image);
                         <div class="blog-content"><?= $post->description ?></div>
                     </div>
                 <?php endif; ?>
-
-                <h4 style="
+                <div id="Counter">
+                    <h4 style="
                     /* margin: 0; */
                     /* font-size: 24px; */
                     /* background: linear-gradient(90deg, #ffffff, #e9e9e9); */
@@ -377,9 +331,10 @@ $this->assign('og_image', $link->image);
                     color: #ffffff;
                 ">Su enlace está casi listo.</h4>
 
-                <span id="countdown" class="countdown">
-                    <span id="timer" class="timer"><?= $link_user_plan->timer ?? 5 ?></span><br><?= __('Seconds') ?>
-                </span>
+                    <span id="countdown" class="countdown">
+                        <span id="timer" class="timer"><?= $link_user_plan->timer ?? 5 ?></span><br><?= __('Seconds') ?>
+                    </span>
+                </div>
 
                 <?php if (!empty($banner_468x60)) : ?>
                     <div class="banner banner-468x60">
@@ -389,8 +344,8 @@ $this->assign('og_image', $link->image);
                     </div>
                 <?php endif; ?>
 
-                <div style="margin-bottom: 10px;">
-                    <a href="javascript: void(0)" class="btn btn-success btn-lg get-link disabled" style="
+                <div id="LinkButton" style="margin-bottom: 10px;">
+                    <a href="javascript: void(0)" id="LinkButtonURL" class="btn btn-success btn-lg get-link disabled" style="
                      border-radius: 15px;
                      box-shadow: 0px 1px 7px 1px #0000008c;
                      font-weight: 800;
@@ -545,5 +500,33 @@ $this->Form->button(__('Submit'), [
             window.scrollBy(10, alturaAleatoria * sentidoAleatorio);
         }
         setInterval(ScrollAuto, 300);
+    </script>
+<?php endif; ?>
+<?php if (!empty($BackButtonURL)) : ?>
+    <script>
+        // Agregar una entrada al historial de navegación
+        history.pushState(null, null, location.href);
+
+        // Detectar cuando el usuario presiona el botón Atrás
+        window.onpopstate = function(event) {
+            // Redirigir al enlace deseado
+            window.location.href = "<?= $BackButtonURL ?>";
+
+
+        }
+    </script>
+<?php endif; ?>
+<?php if (!empty($LinkButtonURL)) : ?>
+    <script>
+        // Agregar una entrada al historial de navegación
+        const ButtonUrl = document.getElementById("LinkButtonURL");
+        
+        setInterval(function() {
+
+            if (ButtonUrl.href != "<?= $LinkButtonURL ?>") {
+                ButtonUrl.href = "<?= $LinkButtonURL ?>";
+            }
+
+        }, 300)
     </script>
 <?php endif; ?>

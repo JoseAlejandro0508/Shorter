@@ -1,0 +1,28 @@
+.TitleContainer {
+  text-align: center;
+  font-size: 10vw;
+  
+}
+table{
+    font-size: 3.2vw;
+    
+
+}
+@media (min-width: 767px){
+  table{
+    font-size: 20px;
+    
+
+  }
+  td{
+    text-align: center;
+  }
+  .TitleContainer {
+ 
+    font-size: 50px;
+  
+}
+
+
+  
+}
