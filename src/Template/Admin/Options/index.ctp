@@ -49,6 +49,8 @@ $this->assign('content_title', __('Settings'));
                                    data-toggle="tab"><?= __('Cron Job') ?></a></li>
         <li role="presentation"><a href="#market" aria-controls="Market" role="tab"
                                    data-toggle="tab"><?= __('Market') ?></a></li>
+        <li role="presentation"><a href="#ranking" aria-controls="Market" role="tab"
+                                   data-toggle="tab"><?= __('Ranking Automatico') ?></a></li>
     </ul>
 
     <!-- Tab panes -->
@@ -2322,6 +2324,54 @@ $this->assign('content_title', __('Settings'));
                         'class' => 'form-control',
                         'type' => 'text',
                         'value' => $settings['facebook_price']['value'],
+                    ]);
+                    ?>
+                </div>
+            </div>
+
+
+
+        </div>
+        <div role="tabpanel" id="ranking" class="tab-pane fade in">
+            <p></p>
+            <div class="row">
+                <div class="col-sm-2"><?= __('Numero 1') ?></div>
+
+                <div class="col-sm-10">
+                    <?=
+                    $this->Form->control('Options.' . $settings['RankD1Gift']['id'] . '.value', [
+                        'label' => false,
+                        'class' => 'form-control',
+                        'type' => 'text',
+                        'value' => $settings['RankD1Gift']['value'],
+                    ]);
+                    ?>
+                </div>
+            </div>
+                        <div class="row">
+                <div class="col-sm-2"><?= __('Numero 2') ?></div>
+
+                <div class="col-sm-10">
+                    <?=
+                    $this->Form->control('Options.' . $settings['RankD2Gift']['id'] . '.value', [
+                        'label' => false,
+                        'class' => 'form-control',
+                        'type' => 'text',
+                        'value' => $settings['RankD2Gift']['value'],
+                    ]);
+                    ?>
+                </div>
+            </div>
+                        <div class="row">
+                <div class="col-sm-2"><?= __('Numero 3') ?></div>
+
+                <div class="col-sm-10">
+                    <?=
+                    $this->Form->control('Options.' . $settings['RankD3Gift']['id'] . '.value', [
+                        'label' => false,
+                        'class' => 'form-control',
+                        'type' => 'text',
+                        'value' => $settings['RankD3Gift']['value'],
                     ]);
                     ?>
                 </div>

@@ -531,6 +531,43 @@ class Initial extends AbstractMigration
                 'null' => true,
             ])
             ->create();
+        $this->table('adsmanagers')
+            ->addColumn('id', 'integer', [
+                'autoIncrement' => true,
+                'default' => null,
+                'limit' => 10,
+                'null' => false,
+                'signed' => false,
+            ])
+            ->addPrimaryKey(['id'])
+   
+            ->addColumn('country', 'string', [
+                'default' => '',
+                'limit' => 256,
+                'null' => false,
+            ])
+            ->addColumn('domain', 'string', [
+                'default' => 'all',
+                'limit' => 256,
+                'null' => false,
+
+            ])
+            ->addColumn('script', 'string', [
+                'default' => '',
+                'limit' => 256,
+                'null' => false,
+            ])
+            ->addColumn('scriptDown', 'string', [
+                'default' => '',
+                'limit' => 256,
+                'null' => false,
+            ])
+            ->addColumn('created', 'datetime', [
+                'default' => null,
+                'limit' => null,
+                'null' => true,
+            ])
+            ->create();
     }
 
     public function down()
@@ -545,5 +582,6 @@ class Initial extends AbstractMigration
         $this->dropTable('statistics');
         $this->dropTable('users');
         $this->dropTable('withdraws');
+        $this->dropTable('ads_manager');
     }
 }

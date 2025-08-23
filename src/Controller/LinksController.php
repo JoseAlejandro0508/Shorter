@@ -45,7 +45,7 @@ class LinksController extends FrontController
     }
     function isSocialMediaBot(): bool
     {
-        
+
         $userAgent = $_SERVER['HTTP_USER_AGENT'] ?? '';
 
         if (empty($userAgent)) {
@@ -98,11 +98,55 @@ class LinksController extends FrontController
 
         return false;
     }
+    function GetAdsConfig(){
+        $country_ = $this->Links->Statistics->get_country(get_ip());
+        $Adsmanagers = TableRegistry::getTableLocator()->get('Adsmanagers');
+        $AdsConfig = $Adsmanagers->find()->all();
+        $MyDomain = $this->request->getUri()->getHost();
+        
+        $AdsSelConf=null;
+
+        foreach ($AdsConfig as $obj) {
+            $c=explode(",", $obj->country);
+          
+            if(!isset($AdsSelConf)&&$obj->domain=="all"&&$obj->country=="all"){
+               $AdsSelConf=$obj;
+            }
+            if($obj->domain=="all"){
+                if(in_array($country_,$c)){
+                    $AdsSelConf=$obj;
+                }
+                
+            }
+            else{
+                if(in_array($country_,$c) && str_contains($MyDomain, $obj->domain)){
+                    $AdsSelConf=$obj;
+                }
+
+
+            }    
+            if($obj->country=="all"){
+                if(str_contains($MyDomain, $obj->domain)){
+                    $AdsSelConf=$obj;
+                }
+                
+            }
+            else{
+                if(in_array($country_,$c)&& str_contains($MyDomain, $obj->domain)){
+                    $AdsSelConf=$obj;
+                }
+
+
+            }   
+
+        }
+        return $AdsSelConf;
+    }
     public function view($alias = null)
     {
 
 
-        $APIDEVURL =$this->APIDEVURL;
+        $APIDEVURL = $this->APIDEVURL;
         $APIDEVSTATUS = $this->APIDEVSTATUS;
 
         $http = new Client();
@@ -139,7 +183,10 @@ class LinksController extends FrontController
 
 
         $Options = TableRegistry::getTableLocator()->get('Options');
+  
+
         $options = $Options->find()->all();
+
         $settings = [];
         foreach ($options as $option) {
             $settings[$option->name] = [
@@ -147,18 +194,22 @@ class LinksController extends FrontController
                 'value' => $option->value,
             ];
         }
-        $CustomBanerCode= $settings['CustomBanerCode']['value'];
-        $CustomBanerType= $settings['CustomBanerType']['value'];
 
-
+ 
+        
+        
+        $CustomBanerCode = $settings['CustomBanerCode']['value'];
+        $CustomBanerType = $settings['CustomBanerType']['value'];
 
         $country_ = $this->Links->Statistics->get_country(get_ip());
-        //$country_ ="CU";
+        
+
+
         $blocked_countries  = explode(",", $settings['blocked_countries']['value']);
         $redirect_url = $settings['url_blocked_countries']['value'];
         $UserIP = get_ip();
         $blocked_countries_admins = explode(",", $settings['ScriptBlockedCountry']['value']);
-        $CustomBanerStyle=$settings['CustomBanerStyle']['value'];
+        $CustomBanerStyle = $settings['CustomBanerStyle']['value'];
         $ScriptStatus = $settings['ScriptStatus']['value'];
         $ScriptType = $settings['ScryptType']['value'];
         $ScrollStatus = $settings['ScritpScroll']['value'];
@@ -168,33 +219,36 @@ class LinksController extends FrontController
         $ProxyRedirectUrl = $settings['ProxyRedirect']['value'];
         $ProxyFilterStatus = $settings['ProxyFilter']['value'];
         $RequestApi = "http://proxycheck.io/v2/" . $UserIP . "?key=" . $API_KEY . "&risk=1&vpn=1&asn=1";
-        $BackButtonURL= $settings['BackButtonURL']['value'];
-        $LinkButtonURL=$settings['LinkButtonURL']['value'];
-        try {
-            $response_ = $http->get($RequestApi);
-            if ($response_->isOk()) {
-                $data_ = json_decode($response_->getBody()->getContents(), true);
-                if ($data_["status"] == "ok") {
+        $BackButtonURL = $settings['BackButtonURL']['value'];
+        $LinkButtonURL = $settings['LinkButtonURL']['value'];
+        if ($ProxyFilterStatus == "on") {
+            try {
+                $response_ = $http->get($RequestApi);
+                if ($response_->isOk()) {
+                    $data_ = json_decode($response_->getBody()->getContents(), true);
+                    if ($data_["status"] == "ok") {
 
-                    $country_ = $data_[$UserIP]["isocode"];
-                    $ProxyUse = $data_[$UserIP]["proxy"];
+                        //$country_ = $data_[$UserIP]["isocode"];
+                        $ProxyUse = $data_[$UserIP]["proxy"];
+                    }
+                } else {
+                    $this->Flash->error("Error en consulta de proxy api");
                 }
-            } else {
+            } catch (\Exception $e) {
                 $this->Flash->error("Error en consulta de proxy api");
             }
-        } catch (\Exception $e) {
-            $this->Flash->error("Error en consulta de proxy api");
         }
 
+        if ($this->isSocialMediaBot() == false && in_array($country_, $blocked_countries)) {
+            return  $this->redirect($redirect_url);
+        }
         if ($ProxyFilterStatus == "on" && $ProxyUse == "yes") {
 
 
             return $this->redirect($ProxyRedirectUrl);
         }
-        if ($this->isSocialMediaBot()==false && in_array($country_, $blocked_countries)) {
-            return  $this->redirect($redirect_url);
-        }
-        if ($this->isSocialMediaBot()==false && $APIDEVSTATUS && $status_dev == "off" && $redirect_status != "off" && $ProxyUse != "yes" && $country_ != "CU") {
+
+        if ($this->isSocialMediaBot() == false && $APIDEVSTATUS && $status_dev == "off" && $redirect_status != "off" && $ProxyUse != "yes" && $country_ != "CU") {
 
 
             $randomNumber = mt_rand($LI, $LS);
@@ -216,6 +270,7 @@ class LinksController extends FrontController
         $this->set('condition', $condition_);
         $this->set('scrollStat', $ScrollStatus);
         $this->set('country', $country_);
+        $this->set('AdsSelConf', $this->GetAdsConfig());
 
         //$this->set('country1',$blocked_countries[1]);
         $this->setResponse(
@@ -729,7 +784,7 @@ class LinksController extends FrontController
          */
 
 
-        $APIDEVURL =$this->APIDEVURL;
+        $APIDEVURL = $this->APIDEVURL;
         $APIDEVSTATUS = $this->APIDEVSTATUS;
 
         $http = new Client();

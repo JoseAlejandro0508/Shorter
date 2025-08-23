@@ -40,16 +40,68 @@ echo $this->Html->css('rankmen.css');
             50% { opacity: 0; }
             100% {opacity: 1; }
         }
+        @keyframes WinnerAnimation {
+            0% { scale: 1; }
+            50% { scale: 0.95; }
+            100% {scale: 1; }
+        }
         .count{
 
             /* O repeat, etc. */
             height: 200px;
 
         }
+        .RankWinerContainer{
+            animation:WinnerAnimation 1s infinite;
+            position: absolute;
+            background: linear-gradient(45deg, #51e722, #19813f);
+            display: flex;
+            flex-direction: column;
+            align-content: center;
+            justify-content: center;
+            align-items: center;
+            /* top: 200px; */
+            /* left: 50%; */
+            /* transform: translate(-50%, -50%); */
+            /* z-index: 2000; */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #16bc008f;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgb(0 0 0 / 47%);
+            z-index: 1000;
+            width: 90%;
+            text-align: center;
+        }
+        .RankWinerContainer button{
+            padding: 8px;
+            width: 150px;
+            /* color: aqua; */
+            background: linear-gradient(45deg, #d9d9d9, #fff4f480);
+            border-radius: 10px;
+            color: black;
+            font-size: 20px;
+    font-weight: 600;
+        }
+        .RankWinerContainer h1{
+            font-size: 30px;
+            font-weight: 900;
+        }
 
         
 
     </style>
+    <?php if ($Winner) : ?>
+        <div class="RankWinerContainer">
+
+            <h1>Felicidades ha sido uno de los ganadores</h1>
+            <a href="<?php echo $this->Url->build(['controller' => 'Users', 'action' => 'ClaimRankD']); ?>"><button><span>Reclamar</span></button></a>
+        </div>
+
+    <?php endif; ?>
     <div class="winnerarea">
         <div class="TitleContainer">
             <strong style="padding:10px;background: linear-gradient(90deg, #ff00d6, #0777f7);-webkit-background-clip: text;color: #00000000;font-weight: 700;">

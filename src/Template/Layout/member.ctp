@@ -260,7 +260,7 @@
                     <li><a href="<?php echo $this->Url->build(['controller' => 'Users', 'action' => 'rankmen']); ?>"><span><?= __('Mensual') ?></span></a></li>
                     <li><a href="<?php echo $this->Url->build(['controller' => 'Users', 'action' => 'ranksem']); ?>"><span><?= __('Semanal') ?></span></a></li>
                     <li><a href="<?php echo $this->Url->build(['controller' => 'Users', 'action' => 'rankday']); ?>"><span><?= __('Diario') ?></span></a></li>
-                    <li><a href="<?php echo $this->Url->build(['controller' => 'Users', 'action' => 'ranklinks']); ?>"><span><?= __('Top Noticias') ?></span></a></li>
+                   
                 </ul>
                 </li>
                 <li class="treeview">

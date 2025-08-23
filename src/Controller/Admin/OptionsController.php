@@ -62,6 +62,7 @@ class OptionsController extends AppAdminController
         }
     }
 
+
     public function socialLogin()
     {
         if ($this->saveOptions()) {

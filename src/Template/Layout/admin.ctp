@@ -392,6 +392,11 @@
                         <i class="fa fa-caret-square-o-down"></i> <span><?= __('Menu Manger') ?></span>
                     </a>
                 </li>
+                <li>
+                    <a href="<?php echo $this->Url->build(['controller' => 'Adsmanagers', 'action' => 'index']); ?>">
+                        <i class="fa fa-star"></i> <span><?= __('Ads Manger') ?></span>
+                    </a>
+                </li>
 
                 <li class="treeview">
                     <a href="#"><i class="fa fa-exclamation-triangle"></i> <span><?= __('Advanced') ?></span> <i

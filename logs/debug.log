@@ -568,3 +568,27 @@
 2025-07-21 00:02:14 Notice: Notice (8): date_default_timezone_set(): Timezone ID '' is invalid in [C:\laragon\www\Acortador\src\Controller\Member\UsersController.php, line 791]
 
 
+2025-07-22 17:30:14 Notice: Notice (8): date_default_timezone_set(): Timezone ID '' is invalid in [C:\laragon\www\Acortador\src\Controller\Member\UsersController.php, line 792]
+
+
+2025-07-22 17:30:18 Notice: Notice (8): date_default_timezone_set(): Timezone ID '' is invalid in [C:\laragon\www\Acortador\src\Controller\Member\UsersController.php, line 792]
+
+
+2025-07-28 17:53:03 Notice: Notice (1024): Undefined property: LinksController::$updateLinkHits in C:\laragon\www\Acortador\src\Controller\LinksController.php on line 832 in [C:\laragon\www\Acortador\vendor\cakephp\cakephp\src\Controller\Controller.php, line 384]
+
+
+2025-08-18 21:38:26 Notice: Notice (1024): Undefined property: AdsmanagersController::$requests in C:\laragon\www\Acortador\src\Controller\Admin\AdsmanagersController.php on line 17 in [C:\laragon\www\Acortador\vendor\cakephp\cakephp\src\Controller\Controller.php, line 384]
+
+
+2025-08-18 21:38:48 Notice: Notice (1024): Undefined property: AdsmanagersController::$requests in C:\laragon\www\Acortador\src\Controller\Admin\AdsmanagersController.php on line 17 in [C:\laragon\www\Acortador\vendor\cakephp\cakephp\src\Controller\Controller.php, line 384]
+
+
+2025-08-18 21:38:51 Notice: Notice (1024): Undefined property: AdsmanagersController::$requests in C:\laragon\www\Acortador\src\Controller\Admin\AdsmanagersController.php on line 17 in [C:\laragon\www\Acortador\vendor\cakephp\cakephp\src\Controller\Controller.php, line 384]
+
+
+2025-08-18 22:11:16 Notice: Notice (1024): Undefined property: AdsmanagersController::$getRequest in C:\laragon\www\Acortador\src\Controller\Admin\AdsmanagersController.php on line 20 in [C:\laragon\www\Acortador\vendor\cakephp\cakephp\src\Controller\Controller.php, line 384]
+
+
+2025-08-18 22:11:31 Notice: Notice (1024): Undefined property: AdsmanagersController::$getRequest in C:\laragon\www\Acortador\src\Controller\Admin\AdsmanagersController.php on line 20 in [C:\laragon\www\Acortador\vendor\cakephp\cakephp\src\Controller\Controller.php, line 384]
+
+

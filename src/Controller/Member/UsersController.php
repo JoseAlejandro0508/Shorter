@@ -24,12 +24,247 @@ class UsersController extends AppMemberController
             //$this->getEventManager()->off($this->Csrf);
             $this->getEventManager()->off($this->Security);
         }
-        
     }
     public function rankday()
     {
+
         date_default_timezone_set('America/Havana');
+        $timestampActual = time();
         $auth_user_id = $this->Auth->user('id');
+        $Options = TableRegistry::getTableLocator()->get('Options');
+        $options = $Options->find()->all();
+        $settings = [];
+        foreach ($options as $option) {
+            $settings[$option->name] = [
+                'id' => $option->id,
+                'value' => $option->value,
+            ];
+        }
+
+
+        $rankTime = [
+            1 => (int)$settings["Rank1DPayedTime"]["value"],
+            2 => (int)$settings["Rank2DPayedTime"]["value"],
+            3 => (int)$settings["Rank3DPayedTime"]["value"]
+        ];
+        $last_record = Time::now();
+        $first_record = user()->created;
+
+        $year_month = [];
+
+        $last_month = Time::now()->year($last_record->year)->month($last_record->month)->startOfMonth();
+        $first_month = Time::now()->year($first_record->year)->month($first_record->month)->startOfMonth();
+
+        while ($first_month <= $last_month) {
+            $year_month[$last_month->format('Y-m')] = $last_month->i18nFormat('LLLL Y');
+
+            $last_month->modify('-1 month');
+        }
+
+        $this->set('year_month', $year_month);
+
+        $to_month = Time::now()->format('Y-m');
+
+        $time = new Time($to_month);
+
+
+
+        $current_time = $time->startOfMonth();
+
+        $year = (int)$current_time->format('Y');
+        $month = (int)$current_time->format('m');
+
+
+        $time_zone = get_option('timezone', 'UTC');
+        // Obtener la hora actual
+        $check_ = Time::createFromDate($year, $month - 1, 01, $time_zone);
+
+        $date1 = Time::createFromDate($year, $month - 1, 01, $time_zone)
+            ->startOfMonth()
+            ->i18nFormat('yyyy-MM-dd HH:mm:ss', 'UTC', 'en');
+        /*$week_d1 = date('w', strtotime($date1));
+        if (intval($week_d1) > 0) {
+            $discount = intval($week_d1) * (-1);
+            $date1 = strtotime($date1);
+            $date1 = date('Y-m-d H:i:s', strtotime(strval($discount) . ' days', $date1));
+        }*/
+        $date2 = Time::createFromDate($year, $month, 01, $time_zone)
+            ->endOfMonth()
+            ->i18nFormat('yyyy-MM-dd HH:mm:ss', 'UTC', 'en');
+
+
+        $connection = ConnectionManager::get('default');
+
+        $time_zone_offset = Time::now($time_zone)->format('P');
+
+        $users = $this->Users->find('all')->toArray();
+
+        // Filtra los usuarios cuyo ID es "a1"
+
+
+        $sql = "SELECT 
+    Statistics.user_id,
+    DATE_FORMAT(CONVERT_TZ(Statistics.created,'+00:00','" . $time_zone_offset . "'), '%Y-%m-%d') AS day,
+    COUNT(CASE WHEN Statistics.publisher_earn > 0 THEN Statistics.id ELSE NULL END) AS count
+    FROM 
+    statistics Statistics 
+    WHERE 
+    Statistics.created BETWEEN :date1 AND :date2
+    GROUP BY 
+    Statistics.user_id, day;";
+        /*  $sql = "SELECT 
+    Statistics.user_id,
+    DATE_FORMAT(CONVERT_TZ(Statistics.created,'+00:00','" . $time_zone_offset . "'), '%Y-%m-%d') AS day,
+    COUNT(Statistics.id) AS count
+    FROM 
+    statistics Statistics 
+    WHERE 
+    Statistics.created BETWEEN :date1 AND :date2
+    GROUP BY 
+    Statistics.user_id, day;";*/
+
+
+
+        $stmt = $connection->prepare($sql);
+        $stmt->bindValue('date1', $date1, 'datetime');
+        $stmt->bindValue('date2', $date2, 'datetime');
+        $stmt->execute();
+
+        $views_per_user = $stmt->fetchAll('assoc');
+
+
+
+
+        // Obtén el último día de la semana actual (sábado)
+
+        $ultimoDiaSemana = strtotime('yesterday');
+        $inicioSemana = strtotime('today');
+
+
+        $diaFinSemana = intval(date('d', $ultimoDiaSemana));
+        $diaInicioSemana = intval(date('d', $inicioSemana));
+        $user_views = [];
+
+        foreach ($views_per_user as $view) {
+            $user_id = $view['user_id'];
+            $day = $view['day'];
+            $fecha_array = explode("-", $day);
+            $count = $view['count'];
+            $date = strtotime($day);
+
+
+            if (!isset($user_views[$user_id])) {
+                $user_views[$user_id] = [];
+                $user_views[$user_id]["y"] = 0;
+                $user_views[$user_id]["t"] = 0;
+            }
+
+
+            if ($date >= $inicioSemana) {
+
+                $user_views[$user_id]["t"] += intval($count);
+            }
+            if ($date >= $ultimoDiaSemana and $date < $inicioSemana) {
+
+                $user_views[$user_id]["y"] += intval($count);
+            }
+
+            $user_views[$user_id][$day] = $count;
+
+
+        }
+        $views_y = [];
+        $views_t = [];
+        foreach ($user_views as $key => $value) {
+            $views_y[$key] = $value["y"];
+            $views_t[$key] = $value["t"];
+        }
+
+        uasort($views_y, function ($a, $b) {
+            return $b <=> $a;
+        });
+        uasort($views_t, function ($a, $b) {
+            return $b <=> $a;
+        });
+
+        uasort($users, function ($a, $b) use ($views_y) {
+            $viewsA = $views_y[$a->id] ?? 0; // Si no existe, usa 0
+            $viewsB =  $views_y[$b->id]?? 0;
+            return $viewsB<=> $viewsA;
+        });
+
+        $posy = [];
+        $posy_ = [];
+        $count_ = 1;
+        foreach ($users as $key => $value) {
+            array_push($posy, $value);
+            $posy_[$value->id] = strval($count_);
+            $count_ += 1;
+        }
+        uasort($users, function ($a, $b) use ($views_t) {
+            $viewsA = $views_t[$a->id] ?? 0; // Si no existe, usa 0
+            $viewsB = $views_t[$b->id] ?? 0;
+            return $viewsB <=> $viewsA; // Orden descendente
+        });
+
+        $pos = [];
+        $pos_ = [];
+        $count_ = 1;
+        foreach ($users as $key => $value) {
+            array_push($pos, $value);
+            $pos_[$value->id] = strval($count_);
+            $count_ += 1;
+        }
+        $diaDelMes = (int)date('j', $timestampActual);
+
+        $Winner = false;
+
+        if ($posy_[$auth_user_id] < 4) {
+
+            $LastRankPay = $rankTime[$posy_[$auth_user_id]];
+            if ($LastRankPay != $diaDelMes) {
+                $Winner = true;
+            }
+        }
+        $users= array_slice($users, 0, 20);
+
+
+
+        $this->set('Winner', $Winner);
+        $this->set('pos', $pos);
+        $this->set('pos_', $pos_);
+        $this->set('posy', $posy);
+        $this->set('posy_', $posy_);
+
+
+        // Calcula la diferencia en segundos
+        $diferenciaSegundos = $inicioSemana + 3600 * 24 - $timestampActual;
+
+        $data = json_encode(['month_temporizer' => $diferenciaSegundos]);
+        $this->set('data_json', $data);
+
+        $this->set('users', $users);
+        $this->set('total_viewst', $views_t);
+        $this->set('total_viewsy', $views_y);
+        $this->set('authuser', $auth_user_id);
+    }
+    public function ClaimRankD()
+    {
+
+        date_default_timezone_set('America/Havana');
+        $timestampActual = time();
+        $auth_user_id = $this->Auth->user('id');
+        $Options = TableRegistry::getTableLocator()->get('Options');
+        $options = $Options->find()->all();
+        $settings = [];
+        foreach ($options as $option) {
+            $settings[$option->name] = [
+                'id' => $option->id,
+                'value' => $option->value,
+            ];
+        }
+
+
 
         $last_record = Time::now();
         $first_record = user()->created;
@@ -117,7 +352,7 @@ class UsersController extends AppMemberController
         $views_per_user = $stmt->fetchAll('assoc');
 
 
-        $timestampActual = time();
+
 
         // Obtén el último día de la semana actual (sábado)
 
@@ -175,7 +410,9 @@ class UsersController extends AppMemberController
         });
 
         uasort($users, function ($a, $b) use ($views_y) {
-            return $views_y[$b->id] <=> $views_y[$a->id];
+            $viewsA = $views_y[$a->id] ?? 0; // Si no existe, usa 0
+            $viewsB =$views_y[$b->id] ?? 0;
+            return $viewsB <=> $viewsA;
         });
 
         $posy = [];
@@ -187,7 +424,10 @@ class UsersController extends AppMemberController
             $count_ += 1;
         }
         uasort($users, function ($a, $b) use ($views_t) {
-            return $views_t[$b->id] <=> $views_t[$a->id];
+            $viewsA = $views_t[$a->id] ?? 0; // Si no existe, usa 0
+            $viewsB =$views_t[$b->id] ?? 0;
+            return $viewsB <=> $viewsA;
+
         });
 
         $pos = [];
@@ -198,128 +438,138 @@ class UsersController extends AppMemberController
             $pos_[$value->id] = strval($count_);
             $count_ += 1;
         }
+        $rankTime = [
+            1 => $settings["Rank1DPayedTime"],
+            2 => $settings["Rank2DPayedTime"],
+            3 => $settings["Rank3DPayedTime"]
+        ];
+        $rankGift = [
+            1 => (int)$settings["RankD1Gift"]["value"],
+            2 => (int)$settings["RankD2Gift"]["value"],
+            3 => (int)$settings["RankD3Gift"]["value"]
+        ];
+        $diaDelMes = (int)date('j', $timestampActual);
 
 
-        $this->set('pos', $pos);
-        $this->set('pos_', $pos_);
-        $this->set('posy', $posy);
-        $this->set('posy_', $posy_);
+        if ($posy_[$auth_user_id] < 4) {
 
 
-        // Calcula la diferencia en segundos
-        $diferenciaSegundos = $inicioSemana + 3600 * 24 - $timestampActual;
+            $LastRankPay = $rankTime[$posy_[$auth_user_id]]["value"];
+            $RankPay = $rankGift[$posy_[$auth_user_id]];
+            $user = $this->Users->get($this->Auth->user('id'));
+            if ($LastRankPay != $diaDelMes) {
 
-        $data = json_encode(['month_temporizer' => $diferenciaSegundos]);
-        $this->set('data_json', $data);
+                $optionId = $rankTime[$posy_[$auth_user_id]]["id"];
+                $optionEntity = $Options->get($optionId); // Cargar la entidad
 
-        $this->set('users', $users);
-        $this->set('total_viewst', $views_t);
-        $this->set('total_viewsy', $views_y);
+                $optionEntity->value = $diaDelMes; // Asignar nuevo valor
+
+                $Options->save($optionEntity);
+                $user->publisher_earnings = price_database_format(floatval($RankPay) + floatval($user->publisher_earnings));
+                $this->Users->save($user);
+            }
+        }
+        return $this->redirect(['action' => 'rankday']);
     }
 
-    public function cancel() {
-        $user=$this->Users->get($this->Auth->user('id'));
-        $market_tab= TableRegistry::getTableLocator()->get('Markets');
+    public function cancel()
+    {
+        $user = $this->Users->get($this->Auth->user('id'));
+        $market_tab = TableRegistry::getTableLocator()->get('Markets');
         $id = $this->request->getQuery('market_id');
         $market = $market_tab->getById($id);
-        if(!isset($market->my_array['status'])){
-            $market->my_array['status']="pending";
+        if (!isset($market->my_array['status'])) {
+            $market->my_array['status'] = "pending";
         }
-        if($market->my_array['status']=="pending"){
-            $market->my_array['status']="canceled";
-            $user->publisher_earnings=price_database_format(floatval($market->my_array["total_price"])+floatval($user->publisher_earnings));
+        if ($market->my_array['status'] == "pending") {
+            $market->my_array['status'] = "canceled";
+            $user->publisher_earnings = price_database_format(floatval($market->my_array["total_price"]) + floatval($user->publisher_earnings));
             $this->Users->save($user);
         }
 
         $market_tab->marketedit($market);
         $this->Flash->success('Successfully Canceled');
         return $this->redirect(['action' => 'orders']);
-
     }
-    public function getmarket() {
-            
+    public function getmarket()
+    {
 
-            if ($this->request->is('post')) {
-                $market_tab= TableRegistry::getTableLocator()->get('Markets');
-                $Options = TableRegistry::getTableLocator()->get('Options');
-                $option = $Options->find()->where(['name' => 'facebook_price'])->first();
-                $fb_pric=floatval($option->value);
-                $user=$this->Users->get($this->Auth->user('id'));
-                $balance=$user->publisher_earnings + $user->referral_earnings;
-                $data=$this->request->getData();
-                $data_ =[];
-                foreach ($data as $key => $value) {
-                    if ($key != '_Token') {
-                        $data_[$key]=$value;
-                    }
-                    
+
+        if ($this->request->is('post')) {
+            $market_tab = TableRegistry::getTableLocator()->get('Markets');
+            $Options = TableRegistry::getTableLocator()->get('Options');
+            $option = $Options->find()->where(['name' => 'facebook_price'])->first();
+            $fb_pric = floatval($option->value);
+            $user = $this->Users->get($this->Auth->user('id'));
+            $balance = $user->publisher_earnings + $user->referral_earnings;
+            $data = $this->request->getData();
+            $data_ = [];
+            foreach ($data as $key => $value) {
+                if ($key != '_Token') {
+                    $data_[$key] = $value;
                 }
-                
-                $data_["total_price"] = floatval($data["cantidad"])* $fb_pric;
-                $data_["user_id"] = $user->id;
-                $data_["username"] = $user->username;
+            }
+
+            $data_["total_price"] = floatval($data["cantidad"]) * $fb_pric;
+            $data_["user_id"] = $user->id;
+            $data_["username"] = $user->username;
 
 
-                if(floatval($balance)>floatval($data["cantidad"])* $fb_pric){
-                    $actual_bal=floatval($user->publisher_earnings)-floatval($data["cantidad"])* $fb_pric;
-                    if($actual_bal<0){
-                        $user->publisher_earnings=price_database_format($user->publisher_earnings-$user->publisher_earnings);
-                        $user->referral_earnings=price_database_format($user->referral_earnings+$actual_bal);
-                    }
-                    else{
-                        $user->publisher_earnings=price_database_format($actual_bal);
-                    }
-                    $market_tab->marketadd($data_);
-                    $this->Users->save($user);
-                    $this->Flash->success('SUCEFULL');
-                    
+            if (floatval($balance) > floatval($data["cantidad"]) * $fb_pric) {
+                $actual_bal = floatval($user->publisher_earnings) - floatval($data["cantidad"]) * $fb_pric;
+                if ($actual_bal < 0) {
+                    $user->publisher_earnings = price_database_format($user->publisher_earnings - $user->publisher_earnings);
+                    $user->referral_earnings = price_database_format($user->referral_earnings + $actual_bal);
+                } else {
+                    $user->publisher_earnings = price_database_format($actual_bal);
                 }
-                else{
-                    $this->Flash->error('INSUFICIENT BALANCE', ['element' => 'error']);
-                }
-                
-                return $this->redirect(['action' => 'oferts']);
-                //
-                //$b=$market_tab  ->getAll();
+                $market_tab->marketadd($data_);
+                $this->Users->save($user);
+                $this->Flash->success('SUCEFULL');
+            } else {
+                $this->Flash->error('INSUFICIENT BALANCE', ['element' => 'error']);
+            }
 
-                //$ofert=$data["ofert_type"];
+            return $this->redirect(['action' => 'oferts']);
+            //
+            //$b=$market_tab  ->getAll();
 
-    
-                // Aquí puedes procesar los datos, por ejemplo, guardarlos en la base de datos
-                // ... 
-    
-                // Redirecciona a otra vista o realiza otras acciones según sea necesario
-            
+            //$ofert=$data["ofert_type"];
+
+
+            // Aquí puedes procesar los datos, por ejemplo, guardarlos en la base de datos
+            // ... 
+
+            // Redirecciona a otra vista o realiza otras acciones según sea necesario
+
             //return $this->redirect(['action' => 'index']);
         }
     }
 
-    public function orders() {
-            
-        $market_tab= TableRegistry::getTableLocator()->get('Markets');
-        $markets=$market_tab->getAll();
+    public function orders()
+    {
 
-        $user=$this->Users->get($this->Auth->user('id'));
-        $mymarkets=[];
-        
-        $uid =intval($user->id);
+        $market_tab = TableRegistry::getTableLocator()->get('Markets');
+        $markets = $market_tab->getAll();
+
+        $user = $this->Users->get($this->Auth->user('id'));
+        $mymarkets = [];
+
+        $uid = intval($user->id);
         foreach ($markets as $value) {
 
-            $mark_uid =$value->my_array["user_id"];
+            $mark_uid = $value->my_array["user_id"];
 
-            if($mark_uid == $uid ){
+            if ($mark_uid == $uid) {
 
-                array_push($mymarkets,$value);
-
-            }
-            else{
-                $a=1;
+                array_push($mymarkets, $value);
+            } else {
+                $a = 1;
             }
         }
         $this->set('mymarkets', $mymarkets);
+    }
 
-}
-    
     public function oferts()
     {
         $Options = TableRegistry::getTableLocator()->get('Options');
@@ -387,7 +637,7 @@ class UsersController extends AppMemberController
         $Statistics = TableRegistry::getTableLocator()->get('Statistics');
         // Obtener todos los usuarios
         $users = $this->Users->find('all')->toArray();
-        
+
         // Consulta para obtener la cantidad total de vistas por cada usuario
         $sql = "SELECT 
                   user_id, 
@@ -399,7 +649,7 @@ class UsersController extends AppMemberController
                 GROUP BY 
                   user_id
                 ORDER BY 
-                  view_count DESC"; // Ordenar por cantidad de vistas en orden descendente
+                  view_count DESC "; // Ordenar por cantidad de vistas en orden descendente
 
         // Preparar y ejecutar la consulta
         $stmt = $connection->prepare($sql);
@@ -421,8 +671,11 @@ class UsersController extends AppMemberController
 
         // Ordenar los usuarios por cantidad de vistas en orden descendente
         uasort($users, function ($a, $b) use ($total_views_per_user) {
-            return $total_views_per_user[$b->id] <=> $total_views_per_user[$a->id];
+            $viewsA =$total_views_per_user[$a->id] ?? 0; // Si no existe, usa 0
+            $viewsB =  $total_views_per_user[$b->id] ?? 0;
+            return $viewsB <=>$viewsA;
         });
+        $users= array_slice($users, 0, 20);
 
         // Pasar a la vista
         $this->set('users', $users);
@@ -430,7 +683,7 @@ class UsersController extends AppMemberController
     }
     public function ranksem()
     {
-         
+
         date_default_timezone_set('America/Havana');
         $auth_user_id = $this->Auth->user('id');
 
@@ -462,16 +715,16 @@ class UsersController extends AppMemberController
         $month = (int)$current_time->format('m');
 
 
-        
+
         $time_zone = get_option('timezone', 'UTC');
- 
+
         // Obtener la hora actual
         $check_ = Time::createFromDate($year, $month, 01, $time_zone);
 
-        $date1 = Time::createFromDate($year, $month-1, 01, $time_zone)
+        $date1 = Time::createFromDate($year, $month - 1, 01, $time_zone)
             ->startOfMonth()
             ->i18nFormat('yyyy-MM-dd HH:mm:ss', 'UTC', 'en');
-       /* $week_d1 = date('w', strtotime($date1));
+        /* $week_d1 = date('w', strtotime($date1));
         if (intval($week_d1) > 0) {
             $discount = intval($week_d1) * (-1);
             $date1 = strtotime($date1);
@@ -480,7 +733,7 @@ class UsersController extends AppMemberController
         $date2 = Time::createFromDate($year, $month, 01, $time_zone)
             ->endOfMonth()
             ->i18nFormat('yyyy-MM-dd HH:mm:ss', 'UTC', 'en');
-        
+
 
         $connection = ConnectionManager::get('default');
 
@@ -500,8 +753,8 @@ FROM
 WHERE 
     Statistics.created BETWEEN :date1 AND :date2
 GROUP BY 
-    Statistics.user_id, day;";
-      /*  $sql = "SELECT 
+    Statistics.user_id, day";
+        /*  $sql = "SELECT 
     Statistics.user_id,
     DATE_FORMAT(CONVERT_TZ(Statistics.created,'+00:00','" . $time_zone_offset . "'), '%Y-%m-%d') AS day,
     COUNT(Statistics.id) AS count
@@ -521,35 +774,35 @@ GROUP BY
 
         $views_per_user = $stmt->fetchAll('assoc');
 
-        
+
         $timestampActual = time();
 
         // Obtén el último día de la semana actual (sábado)
 
-        $ultimoDiaSemana= strtotime('this Sunday');
+        $ultimoDiaSemana = strtotime('this Sunday');
         // $this->Flash->success(__($ultimoDiaSemana));
         $inicioSemana = strtotime("last Sunday");
 
         // Define la fecha objetivo como timestamp (último día de la semana actual, 23:59:59)
         $fechaObjetivo = strtotime(date('Y-m-d', $ultimoDiaSemana) . ' 23:59:59');
-        
-    
+
+
         //$diaFinSemana = intval(date('d', $ultimoDiaSemana));
         //$diaInicioSemana = intval(date('d', $inicioSemana));
         $user_views = [];
 
-       // if ($diaInicioSemana >$diaFinSemana) {
+        // if ($diaInicioSemana >$diaFinSemana) {
         // $diaFinSemana+=30;   
         //    }
         foreach ($views_per_user as $view) {
             $user_id = $view['user_id'];
             $day = $view['day'];
             $fecha_array = explode("-", $day);
-           // $this->Flash->success(__(strtotime($day)));
+            // $this->Flash->success(__(strtotime($day)));
             // $this->Flash->success(__($inicioSemana));
-             // $this->Flash->success(__($ultimoDiaSemana));
-            $tiempo_=strtotime($day);
-           
+            // $this->Flash->success(__($ultimoDiaSemana));
+            $tiempo_ = strtotime($day);
+
             $count = $view['count'];
             $date_ = Time::createFromDate(intval($fecha_array[0]), intval($fecha_array[1]), intval($fecha_array[2]), $time_zone);
             $dayOfWeek = intval(date('w', strtotime($date_)));
@@ -564,32 +817,29 @@ GROUP BY
             }
 
 
-            if ($tiempo_>$inicioSemana and $tiempo_<=$ultimoDiaSemana) {
+            if ($tiempo_ > $inicioSemana and $tiempo_ <= $ultimoDiaSemana) {
 
                 $user_views[$user_id]["sem"] += intval($count);
-                
             }
-            if ($tiempo_<=$inicioSemana and $tiempo_>$inicioSemana-3600*24*7) {
+            if ($tiempo_ <= $inicioSemana and $tiempo_ > $inicioSemana - 3600 * 24 * 7) {
 
                 $user_views[$user_id]["last"] += intval($count);
-                
             }
-            
+
             $user_views[$user_id][$day] = $count;
 
-           
+
             if (intval($month) == intval($fecha_array[1])) {
                 $user_views[$user_id]["total"] += intval($count);
             }
         }
         $views_sem = [];
         $views_men = [];
-        $views_last=[];
+        $views_last = [];
         foreach ($user_views as $key => $value) {
             $views_sem[$key] = $value["sem"];
             $views_men[$key] = $value["total"];
             $views_last[$key] = $value["last"];
-
         }
         uasort($views_last, function ($a, $b) {
             return $b <=> $a;
@@ -601,29 +851,35 @@ GROUP BY
             return $b <=> $a;
         });
         uasort($users, function ($a, $b) use ($views_last) {
-            return $views_last[$b->id] <=> $views_last[$a->id];
+            $viewsA = $views_last[$a->id] ?? 0; // Si no existe, usa 0
+            $viewsB =$views_last[$b->id] ?? 0;
+            return $viewsB <=> $viewsA;
         });
-        $poslast=[];
-        $pos_last=[];
-        $count_=1;
+        $poslast = [];
+        $pos_last = [];
+        $count_ = 1;
         foreach ($users as $key => $value) {
             array_push($poslast, $value);
-            $pos_last[$value->id]=strval($count_);
-            $count_+=1;
+            $pos_last[$value->id] = strval($count_);
+            $count_ += 1;
         }
 
         uasort($users, function ($a, $b) use ($views_sem) {
-            return $views_sem[$b->id] <=> $views_sem[$a->id];
+            $viewsA =  $views_sem[$a->id] ?? 0; // Si no existe, usa 0
+            $viewsB =$views_sem[$b->id] ?? 0;
+            return $viewsB <=> $viewsA;
         });
-        $pos=[];
-        $pos_=[];
-        $count_=1;
+        $pos = [];
+        $pos_ = [];
+        $count_ = 1;
         foreach ($users as $key => $value) {
             array_push($pos, $value);
-            $pos_[$value->id]=strval($count_);
-            $count_+=1;
+            $pos_[$value->id] = strval($count_);
+            $count_ += 1;
         }
-    
+        
+        $users= array_slice($users, 0, 20);
+
 
         $this->set('pos', $pos);
         $this->set('pos_', $pos_);
@@ -631,7 +887,7 @@ GROUP BY
         $this->set('pos_last', $pos_last);
 
 
-        
+
         // Calcula la diferencia en segundos
         $diferenciaSegundos = $fechaObjetivo - $timestampActual;
 
@@ -641,7 +897,6 @@ GROUP BY
         $this->set('users', $users);
         $this->set('total_views_per_user', $views_sem);
         $this->set('total_views_per_userlast', $views_last);
-
     }
 
     public function rankmen()
@@ -778,17 +1033,20 @@ GROUP BY
         });
 
         uasort($users, function ($a, $b) use ($views_men) {
-            return $views_men[$b->id] <=> $views_men[$a->id];
+            $viewsA = $views_men[$a->id] ?? 0; // Si no existe, usa 0
+            $viewsB = $views_men[$b->id] ?? 0;
+            return $viewsB <=> $viewsA;
         });
-        $pos=[];
-        $pos_=[];
-        $count_=1;
+        $pos = [];
+        $pos_ = [];
+        $count_ = 1;
         foreach ($users as $key => $value) {
             array_push($pos, $value);
-            $pos_[$value->id]=strval($count_);
-            $count_+=1;
+            $pos_[$value->id] = strval($count_);
+            $count_ += 1;
         }
-        date_default_timezone_set($timezone);
+        $users= array_slice($users, 0, 20);
+
         $timestampActual = time();
 
         // Obtén el último día del mes actual
@@ -809,14 +1067,14 @@ GROUP BY
         $this->set('pos', $pos);
         $this->set('pos_', $pos_);
     }
-        public function ranklinks()
+    public function ranklinks()
 
     {
         $Users = TableRegistry::getTableLocator()->get('Users');
 
 
         $popularLinks = $Users->Statistics->find()
-            ->contain(['Links','Links.Users'])
+            ->contain(['Links', 'Links.Users'])
             ->select([
                 'Links.id',
                 'Links.alias',
@@ -838,7 +1096,6 @@ GROUP BY
             ->toArray();
 
         $this->set('rank', $popularLinks);
-
     }
     public function dashboard()
     {
@@ -996,8 +1253,8 @@ GROUP BY
         $this->set('total_earnings', array_sum(array_column_polyfill($CurrentMonthDays, 'publisher_earnings')));
         $this->set('referral_earnings', array_sum(array_column_polyfill($CurrentMonthDays, 'referral_earnings')));
 
-        
-       /* $popularLinks = Cache::read('popularLinks_' . $this->Auth->user('id').'_'.$date1.'_'.$date2, '15min');
+
+        /* $popularLinks = Cache::read('popularLinks_' . $this->Auth->user('id').'_'.$date1.'_'.$date2, '15min');
         if ($popularLinks === false) {
             $popularLinks = $this->Users->Statistics->find()
                 ->contain(['Links'])
@@ -1025,7 +1282,7 @@ GROUP BY
 
         $this->set('popularLinks', $popularLinks);
         */
-        
+
 
 
         $this->loadModel('Announcements');

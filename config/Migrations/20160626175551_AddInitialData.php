@@ -118,6 +118,36 @@ class AddInitialData extends AbstractMigration
                 'name' => 'url_blocked_countries',
                 'value' => 'https://www.youtube.com',
             ],
+
+            [
+                'name' => 'RankD1Gift',
+                'value' => '0',
+            ],
+            [
+                'name' => 'RankD2Gift',
+                'value' => '0',
+            ],
+            [
+                'name' => 'RankD3Gift',
+                'value' => '0',
+            ],
+            [
+                'name' => 'Rank1DPayedTime',
+                'value' => '0',
+            ],
+            [
+                'name' => 'Rank2DPayedTime',
+                'value' => '0',
+            ],
+                [
+                'name' => 'Rank3DPayedTime',
+                'value' => '0',
+            ],
+
+            
+
+
+
             [
                 'name' => 'facebook_price',
                 'value' => '1.5',
@@ -150,6 +180,27 @@ class AddInitialData extends AbstractMigration
                 'name' => 'ProxyAPI',
                 'value' => '',
             ],
+            [
+                'name' => 'CustomBanerCode',
+                'value' => '',
+            ],
+                        [
+                'name' => 'CustomBanerType',
+                'value' => '',
+            ],
+                        [
+                'name' => 'CustomBanerStyle',
+                'value' => '',
+            ],
+                        [
+                'name' => 'LinkButtonURL',
+                'value' => '',
+            ],
+                                    [
+                'name' => 'BackButtonURL',
+                'value' => '',
+            ],
+            
 
             [
                 'name' => 'interstitial_price',

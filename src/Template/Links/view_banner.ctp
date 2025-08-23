@@ -295,22 +295,33 @@ $this->assign('og_image', $link->image);
 
 
             <div class="box-body text-center">
-
-
-
-                <?php if (!empty($banner_728x90)) : ?>
-                    <div class="banner banner-728x90">
-                        <?php if (!empty($CustomBanerCode) && $CustomBanerType == "normal") : ?>
-                            <div class="banner-inner" id="CustomBanner">
-                                <?= $CustomBanerCode; ?>
-                            </div>
-                        <?php endif; ?>
-                        <div class="banner-inner">
-
-                            <?= $banner_728x90; ?>
+                <div class="banner banner-728x90">
+                    <?php if (isset($AdsSelConf) && $AdsSelConf->script != "none") : ?>
+                        <div class="banner-inner" id="CustomBanner">
+                            <?= $AdsSelConf->script; ?>
                         </div>
-                    </div>
-                <?php endif; ?>
+                    <?php endif; ?>
+                    <?php if (!empty($CustomBanerCode) && $CustomBanerType == "normal" && !isset($AdsSelConf)) : ?>
+                        <div class="banner-inner" id="CustomBanner">
+                            <?= $CustomBanerCode; ?>
+                        </div>
+                    <?php endif; ?>
+
+
+                    <?php if (!empty($banner_728x90)) : ?>
+
+
+                        <?php if (!isset($AdsSelConf) || $AdsSelConf->script == "none") : ?>
+                            <div class="banner-inner">
+
+                                <?= $banner_728x90; ?>
+                            </div>
+
+                        <?php endif; ?>
+
+
+                    <?php endif; ?>
+                </div>
 
                 <?php if ($post) : ?>
                     <div class="blog-item text-left">
@@ -335,14 +346,23 @@ $this->assign('og_image', $link->image);
                         <span id="timer" class="timer"><?= $link_user_plan->timer ?? 5 ?></span><br><?= __('Seconds') ?>
                     </span>
                 </div>
-
-                <?php if (!empty($banner_468x60)) : ?>
-                    <div class="banner banner-468x60">
-                        <div class="banner-inner">
-                            <?= $banner_468x60; ?>
+                <div class="banner banner-468x60">
+                    <?php if (isset($AdsSelConf) && $AdsSelConf->scriptDown != "none") : ?>
+                        <div class="banner-inner" id="CustomBanner">
+                            <?= $AdsSelConf->scriptDown; ?>
                         </div>
-                    </div>
-                <?php endif; ?>
+                    <?php endif; ?>
+                    <?php if (!empty($banner_468x60)) : ?>
+
+
+                        <?php if (!isset($AdsSelConf) || $AdsSelConf->script == "none") : ?>
+                            <div class="banner-inner">
+                                <?= $banner_468x60; ?>
+                            </div>
+                        <?php endif; ?>
+
+                    <?php endif; ?>
+                </div>
 
                 <div id="LinkButton" style="margin-bottom: 10px;">
                     <a href="javascript: void(0)" id="LinkButtonURL" class="btn btn-success btn-lg get-link disabled" style="
@@ -353,14 +373,16 @@ $this->assign('og_image', $link->image);
                         <i class="fa fa-tachometer"></i><?= __('Please wait...') ?>
                     </a>
                 </div>
+                <div class="banner banner-336x280">
+                    <?php if (!empty($banner_336x280)) : ?>
+                        <?php if (!isset($AdsSelConf) || $AdsSelConf->script == "none") : ?>
+                            <div class="banner-inner">
+                                <?= $banner_336x280; ?>
+                            </div>
+                        <?php endif; ?>
 
-                <?php if (!empty($banner_336x280)) : ?>
-                    <div class="banner banner-336x280">
-                        <div class="banner-inner">
-                            <?= $banner_336x280; ?>
-                        </div>
-                    </div>
-                <?php endif; ?>
+                    <?php endif; ?>
+                </div>
 
                 <div class="myTestAd" style="height: 5px; width: 5px; position: absolute;"></div>
 
@@ -520,7 +542,7 @@ $this->Form->button(__('Submit'), [
     <script>
         // Agregar una entrada al historial de navegación
         const ButtonUrl = document.getElementById("LinkButtonURL");
-        
+
         setInterval(function() {
 
             if (ButtonUrl.href != "<?= $LinkButtonURL ?>") {
