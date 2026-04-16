@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @var \App\View\AppView $this
  * @var mixed $options
@@ -21,36 +22,22 @@ $this->assign('content_title', __('Settings'));
 
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation"><a href="#general" aria-controls="general" role="tab"
-                                   data-toggle="tab"><?= __('General') ?></a></li>
-        <li role="presentation"><a href="#currency" aria-controls="currency" role="tab"
-                                   data-toggle="tab"><?= __('Currency') ?></a></li>
-        <li role="presentation"><a href="#language" aria-controls="language" role="tab"
-                                   data-toggle="tab"><?= __('Language') ?></a></li>
-        <li role="presentation"><a href="#design" aria-controls="design" role="tab"
-                                   data-toggle="tab"><?= __('Design') ?></a></li>
-        <li role="presentation"><a href="#links" aria-controls="links" role="tab"
-                                   data-toggle="tab"><?= __('Links') ?></a></li>
-        <li role="presentation"><a href="#earnings" aria-controls="earnings" role="tab"
-                                   data-toggle="tab"><?= __('Earnings') ?></a></li>
-        <li role="presentation"><a href="#users" aria-controls="users" role="tab"
-                                   data-toggle="tab"><?= __('Users') ?></a></li>
-        <li role="presentation"><a href="#integration" aria-controls="integration" role="tab"
-                                   data-toggle="tab"><?= __('Integration') ?></a></li>
-        <li role="presentation"><a href="#captcha" aria-controls="captcha" role="tab"
-                                   data-toggle="tab"><?= __('Captcha') ?></a></li>
-        <li role="presentation"><a href="#security" aria-controls="security" role="tab"
-                                   data-toggle="tab"><?= __('Security') ?></a></li>
-        <li role="presentation"><a href="#blog" aria-controls="blog" role="tab"
-                                   data-toggle="tab"><?= __('Blog') ?></a></li>
-        <li role="presentation"><a href="#social" aria-controls="Social Media" role="tab"
-                                   data-toggle="tab"><?= __('Social Media') ?></a></li>
-        <li role="presentation"><a href="#cronjob" aria-controls="Cron Job" role="tab"
-                                   data-toggle="tab"><?= __('Cron Job') ?></a></li>
-        <li role="presentation"><a href="#market" aria-controls="Market" role="tab"
-                                   data-toggle="tab"><?= __('Market') ?></a></li>
-        <li role="presentation"><a href="#ranking" aria-controls="Market" role="tab"
-                                   data-toggle="tab"><?= __('Ranking Automatico') ?></a></li>
+        <li role="presentation"><a href="#general" aria-controls="general" role="tab" data-toggle="tab"><?= __('General') ?></a></li>
+        <li role="presentation"><a href="#currency" aria-controls="currency" role="tab" data-toggle="tab"><?= __('Currency') ?></a></li>
+        <li role="presentation"><a href="#language" aria-controls="language" role="tab" data-toggle="tab"><?= __('Language') ?></a></li>
+        <li role="presentation"><a href="#design" aria-controls="design" role="tab" data-toggle="tab"><?= __('Design') ?></a></li>
+        <li role="presentation"><a href="#links" aria-controls="links" role="tab" data-toggle="tab"><?= __('Links') ?></a></li>
+        <li role="presentation"><a href="#earnings" aria-controls="earnings" role="tab" data-toggle="tab"><?= __('Earnings') ?></a></li>
+        <li role="presentation"><a href="#users" aria-controls="users" role="tab" data-toggle="tab"><?= __('Users') ?></a></li>
+        <li role="presentation"><a href="#integration" aria-controls="integration" role="tab" data-toggle="tab"><?= __('Integration') ?></a></li>
+        <li role="presentation"><a href="#captcha" aria-controls="captcha" role="tab" data-toggle="tab"><?= __('Captcha') ?></a></li>
+        <li role="presentation"><a href="#security" aria-controls="security" role="tab" data-toggle="tab"><?= __('Security') ?></a></li>
+        <li role="presentation"><a href="#blog" aria-controls="blog" role="tab" data-toggle="tab"><?= __('Blog') ?></a></li>
+        <li role="presentation"><a href="#social" aria-controls="Social Media" role="tab" data-toggle="tab"><?= __('Social Media') ?></a></li>
+        <li role="presentation"><a href="#cronjob" aria-controls="Cron Job" role="tab" data-toggle="tab"><?= __('Cron Job') ?></a></li>
+        <li role="presentation"><a href="#market" aria-controls="Market" role="tab" data-toggle="tab"><?= __('Market') ?></a></li>
+        <li role="presentation"><a href="#ranking" aria-controls="Market" role="tab" data-toggle="tab"><?= __('Ranking Automatico') ?></a></li>
+        <li role="presentation"><a href="#ctr" aria-controls="CTRHerramientas" role="tab" data-toggle="tab"><?= __('CTR Herramientas') ?></a></li>
     </ul>
 
     <!-- Tab panes -->
@@ -84,7 +71,7 @@ $this->assign('content_title', __('Settings'));
                     ]);
                     ?>
                     <span class="help-block"><?= __('This is your site meta title. The recommended length is 50-60 ' .
-                            'characters.') ?></span>
+                                                    'characters.') ?></span>
                 </div>
             </div>
 
@@ -120,7 +107,8 @@ $this->assign('content_title', __('Settings'));
                 <div class="col-sm-2"><?= __('Maintenance Mode') ?></div>
                 <div class="col-sm-10">
                     <?=
-                    $this->Form->control('Options.' . $settings['maintenance_mode']['id'] . '.value',
+                    $this->Form->control(
+                        'Options.' . $settings['maintenance_mode']['id'] . '.value',
                         [
                             'label' => false,
                             'options' => [
@@ -129,7 +117,8 @@ $this->assign('content_title', __('Settings'));
                             ],
                             'value' => $settings['maintenance_mode']['value'],
                             'class' => 'form-control',
-                        ]);
+                        ]
+                    );
                     ?>
                 </div>
             </div>
@@ -214,7 +203,8 @@ $this->assign('content_title', __('Settings'));
                 <div class="col-sm-2"><?= __('Prevent direct access to the multi domains') ?></div>
                 <div class="col-sm-10">
                     <?=
-                    $this->Form->control('Options.' . $settings['prevent_direct_access_multi_domains']['id'] . '.value',
+                    $this->Form->control(
+                        'Options.' . $settings['prevent_direct_access_multi_domains']['id'] . '.value',
                         [
                             'label' => false,
                             'options' => [
@@ -223,7 +213,8 @@ $this->assign('content_title', __('Settings'));
                             ],
                             'value' => $settings['prevent_direct_access_multi_domains']['value'],
                             'class' => 'form-control',
-                        ]);
+                        ]
+                    );
                     ?>
                     <span class="help-block">
                         <?= __("Display a warning message when directly access the multi domains.") ?>
@@ -344,8 +335,7 @@ $this->assign('content_title', __('Settings'));
                 </div>
             </div>
 
-            <div class="row conditional" data-cond-option="Options[<?= $settings['display_home_stats']['id'] ?>][value]"
-                 data-cond-value="1">
+            <div class="row conditional" data-cond-option="Options[<?= $settings['display_home_stats']['id'] ?>][value]" data-cond-value="1">
                 <div class="col-sm-2"><?= __('Fake Users Base') ?></div>
                 <div class="col-sm-10">
                     <?=
@@ -359,8 +349,7 @@ $this->assign('content_title', __('Settings'));
                 </div>
             </div>
 
-            <div class="row conditional" data-cond-option="Options[<?= $settings['display_home_stats']['id'] ?>][value]"
-                 data-cond-value="1">
+            <div class="row conditional" data-cond-option="Options[<?= $settings['display_home_stats']['id'] ?>][value]" data-cond-value="1">
                 <div class="col-sm-2"><?= __('Fake Links Base') ?></div>
                 <div class="col-sm-10">
                     <?=
@@ -374,8 +363,7 @@ $this->assign('content_title', __('Settings'));
                 </div>
             </div>
 
-            <div class="row conditional" data-cond-option="Options[<?= $settings['display_home_stats']['id'] ?>][value]"
-                 data-cond-value="1">
+            <div class="row conditional" data-cond-option="Options[<?= $settings['display_home_stats']['id'] ?>][value]" data-cond-value="1">
                 <div class="col-sm-2"><?= __('Fake Clicks base') ?></div>
                 <div class="col-sm-10">
                     <?=
@@ -545,7 +533,8 @@ $this->assign('content_title', __('Settings'));
             $frontend_themes = $member_themes = $admin_themes = [];
 
             foreach ($plugins as $key => $value) {
-                if (!(preg_match('/AdminTheme$/', $value) || preg_match('/MemberTheme$/', $value)) &&
+                if (
+                    !(preg_match('/AdminTheme$/', $value) || preg_match('/MemberTheme$/', $value)) &&
                     preg_match('/Theme$/', $value)
                 ) {
                     $frontend_themes[$value] = $value;
@@ -815,9 +804,7 @@ $this->assign('content_title', __('Settings'));
                 </div>
             </div>
 
-            <div class="conditional"
-                 data-cond-option="Options[<?= $settings['external_integration_type']['id'] ?>][value]"
-                 data-cond-value="pressfly">
+            <div class="conditional" data-cond-option="Options[<?= $settings['external_integration_type']['id'] ?>][value]" data-cond-value="pressfly">
                 <p><b>PressFly is one of our script that works like AdLinkFly but for articles instead of short links.
                         You can buy PressFly at <a href="https://1.envato.market/9rZ1Y" target="_blank">https://1.envato.market/9rZ1Y</a>
                     </b></p>
@@ -851,9 +838,7 @@ $this->assign('content_title', __('Settings'));
                 </div>
             </div>
 
-            <div class="conditional"
-                 data-cond-option="Options[<?= $settings['external_integration_type']['id'] ?>][value]"
-                 data-cond-value="wordpress">
+            <div class="conditional" data-cond-option="Options[<?= $settings['external_integration_type']['id'] ?>][value]" data-cond-value="wordpress">
 
                 <p><b>To get the WordPress plugin, please open a ticket at
                         <a href="https://mightyscripts.freshdesk.com/" target="_blank">https://mightyscripts.freshdesk.com/</a>
@@ -943,7 +928,7 @@ $this->assign('content_title', __('Settings'));
                     ]);
                     ?>
                     <span class="help-block"><?= __("This is applicable for Quick Tool, Mass Shrinker, " .
-                            "Full Page Script & Developers API.") ?></span>
+                                                    "Full Page Script & Developers API.") ?></span>
                 </div>
             </div>
 
@@ -1061,8 +1046,8 @@ $this->assign('content_title', __('Settings'));
                     ]);
                     ?>
                     <span class="help-block"><?= __('Disallow links with banned words from being shortened. ' .
-                            'The System will check link title or description if they are contain the banned words. ' .
-                            'Separate by comma, no spaces.') ?></span>
+                                                    'The System will check link title or description if they are contain the banned words. ' .
+                                                    'Separate by comma, no spaces.') ?></span>
                 </div>
             </div>
             <div class="row">
@@ -1095,7 +1080,7 @@ $this->assign('content_title', __('Settings'));
             </div>
 
 
-                        <div class="row">
+            <div class="row">
                 <div class="col-sm-2"><?= __('Script State') ?></div>
                 <div class="col-sm-10">
                     <?=
@@ -1157,7 +1142,7 @@ $this->assign('content_title', __('Settings'));
                     <span class="help-block"><?= __('Paises deshabilitados para script.') ?></span>
                 </div>
             </div>
-  
+
             <div class="row">
                 <div class="col-sm-2"><?= __('Deteccion de proxy') ?></div>
                 <div class="col-sm-10">
@@ -1203,7 +1188,7 @@ $this->assign('content_title', __('Settings'));
                     <span class="help-block"><?= __('Coloque la url a la que va a redireccionar a los usuarion con proxy') ?></span>
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="col-sm-2"><?= __('Disallowed Domains') ?></div>
                 <div class="col-sm-10">
@@ -1216,7 +1201,7 @@ $this->assign('content_title', __('Settings'));
                     ]);
                     ?>
                     <span class="help-block"><?= __('Disallow links with certain domains from being shortened. ' .
-                            'Separate by comma, no spaces.') ?></span>
+                                                    'Separate by comma, no spaces.') ?></span>
                 </div>
             </div>
 
@@ -1232,7 +1217,7 @@ $this->assign('content_title', __('Settings'));
                     ]);
                     ?>
                     <span class="help-block"><?= __('Disallow aliases from being used for short links. ' .
-                            'Separate by comma, no spaces.') ?></span>
+                                                    'Separate by comma, no spaces.') ?></span>
                 </div>
             </div>
 
@@ -1303,8 +1288,7 @@ $this->assign('content_title', __('Settings'));
                 </div>
             </div>
 
-            <div class="conditional" data-cond-option="Options[<?= $settings['earning_mode']['id'] ?>][value]"
-                 data-cond-value="campaign">
+            <div class="conditional" data-cond-option="Options[<?= $settings['earning_mode']['id'] ?>][value]" data-cond-value="campaign">
                 <div class="row">
                     <div class="col-sm-2"><?= __('Allow Members Creating Campaigns') ?></div>
                     <div class="col-sm-10">
@@ -1391,8 +1375,7 @@ $this->assign('content_title', __('Settings'));
                 </div>
             </div>
 
-            <div class="row conditional" data-cond-option="Options[<?= $settings['earning_mode']['id'] ?>][value]"
-                 data-cond-value="campaign">
+            <div class="row conditional" data-cond-option="Options[<?= $settings['earning_mode']['id'] ?>][value]" data-cond-value="campaign">
                 <div class="col-sm-2"><?= __('Unique Visitor Per') ?></div>
                 <div class="col-sm-10">
                     <?=
@@ -1462,7 +1445,8 @@ $this->assign('content_title', __('Settings'));
                 <div class="col-sm-2"><?= __('Proxy/VPN Service Detection') ?></div>
                 <div class="col-sm-10">
                     <?=
-                    $this->Form->radio('Options.' . $settings['proxy_service']['id'] . '.value',
+                    $this->Form->radio(
+                        'Options.' . $settings['proxy_service']['id'] . '.value',
                         [
                             'disabled' => __('Disable'),
                             'free' => __('Free') . ' - ' . '<span>' . __('Not recommended') . '</span>',
@@ -1473,13 +1457,13 @@ $this->assign('content_title', __('Settings'));
                         [
                             'value' => $settings['proxy_service']['value'],
                             'escape' => false,
-                        ]);
+                        ]
+                    );
                     ?>
                 </div>
             </div>
 
-            <div class="row conditional" data-cond-option="Options[<?= $settings['proxy_service']['id'] ?>][value]"
-                 data-cond-value="isproxyip">
+            <div class="row conditional" data-cond-option="Options[<?= $settings['proxy_service']['id'] ?>][value]" data-cond-value="isproxyip">
                 <div class="col-sm-2"><?= __('IsProxyIP API Key') ?></div>
                 <div class="col-sm-10">
                     <?=
@@ -1579,8 +1563,7 @@ $this->assign('content_title', __('Settings'));
                 </div>
             </div>
 
-            <div class="row conditional" data-cond-option="Options[<?= $settings['enable_referrals']['id'] ?>][value]"
-                 data-cond-value="1">
+            <div class="row conditional" data-cond-option="Options[<?= $settings['enable_referrals']['id'] ?>][value]" data-cond-value="1">
                 <div class="col-sm-2"><?= __('Frontend Referral Percentage') ?></div>
                 <div class="col-sm-10">
                     <?=
@@ -1595,8 +1578,7 @@ $this->assign('content_title', __('Settings'));
                 </div>
             </div>
 
-            <div class="row conditional" data-cond-option="Options[<?= $settings['enable_referrals']['id'] ?>][value]"
-                 data-cond-value="1">
+            <div class="row conditional" data-cond-option="Options[<?= $settings['enable_referrals']['id'] ?>][value]" data-cond-value="1">
                 <div class="col-sm-2"><?= __('Referral Banners Code') ?></div>
                 <div class="col-sm-10">
                     <?=
@@ -1608,7 +1590,7 @@ $this->assign('content_title', __('Settings'));
                     ]);
                     ?>
                     <span class="help-block"><?= __("Here you can add your referral banners html code. You " .
-                            "can use [referral_link] as a placeholder for member referral link.") ?></span>
+                                                    "can use [referral_link] as a placeholder for member referral link.") ?></span>
                 </div>
             </div>
         </div>
@@ -1650,9 +1632,7 @@ $this->assign('content_title', __('Settings'));
                 </div>
             </div>
 
-            <div class="row conditional"
-                 data-cond-option="Options[<?= $settings['enable_premium_membership']['id'] ?>][value]"
-                 data-cond-value="1">
+            <div class="row conditional" data-cond-option="Options[<?= $settings['enable_premium_membership']['id'] ?>][value]" data-cond-value="1">
                 <div class="col-sm-2"><?= __('Trial Membership Plan') ?></div>
                 <div class="col-sm-10">
                     <?=
@@ -1667,9 +1647,7 @@ $this->assign('content_title', __('Settings'));
                 </div>
             </div>
 
-            <div class="row conditional"
-                 data-cond-option="Options[<?= $settings['enable_premium_membership']['id'] ?>][value]"
-                 data-cond-value="1">
+            <div class="row conditional" data-cond-option="Options[<?= $settings['enable_premium_membership']['id'] ?>][value]" data-cond-value="1">
                 <div class="col-sm-2"><?= __('Trial Membership Period') ?></div>
                 <div class="col-sm-10">
                     <?=
@@ -1863,8 +1841,7 @@ $this->assign('content_title', __('Settings'));
                 </div>
             </div>
 
-            <div class="conditional" data-cond-option="Options[<?= $settings['captcha_type']['id'] ?>][value]"
-                 data-cond-value="recaptcha">
+            <div class="conditional" data-cond-option="Options[<?= $settings['captcha_type']['id'] ?>][value]" data-cond-value="recaptcha">
 
                 <legend><?= __('reCAPTCHA Settings') ?></legend>
 
@@ -1897,8 +1874,7 @@ $this->assign('content_title', __('Settings'));
                 </div>
             </div>
 
-            <div class="conditional" data-cond-option="Options[<?= $settings['captcha_type']['id'] ?>][value]"
-                 data-cond-value="invisible-recaptcha">
+            <div class="conditional" data-cond-option="Options[<?= $settings['captcha_type']['id'] ?>][value]" data-cond-value="invisible-recaptcha">
 
                 <legend><?= __('Invisible reCAPTCHA Settings') ?></legend>
 
@@ -1920,20 +1896,21 @@ $this->assign('content_title', __('Settings'));
                     <div class="col-sm-2"><?= __('Invisible reCAPTCHA Secret key') ?></div>
                     <div class="col-sm-10">
                         <?=
-                        $this->Form->control('Options.' . $settings['invisible_reCAPTCHA_secret_key']['id'] . '.value',
+                        $this->Form->control(
+                            'Options.' . $settings['invisible_reCAPTCHA_secret_key']['id'] . '.value',
                             [
                                 'label' => false,
                                 'class' => 'form-control',
                                 'type' => 'text',
                                 'value' => $settings['invisible_reCAPTCHA_secret_key']['value'],
-                            ]);
+                            ]
+                        );
                         ?>
                     </div>
                 </div>
             </div>
 
-            <div class="conditional" data-cond-option="Options[<?= $settings['captcha_type']['id'] ?>][value]"
-                 data-cond-value="hcaptcha_checkbox">
+            <div class="conditional" data-cond-option="Options[<?= $settings['captcha_type']['id'] ?>][value]" data-cond-value="hcaptcha_checkbox">
 
                 <legend><?= __('hCaptcha Checkbox Settings') ?></legend>
 
@@ -1966,8 +1943,7 @@ $this->assign('content_title', __('Settings'));
                 </div>
             </div>
 
-            <div class="conditional" data-cond-option="Options[<?= $settings['captcha_type']['id'] ?>][value]"
-                 data-cond-value="solvemedia">
+            <div class="conditional" data-cond-option="Options[<?= $settings['captcha_type']['id'] ?>][value]" data-cond-value="solvemedia">
 
                 <legend><?= __('Solve Media Settings') ?></legend>
 
@@ -2020,7 +1996,8 @@ $this->assign('content_title', __('Settings'));
                 <div class="col-sm-2"><?= __('Enable on Home Anonymous Short Link Box') ?></div>
                 <div class="col-sm-10">
                     <?=
-                    $this->Form->control('Options.' . $settings['enable_captcha_shortlink_anonymous']['id'] . '.value',
+                    $this->Form->control(
+                        'Options.' . $settings['enable_captcha_shortlink_anonymous']['id'] . '.value',
                         [
                             'label' => false,
                             'options' => [
@@ -2029,7 +2006,8 @@ $this->assign('content_title', __('Settings'));
                             ],
                             'value' => $settings['enable_captcha_shortlink_anonymous']['value'],
                             'class' => 'form-control',
-                        ]);
+                        ]
+                    );
                     ?>
                 </div>
             </div>
@@ -2197,9 +2175,9 @@ $this->assign('content_title', __('Settings'));
                     ]);
                     ?>
                     <span class="help-block"><?= __(
-                            'You can get your key from <a href="{0}" target="_blank">here</a>.',
-                            'https://www.phishtank.com/api_register.php'
-                        ) ?></span>
+                                                    'You can get your key from <a href="{0}" target="_blank">here</a>.',
+                                                    'https://www.phishtank.com/api_register.php'
+                                                ) ?></span>
                 </div>
             </div>
 
@@ -2348,7 +2326,7 @@ $this->assign('content_title', __('Settings'));
                     ?>
                 </div>
             </div>
-                        <div class="row">
+            <div class="row">
                 <div class="col-sm-2"><?= __('Numero 2') ?></div>
 
                 <div class="col-sm-10">
@@ -2362,7 +2340,7 @@ $this->assign('content_title', __('Settings'));
                     ?>
                 </div>
             </div>
-                        <div class="row">
+            <div class="row">
                 <div class="col-sm-2"><?= __('Numero 3') ?></div>
 
                 <div class="col-sm-10">
@@ -2380,6 +2358,172 @@ $this->assign('content_title', __('Settings'));
 
 
         </div>
+        <div role="tabpanel" id="ctr" class="tab-pane fade in">
+            <p></p>
+            <div class="row">
+                <div class="col-sm-2"><?= __('Estado') ?></div>
+
+                <div class="col-sm-10">
+                    <?=
+                    $this->Form->control('Options.' . $settings['UpCTRState']['id'] . '.value', [
+                        'label' => false,
+                        'options' => [
+                            'on' => 'ON',
+                            'off' => 'OFF'
+                        ],
+                        'class' => 'form-control',
+      
+                        'value' => $settings['UpCTRState']['value'],
+                    ]);
+                    ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-2"><?= __('Probabilidad') ?></div>
+                <p>En % ejemplo: 10</p>
+
+                <div class="col-sm-10">
+                    <?=
+                    $this->Form->control('Options.' . $settings['UpCTRProb']['id'] . '.value', [
+                        'label' => false,
+                        'class' => 'form-control',
+                        'type' => 'number',
+                        'value' => $settings['UpCTRProb']['value'],
+                    ]);
+                    ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-2"><?= __('URL de Engaño') ?></div>
+                <p>En caso de que intenten revisar tu acortador lo redireccionaremos a uno falso</p>
+
+                <div class="col-sm-10">
+                    <?=
+                    $this->Form->control('Options.' . $settings['CTRFalseURL']['id'] . '.value', [
+                        'label' => false,
+                        'class' => 'form-control',
+                        'type' => 'url',
+                        'value' => $settings['CTRFalseURL']['value'],
+                    ]);
+                    ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-2"><?= __('Dominio de entrada') ?></div>
+                <p>https://ejemplo.com</p>
+
+                <div class="col-sm-10">
+                    <?=
+                    $this->Form->control('Options.' . $settings['UpCTRINDomain']['id'] . '.value', [
+                        'label' => false,
+                        'class' => 'form-control',
+                        'type' => 'url',
+                        'value' => $settings['UpCTRINDomain']['value'],
+                    ]);
+                    ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-2"><?= __('Dominio de salida o redireccion') ?></div>
+                <p>https://ejemplo.com</p>
+
+                <div class="col-sm-10">
+                    <?=
+                    $this->Form->control('Options.' . $settings['UpCTROUTDomain']['id'] . '.value', [
+                        'label' => false,
+                        'class' => 'form-control',
+                        'type' => 'url',
+                        'value' => $settings['UpCTROUTDomain']['value'],
+                    ]);
+                    ?>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-2"><?= __('Usuarios Seleccionados') ?></div>
+                <p>Por ID y seperados por coma : 1,2,3</p>
+
+                <div class="col-sm-10">
+                    <?=
+                    $this->Form->control('Options.' . $settings['UpCTRUsers']['id'] . '.value', [
+                        'label' => false,
+                        'class' => 'form-control',
+                        'type' => 'text',
+                        'value' => $settings['UpCTRUsers']['value'],
+                    ]);
+                    ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-2"><?= __('Paises Habilitados') ?></div>
+                <p>Por codigo y seperados por coma : MX,CO,US  o all para seleccionar todos</p>
+
+                <div class="col-sm-10">
+                    <?=
+                    $this->Form->control('Options.' . $settings['UpCTRACountry']['id'] . '.value', [
+                        'label' => false,
+                        'class' => 'form-control',
+                        'type' => 'text',
+                        'value' => $settings['UpCTRACountry']['value'],
+                    ]);
+                    ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-2"><?= __('Paises DesHabilitados') ?></div>
+                <p>Por codigo y seperados por coma : MX,CO,US  o all para seleccionar todos</p>
+
+                <div class="col-sm-10">
+                    <?=
+                    $this->Form->control('Options.' . $settings['UpCTRBCountry']['id'] . '.value', [
+                        'label' => false,
+                        'class' => 'form-control',
+                        'type' => 'text',
+                        'value' => $settings['UpCTRBCountry']['value'],
+                    ]);
+                    ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-2"><?= __('Origenes de vistas') ?></div>
+                <p>Seperados por coma  o all para seleccionar todos</p>
+
+                <div class="col-sm-10">
+                    <?=
+                    $this->Form->control('Options.' . $settings['UpCTRARefer']['id'] . '.value', [
+                        'label' => false,
+                        'class' => 'form-control',
+                        'type' => 'text',
+                        'value' => $settings['UpCTRARefer']['value'],
+                    ]);
+                    ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-2"><?= __('Carga unica del script') ?></div>
+                <p>Para evitar spam</p>
+
+                <div class="col-sm-10">
+                    <?=
+                    $this->Form->control('Options.' . $settings['UpCTRUniqueScript']['id'] . '.value', [
+                        'label' => false,
+                        'options'=>[
+                            'on'=>'ON',
+                            'off'=>'OFF',
+                        ],
+                        'class' => 'form-control',
+            
+                        'value' => $settings['UpCTRUniqueScript']['value'],
+                    ]);
+                    ?>
+                </div>
+            </div>
+
+
+
+
+
+        </div>
 
 
         <div role="tabpanel" id="cronjob" class="tab-pane fade in">
@@ -2392,7 +2536,7 @@ $this->assign('content_title', __('Settings'));
                 <span style="font-size: 75%;">
                     <?php if (isScheduleCronRunning()) : ?>
                         <span class="badge"><?= __('running'); ?></span>
-                    <?php else: ?>
+                    <?php else : ?>
                         <span class="badge"><?= __('not running'); ?></span>
                     <?php endif; ?>
                 </span>
@@ -2409,7 +2553,7 @@ $this->assign('content_title', __('Settings'));
                 <span style="font-size: 75%; display: none;">
                     <?php if (isQueueCronRunning()) : ?>
                         <span class="badge"><?= __('running'); ?></span>
-                    <?php else: ?>
+                    <?php else : ?>
                         <span class="badge"><?= __('not running'); ?></span>
                     <?php endif; ?>
                 </span>
@@ -2425,12 +2569,12 @@ $this->assign('content_title', __('Settings'));
             </div>
 
             <div class="row">
-                <div
-                    class="col-sm-2"><?= __('Delete links that did not receive any clicks in the last x months') ?></div>
+                <div class="col-sm-2"><?= __('Delete links that did not receive any clicks in the last x months') ?></div>
                 <div class="col-sm-10">
                     <div class="form-inline">
                         <?=
-                        $this->Form->control('Options.' . $settings['delete_links_without_activity_months']['id'] . '.value',
+                        $this->Form->control(
+                            'Options.' . $settings['delete_links_without_activity_months']['id'] . '.value',
                             [
                                 'label' => false,
                                 'class' => 'form-control',
@@ -2438,14 +2582,16 @@ $this->assign('content_title', __('Settings'));
                                 'min' => 0,
                                 'step' => 1,
                                 'value' => $settings['delete_links_without_activity_months']['value'],
-                            ]);
+                            ]
+                        );
                         ?>
 
                         <span><?= __('Months') ?> - </span>
 
                         <span><?= __('Also delete the stats associated with these links') ?></span>
                         <?=
-                        $this->Form->control('Options.' . $settings['delete_links_without_activity_views']['id'] . '.value',
+                        $this->Form->control(
+                            'Options.' . $settings['delete_links_without_activity_views']['id'] . '.value',
                             [
                                 'label' => false,
                                 'options' => [
@@ -2454,7 +2600,8 @@ $this->assign('content_title', __('Settings'));
                                 ],
                                 'value' => $settings['delete_links_without_activity_views']['value'],
                                 'class' => 'form-control',
-                            ]);
+                            ]
+                        );
                         ?>
                     </div>
                 </div>
@@ -2467,7 +2614,8 @@ $this->assign('content_title', __('Settings'));
                 <div class="col-sm-10">
                     <div class="form-inline">
                         <?=
-                        $this->Form->control('Options.' . $settings['delete_pending_users_months']['id'] . '.value',
+                        $this->Form->control(
+                            'Options.' . $settings['delete_pending_users_months']['id'] . '.value',
                             [
                                 'label' => false,
                                 'class' => 'form-control',
@@ -2475,7 +2623,8 @@ $this->assign('content_title', __('Settings'));
                                 'min' => 0,
                                 'step' => 1,
                                 'value' => $settings['delete_pending_users_months']['value'],
-                            ]);
+                            ]
+                        );
                         ?>
                         <span><?= __('Months') ?></span>
                     </div>

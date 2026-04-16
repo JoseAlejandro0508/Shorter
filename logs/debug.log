@@ -592,3 +592,82 @@
 2025-08-18 22:11:31 Notice: Notice (1024): Undefined property: AdsmanagersController::$getRequest in C:\laragon\www\Acortador\src\Controller\Admin\AdsmanagersController.php on line 20 in [C:\laragon\www\Acortador\vendor\cakephp\cakephp\src\Controller\Controller.php, line 384]
 
 
+2025-08-24 19:47:01 Notice: Notice (1024): Undefined property: VdmarketingUsersController::$Vdmarketingusers in C:\laragon\www\Acortador\src\Controller\Member\VdmarketingUsersController.php on line 29 in [C:\laragon\www\Acortador\vendor\cakephp\cakephp\src\Controller\Controller.php, line 384]
+
+
+2025-08-24 19:47:13 Notice: Notice (1024): Undefined property: VdmarketingUsersController::$Vdmarketingusers in C:\laragon\www\Acortador\src\Controller\Member\VdmarketingUsersController.php on line 29 in [C:\laragon\www\Acortador\vendor\cakephp\cakephp\src\Controller\Controller.php, line 384]
+
+
+2025-08-24 19:48:16 Notice: Notice (1024): Undefined property: VdmarketingUsersController::$Vdmarketingusers in C:\laragon\www\Acortador\src\Controller\Member\VdmarketingUsersController.php on line 29 in [C:\laragon\www\Acortador\vendor\cakephp\cakephp\src\Controller\Controller.php, line 384]
+
+
+2025-08-24 19:48:18 Notice: Notice (1024): Undefined property: VdmarketingUsersController::$Vdmarketingusers in C:\laragon\www\Acortador\src\Controller\Member\VdmarketingUsersController.php on line 30 in [C:\laragon\www\Acortador\vendor\cakephp\cakephp\src\Controller\Controller.php, line 384]
+
+
+2025-08-24 19:48:20 Notice: Notice (1024): Undefined property: VdmarketingUsersController::$Vdmarketingusers in C:\laragon\www\Acortador\src\Controller\Member\VdmarketingUsersController.php on line 30 in [C:\laragon\www\Acortador\vendor\cakephp\cakephp\src\Controller\Controller.php, line 384]
+
+
+2025-08-25 19:03:50 Notice: Notice (1024): Undefined property: WithdrawsController::$getRequest in C:\laragon\www\Acortador\src\Controller\Admin\WithdrawsController.php on line 48 in [C:\laragon\www\Acortador\vendor\cakephp\cakephp\src\Controller\Controller.php, line 384]
+
+
+2025-08-25 19:04:49 Notice: Notice (1024): Undefined property: WithdrawsController::$getRequest in C:\laragon\www\Acortador\src\Controller\Admin\WithdrawsController.php on line 48 in [C:\laragon\www\Acortador\vendor\cakephp\cakephp\src\Controller\Controller.php, line 384]
+
+
+2025-08-25 19:06:01 Notice: Notice (1024): Undefined property: WithdrawsController::$getRequest in C:\laragon\www\Acortador\src\Controller\Admin\WithdrawsController.php on line 57 in [C:\laragon\www\Acortador\vendor\cakephp\cakephp\src\Controller\Controller.php, line 384]
+
+
+2025-09-06 19:56:50 Notice: Notice (1024): Undefined property: LinksController::$proxycheck in C:\laragon\www\Acortador\src\Controller\LinksController.php on line 358 in [C:\laragon\www\Acortador\vendor\cakephp\cakephp\src\Controller\Controller.php, line 384]
+
+
+2025-09-06 19:56:54 Notice: Notice (1024): Undefined property: LinksController::$proxycheck in C:\laragon\www\Acortador\src\Controller\LinksController.php on line 358 in [C:\laragon\www\Acortador\vendor\cakephp\cakephp\src\Controller\Controller.php, line 384]
+
+
+2025-09-06 19:58:29 Notice: Notice (1024): Undefined property: LinksController::$isProxy in C:\laragon\www\Acortador\src\Controller\LinksController.php on line 358 in [C:\laragon\www\Acortador\vendor\cakephp\cakephp\src\Controller\Controller.php, line 384]
+
+
+2025-09-12 17:59:19 Debug: ::1-Others-localhost-e22a7ba1-e624-4c41-a8b7-f0e58017a243
+2025-09-13 18:21:50 Debug: Enable false redirection
+2025-09-20 04:43:52 Debug: Entry VdIntegration
+2025-09-20 04:43:52 Debug: Entry VdIntegration Array Array
+2025-09-20 04:43:52 Debug: Invalid Format
+2025-09-20 04:43:58 Debug: Entry VdIntegration
+2025-09-20 04:43:58 Debug: Entry VdIntegration Array Array
+2025-09-20 04:43:58 Debug: Invalid Format
+2025-09-20 04:44:31 Debug: Entry VdIntegration
+2025-09-20 04:44:31 Debug: Entry VdIntegration Array Array
+2025-09-20 04:45:46 Debug: Invalid Format
+2025-09-20 04:45:46 Debug: Entry VdIntegration
+2025-09-20 04:45:46 Debug: Entry VdIntegration Array Array
+2025-09-20 04:46:10 Debug: Log save sucefull sucefull
+2025-09-20 04:46:23 Debug: User update sucefull
+2025-09-20 04:48:28 Debug: Entry VdIntegration
+2025-09-20 04:48:28 Debug: Entry VdIntegration Array Array
+2025-09-20 04:48:37 Debug: Log save sucefull sucefull
+2025-09-20 04:48:37 Debug: User update sucefull
+2025-09-20 05:30:48 Debug: Entry VdIntegration
+2025-09-20 05:30:48 Debug: Entry VdIntegration Array Array
+2025-09-20 05:31:52 Debug: Log save sucefull sucefull
+2025-09-20 05:31:56 Debug: User update sucefull
+2025-09-20 05:32:42 Debug: Entry VdIntegration
+2025-09-20 05:32:42 Debug: Entry VdIntegration Array Array
+2025-09-20 05:32:49 Debug: Log save sucefull sucefull
+2025-09-20 05:32:49 Debug: User update sucefull
+2025-09-20 05:32:58 Debug: Entry VdIntegration
+2025-09-20 05:32:58 Debug: Entry VdIntegration Array Array
+2025-09-20 05:33:02 Debug: Log save sucefull sucefull
+2025-09-20 05:33:02 Debug: User update sucefull
+2025-09-20 05:35:46 Debug: Entry VdIntegration
+2025-09-20 05:35:46 Debug: Entry VdIntegration Array Array
+2025-09-20 05:35:46 Debug: Log save sucefull sucefull
+2025-09-20 05:35:46 Debug: User update sucefull
+2025-09-20 05:36:14 Debug: Entry VdIntegration
+2025-09-20 05:36:14 Debug: Entry VdIntegration Array Array
+2025-09-20 05:36:14 Debug: Log save sucefull sucefull
+2025-09-20 05:36:14 Debug: User update sucefull
+2025-09-20 05:36:34 Debug: Entry VdIntegration
+2025-09-20 05:36:34 Debug: Entry VdIntegration Array Array
+2025-09-20 05:36:34 Debug: Log save sucefull sucefull
+2025-09-20 05:36:34 Debug: User update sucefull
+2025-10-14 21:23:06 Notice: Notice (1024): Undefined property: VdMarketingController::$getRequest in C:\laragon\www\Acortador\src\Controller\Admin\VdMarketingController.php on line 129 in [C:\laragon\www\Acortador\vendor\cakephp\cakephp\src\Controller\Controller.php, line 384]
+
+

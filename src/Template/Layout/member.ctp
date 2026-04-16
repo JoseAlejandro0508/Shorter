@@ -261,7 +261,18 @@
                     <li><a href="<?php echo $this->Url->build(['controller' => 'Users', 'action' => 'ranksem']); ?>"><span><?= __('Semanal') ?></span></a></li>
                     <li><a href="<?php echo $this->Url->build(['controller' => 'Users', 'action' => 'rankday']); ?>"><span><?= __('Diario') ?></span></a></li>
                    
-                </ul>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#"><i class="fa fa-industry"></i><span><?= __('VdMarketing') ?></span> <i
+                                class="fa fa-angle-left pull-right"></i></a>
+                    <ul class="treeview-menu">
+                    <li><a href="<?php echo $this->Url->build(['controller' => 'VdmarketingUsers', 'action' => 'index']); ?>"><i class="fa fa-address-book "></i><span><span><?= __('Estadisticas') ?></span></a></li>
+                    <li><a href="<?php echo $this->Url->build(['controller' => 'VdmarketingUsers', 'action' => 'withdraw']); ?>"><i class="fa fa-upload"></i><span><span><?= __('Extraer') ?></span></a></li>
+                    <li><a href="<?php echo $this->Url->build(['controller' => 'VdmarketingUsers', 'action' => 'myofferts']); ?>"><i class="fa fa-suitcase"></i><span><span><?= __('Administracion') ?></span></a></li>
+                    <li><a href="<?php echo $this->Url->build(['controller' => 'VdmarketingUsers', 'action' => 'offerts']); ?>"><i class="fa fa-suitcase"></i><span><span><?= __('Ofertas') ?></span></a></li>
+                   
+                    </ul>
                 </li>
                 <li class="treeview">
                     <a href="#"><i class="fa fa-line-chart"></i> <span><?= __('Market') ?></span> <i

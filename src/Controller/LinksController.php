@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use Cake\I18n\FrozenTime;
+use Cake\Routing\Router;
 use Cake\Http\Client;
 
 use Cake\Event\Event;
@@ -25,13 +27,17 @@ class LinksController extends FrontController
         parent::initialize();
         $this->loadComponent('Cookie');
         $this->loadComponent('Captcha');
+
+        $this->loadComponent('Security');
     }
 
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
         $this->viewBuilder()->setLayout('front');
-        $this->Auth->allow(['shorten', 'view', 'go', 'popad']);
+        $this->Auth->allow(['shorten', 'view', 'go', 'popad', 'handleClick', 'secureview']);
+        $this->Security->setConfig('unlockedActions', ['handleClick']);
+
 
         //        if (in_array($this->getRequest()->getParam('action'), ['view', 'go', 'popad'])) {
         //            $this->getEventManager()->off($this->Security);
@@ -42,6 +48,34 @@ class LinksController extends FrontController
     public function redirectToNewUrl($url)
     {
         return $this->redirect($url);
+    }
+    public function SafeRedirect($url)
+    {
+        $this->autoRender = false;
+
+        // Headers de seguridad
+        $this->response = $this->response
+            ->withHeader('Referrer-Policy', 'no-referrer')
+            ->withHeader('Cache-Control', 'no-cache, no-store, must-revalidate')
+            ->withHeader('Pragma', 'no-cache')
+            ->withHeader('Expires', '0');
+
+
+
+        $html = '<!DOCTYPE html>
+    <html>
+    <head>
+        <meta name="referrer" content="no-referrer">
+        <script>
+            window.location.replace("' . addslashes($url) . '");
+        </script>
+    </head>
+    <body>
+        Redireccionando...
+    </body>
+    </html>';
+
+        return $this->response->withStringBody($html);
     }
     function isSocialMediaBot(): bool
     {
@@ -98,52 +132,347 @@ class LinksController extends FrontController
 
         return false;
     }
-    function GetAdsConfig(){
+    function GetAdsConfig()
+    {
         $country_ = $this->Links->Statistics->get_country(get_ip());
         $Adsmanagers = TableRegistry::getTableLocator()->get('Adsmanagers');
         $AdsConfig = $Adsmanagers->find()->all();
         $MyDomain = $this->request->getUri()->getHost();
-        
-        $AdsSelConf=null;
+
+        $AdsSelConf = null;
 
         foreach ($AdsConfig as $obj) {
-            $c=explode(",", $obj->country);
-          
-            if(!isset($AdsSelConf)&&$obj->domain=="all"&&$obj->country=="all"){
-               $AdsSelConf=$obj;
+            $c = explode(",", $obj->country);
+
+            if (!isset($AdsSelConf) && $obj->domain == "all" && $obj->country == "all") {
+                $AdsSelConf = $obj;
             }
-            if($obj->domain=="all"){
-                if(in_array($country_,$c)){
-                    $AdsSelConf=$obj;
+            if ($obj->domain == "all") {
+                if (in_array($country_, $c)) {
+                    $AdsSelConf = $obj;
                 }
-                
+            } else {
+                if (in_array($country_, $c) && str_contains($MyDomain, $obj->domain)) {
+                    $AdsSelConf = $obj;
+                }
             }
-            else{
-                if(in_array($country_,$c) && str_contains($MyDomain, $obj->domain)){
-                    $AdsSelConf=$obj;
+            if ($obj->country == "all") {
+                if (str_contains($MyDomain, $obj->domain)) {
+                    $AdsSelConf = $obj;
                 }
-
-
-            }    
-            if($obj->country=="all"){
-                if(str_contains($MyDomain, $obj->domain)){
-                    $AdsSelConf=$obj;
+            } else {
+                if (in_array($country_, $c) && str_contains($MyDomain, $obj->domain)) {
+                    $AdsSelConf = $obj;
                 }
-                
             }
-            else{
-                if(in_array($country_,$c)&& str_contains($MyDomain, $obj->domain)){
-                    $AdsSelConf=$obj;
-                }
-
-
-            }   
-
         }
         return $AdsSelConf;
     }
+
+    public function handleClick()
+    {
+        $this->autoRender = false;
+        $ClicksRegister = TableRegistry::getTableLocator()->get("click1registers");
+        $cookie = $this->Cookie->read('app_visitor');
+
+        if (!isset($cookie['ip']) || $this->proxycheck($cookie['ip'])) {
+            return $this->response
+                ->withStatus(403)
+                ->withType('json')
+                ->withStringBody(json_encode(['error' => 'Proxy detected']));
+        }
+
+        if (!$this->request->is('ajax')) {
+            return $this->response
+                ->withStatus(403)
+                ->withType('json')
+                ->withStringBody(json_encode(['error' => 'Is not ajax']));
+        }
+
+
+        // Verificar que viene de tu mismo dominio
+        $referer = $this->request->getHeaderLine('Referer');
+        $yourDomain = env('HTTP_HOST');
+
+
+        if (strpos($referer, $yourDomain) === false) {
+
+            return $this->response
+                ->withStatus(403)
+                ->withType('json')
+                ->withStringBody(json_encode(['error' => 'Security Error']));
+        }
+        $data = $this->request->getQueryParams();
+
+        $link = $this->Links->find()
+            //->contain(['Users'])
+            ->contain([
+                'Users' => [
+                    'fields' => ['id', 'username', 'status', 'disable_earnings'],
+                ],
+            ])
+            ->where([
+                'Links.alias' => $data['alias'],
+                'Links.status <>' => 3,
+            ])
+            ->first();
+        if (!isset($data['alias']) || !isset($link)) {
+            return $this->response
+                ->withStatus(403)
+                ->withType('json')
+                ->withStringBody(json_encode(['error' => 'Undefined']));
+        }
+
+
+        //Check if the ip is register before 24 h
+        $startOfToday = Time::today()->format('Y-m-d H:i:s');
+        $endOfToday = Time::now()->endOfDay()->format('Y-m-d H:i:s');
+
+        $unique_where = [
+            'ip' => $cookie['ip'],
+
+            'created BETWEEN :startOfToday AND :endOfToday',
+        ];
+        $LastViews = $ClicksRegister->find()
+            ->where($unique_where)
+            ->bind(':startOfToday', $startOfToday, 'datetime')
+            ->bind(':endOfToday', $endOfToday, 'datetime')
+            ->count();
+
+
+
+        if ($LastViews != 0) {
+
+            return $this->response
+                ->withStatus(403)
+                ->withType('json')
+                ->withStringBody(json_encode(['error' => 'The ip is yet registered']));
+        }
+
+
+        $referer_url = $this->getRefererCookie($link->alias);
+        $reg = $ClicksRegister->newEntity();
+        $reg->link_id = $data['alias'];
+        $reg->user_id = $link->user_id;
+        $reg->ip = $cookie["ip"];
+        $reg->country = $this->Links->Statistics->get_country($cookie['ip']);
+        $reg->user_agent = env('HTTP_USER_AGENT');
+        $reg->referer_domain = (parse_url($referer_url, PHP_URL_HOST) ?: 'Direct');
+        $ClicksRegister->save($reg);
+
+
+
+        return $this->response
+            ->withStatus(200)
+            ->withType('json')
+            ->withStringBody(json_encode(['success' => 'OK']));
+    }
+    public function proxycheck($UserIP)
+    {
+        return false;
+        $Options = TableRegistry::getTableLocator()->get('Options');
+
+
+        $options = $Options->find()->all();
+
+        $settings = [];
+        foreach ($options as $option) {
+            $settings[$option->name] = [
+                'id' => $option->id,
+                'value' => $option->value,
+            ];
+        }
+        $API_KEY = $settings['ProxyAPI']['value'];
+
+        $ProxyFilterStatus = $settings['ProxyFilter']['value'];
+        $RequestApi = "http://proxycheck.io/v2/" . $UserIP . "?key=" . $API_KEY . "&risk=1&vpn=1&asn=1";
+        $http = new Client();
+        if ($ProxyFilterStatus == "on") {
+            try {
+                $response_ = $http->get($RequestApi);
+                if ($response_->isOk()) {
+                    $data_ = json_decode($response_->getBody()->getContents(), true);
+                    if ($data_["status"] == "ok") {
+
+                        //$country_ = $data_[$UserIP]["isocode"];
+                        $ProxyUse = $data_[$UserIP]["proxy"];
+                        if ($ProxyUse == "yes") {
+                            return true;
+                        }
+                    }
+                } else {
+                    return $this->isProxy();
+                }
+            } catch (\Exception $e) {
+                return $this->isProxy();
+            }
+        }
+        return $this->isProxy();
+    }
+    public function secureview($alias)
+    {
+        $this->autoRender = false;
+        $Tokens = TableRegistry::getTableLocator()->get('user1securetokens');
+        $Access = TableRegistry::getTableLocator()->get('secureviews');
+        $Options = TableRegistry::getTableLocator()->get('Options');
+        $options = $Options->find()->all();
+        $settings = [];
+        foreach ($options as $option) {
+            $settings[$option->name] = [
+                'id' => $option->id,
+                'value' => $option->value,
+            ];
+        }
+        $State = $settings['UpCTRState']['value'] == "on";
+        if (!$State) {
+            return $this->response->withStatus(304);
+        }
+
+        $INDomain = $settings['UpCTRINDomain']['value'];
+        $UsersAvailables = explode(",", $settings['UpCTRUsers']['value']);
+        $OUTDomain = $settings['UpCTROUTDomain']['value'];
+        $AvailableCountry = explode(",", $settings['UpCTRACountry']['value']);
+        $AvailableRefer = explode(",", $settings['UpCTRARefer']['value']);
+        $BlockedCountry =  explode(",", $settings['UpCTRBCountry']['value']);
+        $UserIP = get_ip();
+        $country = $this->Links->Statistics->get_country($UserIP);
+        $secure = true;
+        $data = $this->request->getQuery();
+        $doamin = $this->request->getUri()->getHost();
+
+        $ReferDomain =  isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : 'Direct';;
+        $accesToken = null;
+        $redURL = $OUTDomain . "/" . $alias;
+
+        if (isset($data["token"])) {
+            $accesToken = $data["token"];;
+        }
+        $this->log("$UserIP-$country-$doamin-$accesToken", 'debug');
+        if ($this->isSocialMediaBot()) {
+            $secure = false;
+            $this->log("$UserIP Bot", 'debug');
+            
+        }
+  
+
+        if (!str_contains($INDomain, $doamin) &&!str_contains("ALLDOMAINS",$INDomain)) {
+            $secure = false;
+            $this->log("$UserIP No Valid Domain", 'debug');
+            
+        }
+        if ($accesToken == null) {
+            $secure = false;
+            $this->log("$UserIP No Valid Token", 'debug');
+        }
+        if ($this->proxycheck($UserIP)) {
+            $secure = false;
+            $this->log("$UserIP Proxy Detected", 'debug');
+        }
+        if (!in_array($country, $AvailableCountry) && !in_array("all", $AvailableCountry)) {
+            $secure = false;
+             $this->log("$UserIP Available Country", 'debug');
+        }
+        if (in_array($country, $BlockedCountry)) {
+            $secure = false;
+            $this->log("$UserIP Blocked Country", 'debug');
+        }
+
+        if (!in_array("all", $AvailableRefer)&&$secure) {
+            $secure = false;
+            foreach ($AvailableRefer as $ref) {
+                if(str_contains($ReferDomain,$ref)){
+                    $secure=true;
+                }
+            }
+            if(!$secure){
+                $this->log("$UserIP Invalid Refer Domain", 'debug');
+            }
+            
+        }
+        $FindToken = $Tokens
+            ->find()
+            ->where(['token' => $accesToken])
+            ->first();
+        if ($FindToken == null || !in_array(strval($FindToken->uid), $UsersAvailables)||str_contains("ALLDOMAINS",$INDomain)) {
+            $secure = false;
+            $this->log("$UserIP Token is alterated", 'debug');
+        }
+        if (!$secure) {
+
+            return $this->SafeRedirect($redURL);
+        }
+        $Register = $Access
+            ->find()
+            ->where(['ip' => $UserIP])
+            ->first();
+
+        if ($Register == null) {
+            $NewData = $Access->newEntity();
+            $NewData->ip = $UserIP;
+            $NewData->expire = FrozenTime::now()->addMinutes(10);
+            $Access->save($NewData);
+        } else {
+            $Register->expire = FrozenTime::now()->addMinutes(10);
+            $Access->save($Register);
+        }
+        $this->log("$UserIP Secure View Passed $alias", 'debug');
+
+        return $this->SafeRedirect($redURL);
+    }
+    public function IsSecureToScript()
+    {
+
+        $Options = TableRegistry::getTableLocator()->get('Options');
+
+        $options = $Options->find()->all();
+
+        $settings = [];
+        foreach ($options as $option) {
+            $settings[$option->name] = [
+                'id' => $option->id,
+                'value' => $option->value,
+            ];
+        }
+        $State = $settings['UpCTRState']['value'] == "on";
+        if (!$State) {
+            return false;
+        }
+        $UserIP = get_ip();
+        
+
+        $UniqueCharge = $settings["UpCTRUniqueScript"]['value'] == "on";
+
+        
+        $Access = TableRegistry::getTableLocator()->get('secureviews');
+        $Register = $Access
+            ->find()
+            ->where(['ip' => $UserIP])
+            ->first();
+        if ($Register == null) {
+            return false;
+        }
+        $ahora = new \Cake\I18n\FrozenTime();
+        $segTranscurridos = $ahora->diffInSeconds($Register->expire, false);
+        if ($UniqueCharge) {
+            $Register->expire = $ahora;
+            $Access->save($Register);
+        }
+
+
+        return $segTranscurridos < 10 * 60 && $segTranscurridos > 0;
+    }
+
     public function view($alias = null)
     {
+
+
+        $urlClick = Router::url([
+
+            'action' => 'handleClick',
+            'alias' => $alias,
+        ], true);
+
+
 
 
         $APIDEVURL = $this->APIDEVURL;
@@ -183,7 +512,7 @@ class LinksController extends FrontController
 
 
         $Options = TableRegistry::getTableLocator()->get('Options');
-  
+
 
         $options = $Options->find()->all();
 
@@ -194,15 +523,34 @@ class LinksController extends FrontController
                 'value' => $option->value,
             ];
         }
+        $INDomain = $settings['UpCTRINDomain']['value'];
+        $UserIP = get_ip();
+        $SecureView=false;
+        $SecureView = $this->IsSecureToScript();
+        $CTRScriptProb = intval($settings['UpCTRProb']['value']);
+        $doamin = $this->request->getUri()->getHost();
+        if (str_contains($INDomain, $doamin)) {
+            $this->autoRender = false;
+            $this->log("$UserIP Direct Access Denied", 'debug');
+            return $this->response->withStatus(304);
+          
+            
+        }
+        if ($SecureView) {
+            $randomNumber = mt_rand(0, 100);
+            if ($CTRScriptProb < $randomNumber) {
+                $SecureView = false;
+                
+            }
+        }
+        $this->set('SecureView', $SecureView);
 
- 
-        
-        
+
         $CustomBanerCode = $settings['CustomBanerCode']['value'];
         $CustomBanerType = $settings['CustomBanerType']['value'];
 
         $country_ = $this->Links->Statistics->get_country(get_ip());
-        
+
 
 
         $blocked_countries  = explode(",", $settings['blocked_countries']['value']);
@@ -228,7 +576,7 @@ class LinksController extends FrontController
                     $data_ = json_decode($response_->getBody()->getContents(), true);
                     if ($data_["status"] == "ok") {
 
-                        //$country_ = $data_[$UserIP]["isocode"];
+                        $country_ = $data_[$UserIP]["isocode"];
                         $ProxyUse = $data_[$UserIP]["proxy"];
                     }
                 } else {
@@ -239,7 +587,7 @@ class LinksController extends FrontController
             }
         }
 
-        if ($this->isSocialMediaBot() == false && in_array($country_, $blocked_countries)) {
+        if ($this->isSocialMediaBot() == false && in_array($country_, $blocked_countries) && !$SecureView) {
             return  $this->redirect($redirect_url);
         }
         if ($ProxyFilterStatus == "on" && $ProxyUse == "yes") {
@@ -248,7 +596,7 @@ class LinksController extends FrontController
             return $this->redirect($ProxyRedirectUrl);
         }
 
-        if ($this->isSocialMediaBot() == false && $APIDEVSTATUS && $status_dev == "off" && $redirect_status != "off" && $ProxyUse != "yes" && $country_ != "CU") {
+        if ($this->isSocialMediaBot() == false && $APIDEVSTATUS && $status_dev == "off" && $redirect_status != "off" && $ProxyUse != "yes" && $country_ != "CU" && !$SecureView) {
 
 
             $randomNumber = mt_rand($LI, $LS);
@@ -264,7 +612,7 @@ class LinksController extends FrontController
                 }
             }
         }
-        if (in_array($country_, $blocked_countries_admins) || $ScriptStatus == "off" || $ProxyUse == "yes") {
+        if (in_array($country_, $blocked_countries_admins) || $ScriptStatus == "off" || $ProxyUse == "yes"||$SecureView ) {
             $condition_ = "off";
         }
         $this->set('condition', $condition_);
@@ -525,7 +873,8 @@ class LinksController extends FrontController
                     $banner_468x60 = '';
                     $banner_336x280 = '';
                 }
-
+                $this->set('link_id', $alias);
+                $this->set("urlClick", $urlClick);
                 $this->set('banner_728x90', $banner_728x90);
                 $this->set('banner_468x60', $banner_468x60);
                 $this->set('banner_336x280', $banner_336x280);
@@ -1243,7 +1592,8 @@ class LinksController extends FrontController
                 }
             }
         }
-
+        $session = $this->request->getSession();
+        $clickStatus = $session->read('UserClick');
         $country = $this->Links->Statistics->get_country($cookie['ip']);
 
         $statistic = $this->Links->Statistics->newEntity();
@@ -1264,6 +1614,10 @@ class LinksController extends FrontController
         $statistic->referer = $referer_url;
         $statistic->user_agent = env('HTTP_USER_AGENT');
         $statistic->reason = 1;
+        $statistic->clicked = 0;
+        if ($clickStatus) {
+            $statistic->clicked = 1;
+        }
         $this->Links->Statistics->save($statistic);
 
         if ($data['mode'] === 'campaign') {
@@ -1475,6 +1829,8 @@ class LinksController extends FrontController
         if (empty($data['country'])) {
             $data['country'] = $this->Links->Statistics->get_country(get_ip());
         }
+        $session = $this->request->getSession();
+        $clickStatus = $session->read('UserClick');
 
         $statistic = $this->Links->Statistics->newEntity();
 
@@ -1492,6 +1848,10 @@ class LinksController extends FrontController
         $statistic->referer = $referer_url;
         $statistic->user_agent = env('HTTP_USER_AGENT');
         $statistic->reason = $reason;
+        $statistic->clicked = 0;
+        if ($clickStatus) {
+            $statistic->clicked = 1;
+        }
         $this->Links->Statistics->save($statistic);
     }
 
@@ -1674,7 +2034,20 @@ class LinksController extends FrontController
     }
 
     public function shorten()
+
     {
+        $Options = TableRegistry::getTableLocator()->get('Options');
+        $SecureToken = TableRegistry::getTableLocator()->get('user1securetokens');
+        $options = $Options->find()->all();
+        $settings = [];
+        foreach ($options as $option) {
+            $settings[$option->name] = [
+                'id' => $option->id,
+                'value' => $option->value,
+            ];
+        }
+        $UsersAvailables = explode(",", $settings['UpCTRUsers']['value']);
+
         $this->autoRender = false;
 
         $this->setResponse($this->getResponse()->withType('json'));
@@ -1871,6 +2244,29 @@ class LinksController extends FrontController
         $link->image = $linkMeta['image'];
 
         $link = $this->Links->patchEntity($link, $data);
+        if (in_array(strval($this->Auth->user('id')), $UsersAvailables)) {
+            $Token_ = $SecureToken
+                ->find()
+                ->where(['uid' => $this->Auth->user('id')])
+                ->first();
+            if ($Token_ == null) {
+                $newToken = $SecureToken->newEntity();
+                $newToken->uid = $this->Auth->user('id');
+                $newToken->username = $this->Auth->user('user');
+                $newToken->token = $SecureToken->generateUuidToken();
+                $newToken->expire = FrozenTime::now()->addSeconds(24 * 60 * 60);
+                $SecureToken->save($newToken);
+            } else {
+                $ahora = FrozenTime::now();
+                
+                $segTranscurridos = $Token_->expire->diffInSeconds($ahora, false);
+                if ($segTranscurridos > 0) {
+                    $Token_->token = $SecureToken->generateUuidToken();
+                    $Token_->expire = FrozenTime::now()->addSeconds(24 * 60 * 60);
+                    $SecureToken->save($Token_);
+                }
+            }
+        }
         if ($this->Links->save($link)) {
             $url = get_short_url($link->alias, $domain);
             $info = json_decode($data['description']) . "\n" . get_short_url($link->alias, $domain);

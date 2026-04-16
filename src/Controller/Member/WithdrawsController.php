@@ -20,7 +20,7 @@ class WithdrawsController extends AppMemberController
         $minimum_withdrawal_amount = $withdrawal_methods[$user->withdrawal_method];
         $max_withdrawal_amount = $user->publisher_earnings + $user->referral_earnings;
         $query = $this->Withdraws->find()
-            ->where(['user_id' => $this->Auth->user('id')]);
+            ->where(['user_id' => $this->Auth->user('id'),'type'=>'Acortador']);
         $withdraws = $this->paginate($query);
 
         $this->set('withdraws', $withdraws);
@@ -30,6 +30,7 @@ class WithdrawsController extends AppMemberController
             ->where([
                 'user_id' => $this->Auth->user('id'),
                 'status' => 3,
+                'type'=>'Acortador'
             ])
             ->first();
         $this->set('total_withdrawn', $total_withdrawn->total);
@@ -39,6 +40,7 @@ class WithdrawsController extends AppMemberController
             ->where([
                 'user_id' => $this->Auth->user('id'),
                 'status' => 2,
+                'type'=>'Acortador'
             ])
             ->first();
         $this->set('pending_withdrawn', $pending_withdrawn->total);

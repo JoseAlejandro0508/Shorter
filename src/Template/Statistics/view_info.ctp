@@ -116,6 +116,41 @@ $this->assign('content_title', __("Link Statistics"));
         </div>
     </div>
 </div>
+ <?php if($isAdmin) : ?>
+<div class="box box-success wow fadeInUp">
+    <div class="box-header">
+        <h3 class="box-title"><?= __("Real Clicks") ?></h3>
+    </div>
+    <div class="box-body">
+        <div class="row">
+            <div class="col-sm-12">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th><?= __("Country") ?></th>
+                        <th><?= __("Real Clicks") ?></th>
+                         <th><?= __("CTR") ?></th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach ($ClickedStat as $country) : ?>
+                        <tr>
+                            <td><?= $country->country ?></td>
+                            <td><?= $country->clicked ?></td>
+                            <td><?= $RatioInfo[$country->country]?>%</td>
+
+                        </tr>
+                    <?php endforeach; ?>
+                    <?php unset($referrer); ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
+
 
 
 <?php $this->start('scriptBottom'); ?>

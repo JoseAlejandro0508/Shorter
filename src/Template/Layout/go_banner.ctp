@@ -83,7 +83,7 @@
 
         <header class="main-header">
             <!-- Fixed navbar -->
-            <nav class="navbar">
+            <nav class="navbar" id="navheader">
                 <div class="container">
                     <div class="navbar-header">
                         <?php

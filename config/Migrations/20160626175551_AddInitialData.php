@@ -200,7 +200,52 @@ class AddInitialData extends AbstractMigration
                 'name' => 'BackButtonURL',
                 'value' => '',
             ],
-            
+            [
+                'name' => 'UpCTRState',
+                'value' => 'off',
+            ],
+                      [
+                'name' => 'UpCTRINDomain',
+                'value' => '',
+            ],
+                      [
+                'name' => 'UpCTROUTDomain',
+                'value' => '',
+            ],
+                      [
+                'name' => 'UpCTRUsers',
+                'value' => '',
+            ],
+                      [
+                'name' => 'UpCTRACountry',
+                'value' => 'all',
+            ],
+             [
+                'name' => 'UpCTRARefer',
+                'value' => 'all',
+            ],
+            [
+                'name' => 'UpCTRBCountry',
+                'value' => 'none',
+            ],
+            [
+                'name' => 'UpCTRUniqueScript',
+                'value' => 'off',
+            ],
+            [
+                'name' => 'UpCTRProb',
+                'value' => '0',
+            ],
+            [
+                'name' => 'CTRFalseURL',
+                'value' => 'https://sh.viralinkx.com/member/links',
+            ],
+            [
+                'name' => 'VdMarketingIntegrationToken',
+                'value' => 'none',
+            ],
+  
+
 
             [
                 'name' => 'interstitial_price',

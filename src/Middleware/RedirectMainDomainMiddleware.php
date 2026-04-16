@@ -6,12 +6,36 @@ use Cake\Http\Response;
 use Cake\Http\ServerRequest;
 use Cake\View\View;
 use Laminas\Diactoros\Response\RedirectResponse;
+use Cake\Log\Log;
 
 class RedirectMainDomainMiddleware
 {
     public function __invoke(ServerRequest $request, Response $response, callable $next)
     {
+        $domain = $request->getUri()->getHost();
+        $INDomain = get_option('UpCTRINDomain');
+        $false_url = get_option('CTRFalseURL');
+
+        
+        $controller = $request->getParam('controller');
+        $action = $request->getParam('action');
+        
+         if (!(in_array($controller, ['Links']) && in_array($action, ['secureview']))){
+            
+            if (str_contains($INDomain, $domain)) {
+                Log::debug("Enable false redirection");
+                return new RedirectResponse($false_url,301);
+    
+            }
+
+         }
+
+
+        
         if ($this->redirectMainDomain($request)) {
+      
+
+
             $protocol = (empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off") ? "http://" : "https://";
             $redirect_url = $protocol . get_option('main_domain') . env('REQUEST_URI');
 
@@ -56,7 +80,7 @@ class RedirectMainDomainMiddleware
         $action = $request->getParam('action');
 
         if (!(
-            (in_array($controller, ['Links']) && in_array($action, ['view', 'go', 'popad'])) ||
+            (in_array($controller, ['Links']) && in_array($action, ['view','secureview', 'go', 'popad'])) ||
             (in_array($controller, ['Tools']) && in_array($action, ['st', 'api', 'full', 'bookmarklet'])) ||
             (in_array($controller, ['Invoices']) && in_array($action, ['ipn'])) ||
             (in_array($controller, ['Users']) && in_array($action, ['multidomainsAuth', 'authDone']))

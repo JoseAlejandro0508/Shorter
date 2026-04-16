@@ -128,6 +128,7 @@ $this->assign('content_title', __('Statistics Table'));
                     <th><?= __('Publisher Earn') ?></th>
                     <th><?= __('Referral Earn') ?></th>
                     <th><?= __('Referer Domain') ?></th>
+                    <th><?= __('Clicked') ?></th>
                 </tr>
                 <?php foreach ($statistics as $statistic) : ?>
                     <tr>
@@ -146,6 +147,7 @@ $this->assign('content_title', __('Statistics Table'));
                         <td><?= $statistic->publisher_earn ?></td>
                         <td><?= $statistic->referral_earn ?></td>
                         <td><?= $statistic->referer_domain ?></td>
+                        <td><?= $statistic->clicked ?></td>
                     </tr>
                 <?php endforeach; ?>
             </table>

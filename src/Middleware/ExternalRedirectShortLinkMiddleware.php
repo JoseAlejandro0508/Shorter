@@ -14,7 +14,7 @@ class ExternalRedirectShortLinkMiddleware
 
     public function __invoke(ServerRequest $request, Response $response, callable $next)
     {
-        if ($request->getParam('_name') !== 'short') {
+        if ($request->getParam('_name') !== 'short' && $request->getParam('_name') !== 'short1') {
             return $next($request, $response);
         }
 

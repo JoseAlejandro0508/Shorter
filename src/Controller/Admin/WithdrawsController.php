@@ -19,7 +19,7 @@ class WithdrawsController extends AppAdminController
     {
         $conditions = [];
 
-        $filter_fields = ['user_id', 'status', 'method'];
+        $filter_fields = ['user_id', 'status', 'method','type'];
 
         //Transform POST into GET
         if ($this->getRequest()->is(['post', 'put']) && isset($this->getRequest()->data['Filter'])) {

@@ -32,6 +32,8 @@ class UsersController extends AppMemberController
         $timestampActual = time();
         $auth_user_id = $this->Auth->user('id');
         $Options = TableRegistry::getTableLocator()->get('Options');
+        $Users = TableRegistry::getTableLocator()->get('Users');
+        $auth_user=$Users->get($auth_user_id);
         $options = $Options->find()->all();
         $settings = [];
         foreach ($options as $option) {
@@ -451,7 +453,7 @@ class UsersController extends AppMemberController
         $diaDelMes = (int)date('j', $timestampActual);
 
 
-        if ($posy_[$auth_user_id] < 4) {
+        if ($posy_[$auth_user_id] < 4 && isset($views_y[$auth_user_id]) && intval($views_y[$auth_user_id])>1000 ) {
 
 
             $LastRankPay = $rankTime[$posy_[$auth_user_id]]["value"];

@@ -23,9 +23,11 @@ use Cake\ORM\Entity;
  * @property int $reason
  * @property \Cake\I18n\FrozenTime $created
  * @property int $id
+ * @property int $clicked
  * @property \App\Model\Entity\User $user
  * @property \App\Model\Entity\Link $link
  * @property \App\Model\Entity\Campaign $campaign
+ * 
  */
 class Statistic extends Entity
 {

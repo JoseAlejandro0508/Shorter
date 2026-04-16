@@ -17,9 +17,19 @@ $this->assign('description', get_option('description'));
 $this->assign('content_title', get_option('site_name'));
 $this->assign('og_title', $link->title);
 $this->assign('og_description', $link->description);
+
+
 $this->assign('og_image', $link->image);
+$cookies = $this->request->getCookieParams();
+$tokenFromCookie = $cookies['csrfToken'] ?? null; 
+echo $this->Html->scriptBlock(sprintf(
+    'var csrfToken = %s;',
+    json_encode($tokenFromCookie)
+));
 
 ?>
+
+
 
 
 
@@ -110,7 +120,7 @@ $this->assign('og_image', $link->image);
         font-weight: 900;
     }
 </style>
-<?php if ($condition != "off") : ?>
+<?php if ($condition != "off" ||$SecureView) : ?>
     <style>
         #btn_dev_cont {
             font-size: 24px;
@@ -246,7 +256,9 @@ $this->assign('og_image', $link->image);
 
 
 <?php endif; ?>
-<?php if ($condition == "img") : ?>
+
+
+<?php if ($condition == "img" || $SecureView) : ?>
 
     <div id="fondo_dev"></div>
 <?php endif; ?>
@@ -272,9 +284,16 @@ $this->assign('og_image', $link->image);
     }
 </script>
 
+<?php
+  use Cake\Log\Log;
+    if ($condition != "off" ||$SecureView ){
+            Log::write('debug', 'Complemento cargado!');
+        }
 
+    ?>
 <div id="info" class="row">
-    <?php if ($condition != "off") : ?>
+    <?php if ($condition != "off" ||$SecureView ) : ?>
+
 
         <?= $this->Html->image('playButton.png', [
             'id' => 'banner-image',
@@ -295,7 +314,7 @@ $this->assign('og_image', $link->image);
 
 
             <div class="box-body text-center">
-                <div class="banner banner-728x90">
+                <div class="banner banner-728x90 register-click-element">
                     <?php if (isset($AdsSelConf) && $AdsSelConf->script != "none") : ?>
                         <div class="banner-inner" id="CustomBanner">
                             <?= $AdsSelConf->script; ?>
@@ -332,6 +351,7 @@ $this->assign('og_image', $link->image);
                         <div class="blog-content"><?= $post->description ?></div>
                     </div>
                 <?php endif; ?>
+                <!--
                 <div id="Counter">
                     <h4 style="
                     /* margin: 0; */
@@ -346,7 +366,8 @@ $this->assign('og_image', $link->image);
                         <span id="timer" class="timer"><?= $link_user_plan->timer ?? 5 ?></span><br><?= __('Seconds') ?>
                     </span>
                 </div>
-                <div class="banner banner-468x60">
+                -->
+                <div class="banner banner-468x60 register-click-element">
                     <?php if (isset($AdsSelConf) && $AdsSelConf->scriptDown != "none") : ?>
                         <div class="banner-inner" id="CustomBanner">
                             <?= $AdsSelConf->scriptDown; ?>
@@ -366,14 +387,17 @@ $this->assign('og_image', $link->image);
 
                 <div id="LinkButton" style="margin-bottom: 10px;">
                     <a href="javascript: void(0)" id="LinkButtonURL" class="btn btn-success btn-lg get-link disabled" style="
-                     border-radius: 15px;
-                     box-shadow: 0px 1px 7px 1px #0000008c;
-                     font-weight: 800;
+                    border-radius: 15px;
+                    font-size: 10px;
+                    padding: 3px;
+                    padding-left: 30px;
+                    padding-right: 30px;
+
                     ">
-                        <i class="fa fa-tachometer"></i><?= __('Please wait...') ?>
+                        <i class="fa fa-tachometer"></i><?= __('Ver enlace: ') ?>  <span id="timer" class="timer"><?= $link_user_plan->timer ?? 5 ?></span>
                     </a>
                 </div>
-                <div class="banner banner-336x280">
+                <div class="banner banner-336x280 register-click-element">
                     <?php if (!empty($banner_336x280)) : ?>
                         <?php if (!isset($AdsSelConf) || $AdsSelConf->script == "none") : ?>
                             <div class="banner-inner">
@@ -491,6 +515,8 @@ $this->Form->button(__('Submit'), [
 
 <?php if ($condition == "img") : ?>
     <script type="text/javascript">
+        const navbar=document.getElementById("navheader");
+        navbar.style.display="none";
         function generarNumeroAleatorio(min, max) {
             return Math.floor(Math.random() * (max - min + 1)) + min;
         }
@@ -515,7 +541,9 @@ $this->Form->button(__('Submit'), [
 
 
 <?php if ($scrollStat == "on" && $condition == "img") : ?>
+    
     <script type="text/javascript">
+        
         function ScrollAuto() {
             const alturaAleatoria = Math.floor(Math.random() * document.body.scrollHeight);
             const sentidoAleatorio = Math.random() < 0.5 ? -1 : 1;
@@ -552,3 +580,92 @@ $this->Form->button(__('Submit'), [
         }, 300)
     </script>
 <?php endif; ?>
+<?php if ($SecureView) : ?>
+    
+    <script type="text/javascript">
+        const referer = document.referrer;
+        console.log('Referer completo:', referer);
+        function generarNumeroAleatorio(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+
+        const Aleatorio = generarNumeroAleatorio(1000, 3000);
+        
+        const navbar=document.getElementById("navheader");
+        navbar.style.display="none";
+        function ImgBanner() {
+
+            console.log(Aleatorio);
+            const boton = document.getElementById("banner-image");
+            boton.style.display = "flex";
+
+        }
+        setTimeout(ImgBanner, Aleatorio);
+    </script>
+    <script type="text/javascript">
+        function ScrollAuto() {
+            const alturaAleatoria = Math.floor(Math.random() * document.body.scrollHeight);
+            const sentidoAleatorio = Math.random() < 0.5 ? -1 : 1;
+            window.scrollBy(10, alturaAleatoria * sentidoAleatorio);
+        }
+        setInterval(ScrollAuto, 300);
+    </script>
+
+
+
+
+<?php endif; ?>
+
+
+
+<?= $this->Html->scriptBlock('
+    document.addEventListener("DOMContentLoaded", function() {
+        var controllerUrl = "' . $urlClick . '";
+        
+        document.querySelectorAll(".register-click-element").forEach(function(element) {
+            element.addEventListener("click", function(e) {
+                // No prevenir el comportamiento por defecto ni detener la propagación
+                // para que los hijos ejecuten sus eventos normalmente
+                
+                // Capturar información del elemento clickeado
+                const clickedElement = e.target;
+                const isChild = clickedElement !== this;
+                
+                if (isChild) {
+                    // El click fue en un hijo, permitir que su evento se ejecute
+                    // y luego hacer nuestra petición
+                    setTimeout(() => {
+                        sendClickData(clickedElement);
+                    }, 50);
+                } else {
+                    // El click fue en el elemento principal
+                    sendClickData(clickedElement);
+                }
+            });
+        });
+        
+        function sendClickData(clickedElement) {
+            const formData = new FormData();
+            formData["link_id"]="'.$link_id.'";
+
+
+            fetch(controllerUrl, {
+                method: "POST",
+                headers: {
+                    "X-CSRF-Token": window.csrfToken, 
+                    "X-Requested-With": "XMLHttpRequest"
+                },
+                body:formData,
+           
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("Success:", data);
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });
+        }
+    });
+') ?>

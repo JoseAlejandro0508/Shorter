@@ -189,6 +189,31 @@
                             ]); ?>"><?= __('Inactive Links') ?></a></li>
                     </ul>
                 </li>
+                <li class="treeview">
+                    <a href="#"><i class="fa fa-link"></i> <span><?= __('Vd Marketing') ?></span> <i
+                            class="fa fa-angle-left pull-right"></i></a>
+                    <ul class="treeview-menu">
+                        <li><a href="<?php echo $this->Url->build([
+                                'controller' => 'VdMarketing',
+                                'action' => 'index',
+                            ]); ?>"><?= __('Ofertas') ?></a></li>
+ 
+                    </ul>
+                    <ul class="treeview-menu">
+                        <li><a href="<?php echo $this->Url->build([
+                                'controller' => 'VdMarketing',
+                                'action' => 'newaccestoken',
+                            ]); ?>"><?= __('Access Token') ?></a></li>
+ 
+                    </ul>
+                    <ul class="treeview-menu">
+                        <li><a href="<?php echo $this->Url->build([
+                                'controller' => 'VdMarketing',
+                                'action' => 'logs',
+                            ]); ?>"><?= __('Logs') ?></a></li>
+ 
+                    </ul>
+                </li>
 
                 <?php if (get_option('earning_mode', 'campaign') === 'campaign') : ?>
                     <li class="treeview">

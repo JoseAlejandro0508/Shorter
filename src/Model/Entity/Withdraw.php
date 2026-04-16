@@ -11,6 +11,7 @@ use Cake\ORM\Entity;
  * @property float $publisher_earnings
  * @property float $referral_earnings
  * @property float $amount
+ * @property string $type
  * @property string|null $json_data
  * @property string $method
  * @property string|null $account

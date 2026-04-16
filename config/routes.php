@@ -66,7 +66,10 @@ Router::scope('/', function (RouteBuilder $routes) {
      * Requires middleware to be registered through `Application::routes()` with `registerMiddleware()`
      */
     //$routes->applyMiddleware('csrf');
-
+    $routes->connect('/links/handle-click', [
+        'controller' => 'Links',
+        'action' => 'handleClick'
+    ]);
     $routes->connect('/install/:action', ['controller' => 'Install']);
     $routes->redirect('/install', ['controller' => 'Install', 'action' => 'index']);
 
@@ -121,9 +124,24 @@ Router::scope('/', function (RouteBuilder $routes) {
 
     $routes->connect('/:alias/info', ['controller' => 'Statistics', 'action' => 'viewInfo'], ['pass' => ['alias']]);
     $routes->connect(
+        '/secureview/:alias',
+        ['controller' => 'Links', 'action' => 'secureview'],
+        ['pass' => ['alias'], '_name' => 'short1']
+    );
+    $routes->connect(
         '/:alias',
         ['controller' => 'Links', 'action' => 'view'],
         ['pass' => ['alias'], '_name' => 'short']
+    );
+    $routes->connect(
+        '/vdoffert/:token',
+        ['controller' => 'Integrations', 'action' => 'viewvdoffert'],
+        ['pass' => ['token'],'_name' => 'vdoffert']
+    );
+    $routes->connect(
+        '/vdintegration/:token/listen',
+        ['controller' => 'Integrations', 'action' => 'vdmarketinglisten'],
+        ['pass' => ['token'],'_name' => 'vdlisten']
     );
 });
 

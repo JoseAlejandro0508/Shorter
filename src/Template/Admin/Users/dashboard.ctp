@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Link $link
@@ -99,7 +100,35 @@ $this->assign('content_title', __('Dashboard'));
             </div>
         </div>
     </div>
+    <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-yellow">
+            <div class="inner">
+                <h3><?= $CountClicksForDays["Total"] ?></h3>
+
+                <p><?= __('Total Clicks') ?></p>
+            </div>
+            <div class="icon">
+                <i class="fa fa-bar-chart"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-yellow">
+            <div class="inner">
+                <h3><?= $RatioInfo["Total"] ?></h3>
+
+                <p><?= __('Total CTR') ?></p>
+            </div>
+            <div class="icon">
+                <i class="fa fa-bar-chart"></i>
+            </div>
+        </div>
+    </div>
 </div>
+
+
 
 <div class="box box-primary">
     <div class="box-header with-border">
@@ -108,21 +137,24 @@ $this->assign('content_title', __('Dashboard'));
     </div>
     <div class="box-body no-padding">
         <div id="chart_div" style="position: relative; height: 300px; width: 100%;"></div>
+        <div id="clicks_div" style="position: relative; height: 300px; width: 100%;"></div>
+        <div id="ctr_div" style="position: relative; height: 300px; width: 100%;"></div>
+        
         <div class="small text-right" style="padding-right: 10px;">
             <?= __('Data is reported in {0} timezone', get_option('timezone', 'UTC')) ?>
         </div>
         <div style="height: 300px;overflow: auto;">
             <table class="table table-hover table-striped">
                 <thead>
-                <tr>
-                    <th><?= __('Date') ?></th>
-                    <th><?= __('Views') ?></th>
-                    <th><?= __('Link Earnings') ?></th>
-                    <th><?= __('Daily CPM') ?></th>
-                    <th><?= __('Referral Earnings') ?></th>
-                </tr>
+                    <tr>
+                        <th><?= __('Date') ?></th>
+                        <th><?= __('Views') ?></th>
+                        <th><?= __('Link Earnings') ?></th>
+                        <th><?= __('Daily CPM') ?></th>
+                        <th><?= __('Referral Earnings') ?></th>
+                    </tr>
                 </thead>
-                <?php foreach ($CurrentMonthDays as $key => $value): ?>
+                <?php foreach ($CurrentMonthDays as $key => $value) : ?>
                     <tr>
                         <td><?= $key ?></td>
                         <td><?= $value['view'] ?></td>
@@ -136,7 +168,9 @@ $this->assign('content_title', __('Dashboard'));
             </table>
         </div>
     </div>
+    
 </div>
+
 
 <?php
 /*
@@ -227,8 +261,7 @@ $this->assign('content_title', __('Dashboard'));
 
 <link rel="stylesheet" href="https://fastly.jsdelivr.net/gh/almasaeed2010/AdminLTE@v2.3.11/plugins/morris/morris.css">
 <script src="https://fastly.jsdelivr.net/gh/DmitryBaranovskiy/raphael@v2.1.0/raphael-min.js"></script>
-<script src="https://fastly.jsdelivr.net/gh/almasaeed2010/AdminLTE@v2.3.11/plugins/morris/morris.min.js"
-        type="text/javascript"></script>
+<script src="https://fastly.jsdelivr.net/gh/almasaeed2010/AdminLTE@v2.3.11/plugins/morris/morris.min.js" type="text/javascript"></script>
 
 <script>
     jQuery(document).ready(function() {
@@ -250,6 +283,60 @@ $this->assign('content_title', __('Dashboard'));
             lineWidth: 2,
             hideHover: 'auto',
             smooth: false,
+        });
+    });
+</script>
+<script>
+    jQuery(document).ready(function() {
+        new Morris.Line({
+            element: 'clicks_div',
+            resize: true,
+            data: [
+                <?php
+                foreach ($CountClicksForDays as $key => $value) {
+                    if($key=="Total"){
+                        continue;
+                    }
+                    echo '{day: "' . $key . '", clicks: ' . $value . '},';
+                }
+                ?>
+            ],
+            xkey: 'day',
+            xLabels: 'day',
+            ykeys: ['clicks'],
+            labels: ['<?= __('Clicks') ?>'],
+            lineColors: ['rgba(245, 9, 9, 1)'],
+            lineWidth: 2,
+            hideHover: 'auto',
+            smooth: false,
+            parseTime: false,
+        });
+    });
+</script>
+<script>
+    jQuery(document).ready(function() {
+        new Morris.Line({
+            element: 'ctr_div',
+            resize: true,
+            data: [
+                <?php
+                foreach ($RatioInfo as $key => $value) {
+                    if($key=="Total"){
+                        continue;
+                    }
+                    echo '{day: "' . $key . '", ctr: ' . $value . '},';
+                }
+                ?>
+            ],
+            xkey: 'day',
+            xLabels: 'day',
+            ykeys: ['ctr'],
+            labels: ['<?= __('CTR') ?>'],
+            lineColors: ['hsla(23, 96%, 51%, 1.00)'],
+            lineWidth: 2,
+            hideHover: 'auto',
+            smooth: false,
+            parseTime: false,
         });
     });
 </script>

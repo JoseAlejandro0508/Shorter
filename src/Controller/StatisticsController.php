@@ -6,6 +6,7 @@ use Cake\Event\Event;
 use Cake\I18n\Time;
 use Cake\Cache\Cache;
 use Cake\Http\Exception\NotFoundException;
+use Cake\ORM\TableRegistry;
 
 /**
  * @property \App\Model\Table\StatisticsTable $Statistics
@@ -21,6 +22,7 @@ class StatisticsController extends FrontController
 
     public function viewInfo($alias = null)
     {
+        $admin = $this->Auth->user('role') == 'admin';
         if (!$alias) {
             throw new NotFoundException(__('404 Not Found'));
         }
@@ -87,7 +89,7 @@ class StatisticsController extends FrontController
 
         $time_zone_offset = Time::now($time_zone)->format('P');
 
-        if (($stats = Cache::read('info_stats_' . $alias, '1hour')) === false) {
+        if (($stats = Cache::read('info_stats_' . $alias, '1hour')) === false || $admin) {
             $stats = $this->Statistics->find()
                 ->select([
                     'statDate' => "DATE_FORMAT(CONVERT_TZ(created,'+00:00','" . $time_zone_offset . "'), '%Y-%m-%d')",
@@ -106,9 +108,9 @@ class StatisticsController extends FrontController
             Cache::write('info_stats_' . $alias, $stats, '1hour');
         }
 
-        $this->set('stats', $stats);
 
-        if (($countries = Cache::read('info_countries_' . $alias, '1hour')) === false) {
+
+        if (($countries = Cache::read('info_countries_' . $alias, '1hour')) === false || $admin) {
             $countries = $this->Statistics->find()
                 ->select([
                     'country',
@@ -127,9 +129,9 @@ class StatisticsController extends FrontController
             Cache::write('info_countries_' . $alias, $countries, '1hour');
         }
 
-        $this->set('countries', $countries);
 
-        if (($referrers = Cache::read('info_referrers_' . $alias, '1hour')) === false) {
+
+        if (($referrers = Cache::read('info_referrers_' . $alias, '1hour')) === false || $admin) {
             $referrers = $this->Statistics->find()
                 ->select([
                     'referer_domain',
@@ -148,6 +150,74 @@ class StatisticsController extends FrontController
             Cache::write('info_referrers_' . $alias, $referrers, '1hour');
         }
 
+        if ($admin) {
+            $ClicksRegister = TableRegistry::getTableLocator()->get('click1registers');
+            $firstClick = $ClicksRegister
+                ->find()
+
+                ->where([
+                    'link_id' => $alias,
+                    'user_id' => $link->user_id,
+                    'created BETWEEN :last30 AND :now',
+                ])
+                ->bind(':last30', $last30, 'datetime')
+                ->bind(':now', $now, 'datetime')
+                ->order(['created' => 'ASC'])
+
+                ->first()->created;
+            $ViewsStat = $this->Statistics->find()
+                ->select([
+                    'country',
+                    'clicks' => 'COUNT(country)',
+                ])
+                ->where([
+                    'link_id' => $link->id,
+                    'user_id' => $link->user_id,
+                    'created BETWEEN :firstClick AND :now',
+                ])
+                ->bind(':firstClick', $firstClick, 'datetime')
+                ->bind(':now', $now, 'datetime')
+                ->order(['clicks' => 'DESC'])
+                ->group('country')
+                ->toArray();
+
+
+
+
+            $clickedStat = $ClicksRegister->find()
+                ->select([
+                    'country',
+
+                    'clicked' => 'COUNT(country)',
+                ])
+                ->where([
+                    'link_id' => $alias,
+                    'user_id' => $link->user_id,
+                    'created BETWEEN :last30 AND :now',
+                ])
+                ->bind(':last30', $last30, 'datetime')
+                ->bind(':now', $now, 'datetime')
+                ->order(['clicked' => 'DESC'])
+                ->group('country')
+                ->toArray();
+            $this->set('ClickedStat', $clickedStat);
+            $RatioInfo = [];
+            foreach ($ViewsStat as $country) {
+                foreach ($clickedStat as $clicked) {
+                    if ($clicked->country == $country->country) {
+                        $ratio = $clicked->clicked / $country->clicks;
+                        $RatioInfo[$clicked->country] = $ratio * 100;
+
+                        break;
+                    }
+                }
+            }
+            $this->set('RatioInfo', $RatioInfo);
+        }
+        $this->set('countries', $countries);
+
         $this->set('referrers', $referrers);
+        $this->set('stats', $stats);
+        $this->set('isAdmin', $admin);
     }
 }

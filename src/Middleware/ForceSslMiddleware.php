@@ -28,7 +28,7 @@ class ForceSslMiddleware
             $action = $request->getParam('action');
 
             if (!(
-                (in_array($controller, ['Links']) && in_array($action, ['view', 'go', 'popad'])) ||
+                (in_array($controller, ['Links']) && in_array($action, ['view', 'secureview' ,'go', 'popad'])) ||
                 (in_array($controller, ['Tools']) && in_array($action, ['st', 'api', 'full', 'bookmarklet'])) ||
                 (in_array($controller, ['Invoices']) && in_array($action, ['ipn'])) ||
                 (in_array($controller, ['Users']) && in_array($action, ['multidomainsAuth', 'authDone']))

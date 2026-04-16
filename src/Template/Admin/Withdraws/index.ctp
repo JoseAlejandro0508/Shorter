@@ -95,6 +95,18 @@ $withdrawal_methods = array_column_polyfill(get_withdrawal_methods(), 'name', 'i
             'class' => 'form-control'
         ]);
         ?>
+        <?=
+        $this->Form->control('Filter.type', [
+            'label' => false,
+            'options' => [
+                'Acortador' => __('Acortador'),
+                'VdMarketing' => __('VdMarketing'),
+
+            ],
+            'empty' => __('Type'),
+            'class' => 'form-control'
+        ]);
+        ?>
 
         <?= $this->Form->button(__('Filter'), ['class' => 'btn btn-default btn-sm']); ?>
 
@@ -113,6 +125,7 @@ $withdrawal_methods = array_column_polyfill(get_withdrawal_methods(), 'name', 'i
                     <tr>
                         <th><?= $this->Paginator->sort('id', __('ID')) ?></th>
                         <th><?= __('Plan') ?></th>
+                        <th><?= __('Type') ?></th>
                         <th><?= __('User') ?></th>
                         <th><?= $this->Paginator->sort('created', __('Date')) ?></th>
                         <th><?= __('Status') ?></th>
@@ -126,30 +139,34 @@ $withdrawal_methods = array_column_polyfill(get_withdrawal_methods(), 'name', 'i
                 </thead>
                 <?php foreach ($withdraws as $withdraw) : ?>
                     <tr>
-                        <td ><?= $this->Html->link($withdraw->id, array(
+                        <td><?= $this->Html->link($withdraw->id, array(
                                 'action' => 'view',
                                 $withdraw->id
                             )); ?></td>
-                        <td >
+                        <td>
                             <?php $logged_userPlan = get_user_plan($withdraw->user->id) ?>
 
                             <i style="<?= $logged_userPlan->Style ?>" id="PlanIco" class="fa fa-<?= $logged_userPlan->Icon ?>"></i>
                             <span style="<?= $logged_userPlan->Style ?>" id="PlanText"><?= $logged_userPlan->title ?></span>
                         </td>
-                        <td ><?= $this->Html->link($withdraw->user->username, array(
+                        <td>
+
+                            <span><?= $withdraw->type ?></span>
+                        </td>
+                        <td><?= $this->Html->link($withdraw->user->username, array(
                                 'controller' => 'Users',
                                 'action' => 'view',
                                 $withdraw->user->id,
                                 'prefix' => 'admin'
                             )); ?></td>
-                        <td ><?= display_date_timezone($withdraw->created); ?></td>
-                        <td ><?= h(withdraw_statuses($withdraw->status)) ?></td>
-                        <td ><?= display_price_currency($withdraw->publisher_earnings); ?></td>
-                        <td ><?= display_price_currency($withdraw->referral_earnings); ?></td>
-                        <td ><?= display_price_currency($withdraw->amount); ?></td>
+                        <td><?= display_date_timezone($withdraw->created); ?></td>
+                        <td><?= h(withdraw_statuses($withdraw->status)) ?></td>
+                        <td><?= display_price_currency($withdraw->publisher_earnings); ?></td>
+                        <td><?= display_price_currency($withdraw->referral_earnings); ?></td>
+                        <td><?= display_price_currency($withdraw->amount); ?></td>
                         <td><?= (isset($withdrawal_methods[$withdraw->method])) ?
                                 $withdrawal_methods[$withdraw->method] : $withdraw->method ?></td>
-                        <td ><?= nl2br(h($withdraw->account)); ?></td>
+                        <td><?= nl2br(h($withdraw->account)); ?></td>
                         <td class="withdraw-order-table">
                             <?php if ($withdraw->status != 5) : ?>
                                 <?= $this->Html->link(

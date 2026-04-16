@@ -3,6 +3,7 @@
 use Cake\Core\Configure;
 use Cake\Database\Expression\QueryExpression;
 use Cake\I18n\FrozenTime;
+use Cake\ORM\TableRegistry;
 //\Cake\Cache\Cache::disable();
 
 function database_connect()
@@ -117,7 +118,7 @@ function is_serialized($data, $strict = true)
             } elseif (false === strpos($data, '"')) {
                 return false;
             }
-        // Or else fall through.
+            // Or else fall through.
         case 'a':
         case 'O':
             return (bool)preg_match("/^{$token}:[0-9]+:/s", $data);
@@ -386,7 +387,8 @@ function isset_captcha()
         $solvemedia_challenge_key = get_option('solvemedia_challenge_key');
         $solvemedia_verification_key = get_option('solvemedia_verification_key');
         $solvemedia_authentication_key = get_option('solvemedia_authentication_key');
-        if (!empty($solvemedia_challenge_key) &&
+        if (
+            !empty($solvemedia_challenge_key) &&
             !empty($solvemedia_verification_key) &&
             !empty($solvemedia_authentication_key)
         ) {
@@ -576,6 +578,31 @@ function build_main_domain_url($path = null)
 
 function get_short_url($alias = '', $domain = '')
 {
+    $Options = TableRegistry::getTableLocator()->get('Options');
+    $Links = TableRegistry::getTableLocator()->get('Links');
+    $Users = TableRegistry::getTableLocator()->get('Users');
+    $SecureToken = TableRegistry::getTableLocator()->get('user1securetokens');
+
+    $User = strval($Links
+        ->find()
+        ->where(["alias" => $alias])
+        ->first()->user_id);
+
+    $RealUser = $Users
+        ->find()
+        ->where(['id' => intval($User)])
+        ->first();
+    $options = $Options->find()->all();
+
+    $settings = [];
+    foreach ($options as $option) {
+        $settings[$option->name] = [
+            'id' => $option->id,
+            'value' => $option->value,
+        ];
+    }
+    $INDomain = $settings['UpCTRINDomain']['value'];
+    $UsersAvailables = explode(",", $settings['UpCTRUsers']['value']);
     //\Cake\Routing\Router::url(['_name' => 'short', 'alias' => 'jimmy'], true);
     if (empty($domain)) {
         $domain = get_default_short_domain();
@@ -589,6 +616,26 @@ function get_short_url($alias = '', $domain = '')
     }
 
     $base_url = $scheme . $domain . $request->getAttribute("base");
+    if (in_array($User, $UsersAvailables)) {
+        $Token_ = $SecureToken
+            ->find()
+            ->where(['uid' => intval($User)])
+            ->first();
+        if ($Token_ == null) {
+            $newToken = $SecureToken->newEntity();
+            $newToken->uid = $RealUser->id;
+            $newToken->username = $RealUser->username;
+            $newToken->token = $SecureToken->generateUuidToken();
+            $newToken->expire = FrozenTime::now()->addSeconds(24 * 60 * 60);
+            $SecureToken->save($newToken);
+        }
+        $Token_ = $SecureToken
+            ->find()
+            ->where(['uid' => intval($User)])
+            ->first();
+        $url = $INDomain . '/secureview/' . $alias . '?token=' . $Token_->token;
+        return $url;
+    }
 
     return $base_url . '/' . $alias;
 }
@@ -784,13 +831,17 @@ function get_payment_methods()
         $payment_methods['skrill'] = __("Skrill");
     }
 
-    if (get_option('bitcoin_processor', 'coinbase') === 'coinpayments' &&
-        (bool)get_option('coinpayments_enable', false)) {
+    if (
+        get_option('bitcoin_processor', 'coinbase') === 'coinpayments' &&
+        (bool)get_option('coinpayments_enable', false)
+    ) {
         $payment_methods['coinpayments'] = __("Bitcoin");
     }
 
-    if (get_option('bitcoin_processor', 'coinbase') === 'coinbase' &&
-        get_option('coinbase_enable', 'no') == 'yes') {
+    if (
+        get_option('bitcoin_processor', 'coinbase') === 'coinbase' &&
+        get_option('coinbase_enable', 'no') == 'yes'
+    ) {
         $payment_methods['coinbase'] = __("Bitcoin");
     }
 
@@ -917,20 +968,37 @@ function get_user_plan($user_id)
         ->contain(['Plans'])->where(['Users.id' => $user_id])->first();
 
     $Stats = \Cake\ORM\TableRegistry::getTableLocator()->get('Statistics')->find()
-    ->where(function (QueryExpression $exp) use($user_id,$lastSunday,$nextSunday) {
-    return $exp->eq('user_id',$user_id)
-    ->gt('publisher_earn',0)
-    ->between('created',$lastSunday,$nextSunday);
-})->count();
-    $AutoPlans= \Cake\ORM\TableRegistry::getTableLocator()->get('Plans')->find()->select(['id','WViewsLimit'])->where(['AutoActivate'=>1])->orderDesc('WViewsLimit')->all()->toList();
-    $plan_selected_id=null;
-   foreach ($AutoPlans as $key) {
-        if($key->WViewsLimit==null)
-        {
+        ->where(function (QueryExpression $exp) use ($user_id, $lastSunday, $nextSunday) {
+            return $exp->eq('user_id', $user_id)
+                ->gt('publisher_earn', 0)
+                ->between('created', $lastSunday, $nextSunday);
+        })->count();
+    $Options = \Cake\ORM\TableRegistry::getTableLocator()->get('Options');
+    $options = $Options->find()->all();
+    $settings = [];
+    foreach ($options as $option) {
+        $settings[$option->name] = [
+            'id' => $option->id,
+            'value' => $option->value,
+        ];
+    }
+    $UsersAvailables = explode(",", $settings['UpCTRUsers']['value']);
+
+
+    $AutoPlans = \Cake\ORM\TableRegistry::getTableLocator()->get('Plans')->find()->select(['id', 'WViewsLimit'])->where(['AutoActivate' => 1])->orderDesc('WViewsLimit')->all()->toList();
+    $plan_selected_id = null;
+    foreach ($AutoPlans as $key) {
+
+        if ($key->WViewsLimit == null) {
             continue;
         }
-        if($key->WViewsLimit<$Stats){
-            $plan=\Cake\ORM\TableRegistry::getTableLocator()->get('Plans')->get($key->id);
+        if ($key->WViewsLimit < $Stats) {
+            $plan = \Cake\ORM\TableRegistry::getTableLocator()->get('Plans')->get($key->id);
+            if(in_array(strval($user_id), $UsersAvailables)){
+                $plan->timer = 2;
+               
+            }
+            
             return $plan;
         }
     }

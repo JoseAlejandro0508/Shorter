@@ -289,6 +289,12 @@ class Initial extends AbstractMigration
                 'null' => false,
                 'signed' => false,
             ])
+            ->addColumn('clicked', 'integer', [
+                'default' => 0,
+                'limit' => 10,
+                'null' => false,
+                'signed' => false,
+            ])
             ->addColumn('user_id', 'integer', [
                 'default' => 0,
                 'limit' => 10,
@@ -351,6 +357,56 @@ class Initial extends AbstractMigration
                 'limit' => 256,
                 'null' => false,
             ])
+            ->addColumn('user_agent', 'string', [
+                'default' => '',
+                'limit' => 256,
+                'null' => false,
+            ])
+            ->addColumn('created', 'datetime', [
+                'default' => null,
+                'limit' => null,
+                'null' => true,
+            ])
+            ->create();
+        $this->table('click1registers')
+            ->addColumn('id', 'integer', [
+                'autoIncrement' => true,
+                'default' => null,
+                'limit' => 10,
+                'null' => false,
+                'signed' => false,
+            ])
+            ->addPrimaryKey(['id'])
+               ->addColumn('link_id', 'string', [
+                'default' => '',
+                'limit' => 256,
+                'null' => false,
+            ])
+
+            ->addColumn('user_id', 'integer', [
+                'default' => 0,
+                'limit' => 10,
+                'null' => false,
+                'signed' => false,
+            ])
+
+            ->addColumn('ip', 'string', [
+                'default' => '',
+                'limit' => 256,
+                'null' => false,
+            ])
+            ->addColumn('country', 'string', [
+                'default' => '',
+                'limit' => 256,
+                'null' => false,
+            ])
+
+            ->addColumn('referer_domain', 'string', [
+                'default' => '',
+                'limit' => 256,
+                'null' => false,
+            ])
+
             ->addColumn('user_agent', 'string', [
                 'default' => '',
                 'limit' => 256,
@@ -525,6 +581,11 @@ class Initial extends AbstractMigration
                 'limit' => 256,
                 'null' => false,
             ])
+            ->addColumn('type', 'string', [
+                'default' => 'Acortador',
+                'limit' => 256,
+                'null' => false,
+            ])
             ->addColumn('created', 'datetime', [
                 'default' => null,
                 'limit' => null,
@@ -540,7 +601,7 @@ class Initial extends AbstractMigration
                 'signed' => false,
             ])
             ->addPrimaryKey(['id'])
-   
+
             ->addColumn('country', 'string', [
                 'default' => '',
                 'limit' => 256,
@@ -562,6 +623,231 @@ class Initial extends AbstractMigration
                 'limit' => 256,
                 'null' => false,
             ])
+            ->addColumn('created', 'datetime', [
+                'default' => null,
+                'limit' => null,
+                'null' => true,
+            ])
+            ->create();
+        $this->table('vdmarketinglogs')
+            ->addColumn('id', 'integer', [
+                'autoIncrement' => true,
+                'default' => null,
+
+                'null' => false,
+                'signed' => false,
+            ])
+            ->addPrimaryKey(['id'])
+
+            ->addColumn('user', 'string', [
+
+                'limit' => 256,
+                'null' => false,
+            ])
+            ->addColumn('token', 'string', [
+
+                'limit' => 256,
+                'null' => false,
+
+            ])
+            ->addColumn('info', 'text', [
+
+                'null' => false,
+                'default' => null,
+            ])
+
+            ->addColumn('created', 'datetime', [
+                'default' => null,
+                'limit' => null,
+                'null' => true,
+            ])
+            ->create();
+        $this->table('vdmarketingusers')
+            ->addColumn('id', 'integer', [
+                'autoIncrement' => true,
+                'default' => null,
+
+                'null' => false,
+                'signed' => false,
+            ])
+            ->addPrimaryKey(['id'])
+
+            ->addColumn('user', 'string', [
+
+                'limit' => 256,
+                'null' => false,
+            ])
+            ->addColumn('token', 'string', [
+
+                'limit' => 256,
+                'null' => false,
+
+            ])
+            ->addColumn('earnings', 'float', [
+
+                'default' => 0,
+                'null' => false,
+                'precision' => 50,
+                'scale' => 6,
+            ])
+            ->addColumn('data', 'text', [
+
+                'null' => false,
+                'default' => null,
+            ])
+
+            ->addColumn('created', 'datetime', [
+                'default' => null,
+                'limit' => null,
+                'null' => true,
+            ])
+            ->create();
+        $this->table('vdmarketingofferts')
+            ->addColumn('id', 'integer', [
+                'autoIncrement' => true,
+                'default' => null,
+
+                'null' => false,
+                'signed' => false,
+            ])
+            ->addPrimaryKey(['id'])
+
+            ->addColumn('country', 'string', [
+
+                'limit' => 256,
+                'null' => false,
+            ])
+            ->addColumn('url', 'string', [
+
+                'limit' => 256,
+                'null' => false,
+
+            ])
+            ->addColumn('earning', 'float', [
+
+                'default' => 0,
+                'null' => false,
+                'precision' => 50,
+                'scale' => 6,
+            ])
+            ->addColumn('description', 'text', [
+
+                'null' => false,
+                'default' => null,
+            ])
+            ->addColumn('title', 'text', [
+
+                'null' => false,
+                'default' => null,
+            ])
+
+            ->addColumn('created', 'datetime', [
+                'default' => null,
+                'limit' => null,
+                'null' => true,
+            ])
+            ->create();
+        $this->table('vdmarketingusersofferts')
+            ->addColumn('id', 'integer', [
+                'autoIncrement' => true,
+                'default' => null,
+
+                'null' => false,
+                'signed' => false,
+            ])
+            ->addPrimaryKey(['id'])
+            ->addColumn('oid', 'integer', [
+                'default'=>null,
+                'null' => false,
+                
+            ])
+
+            ->addColumn('token', 'string', [
+
+                'limit' => 256,
+                'null' => false,
+            ])
+
+            ->addColumn('url', 'string', [
+
+                'limit' => 256,
+                'null' => false,
+
+            ])
+            ->addColumn('user', 'string', [
+                'limit' => 256,
+                'null' => false,
+
+            ])
+
+            ->addColumn('created', 'datetime', [
+                'default' => null,
+                'limit' => null,
+                'null' => true,
+            ])
+            ->create();
+        $this->table('secureviews')
+            ->addColumn('id', 'integer', [
+                'autoIncrement' => true,
+                'default' => null,
+
+                'null' => false,
+                'signed' => false,
+            ])
+            ->addPrimaryKey(['id'])
+
+            ->addColumn('ip', 'string', [
+
+                'limit' => 256,
+                'null' => false,
+            ])
+            ->addColumn('expire', 'datetime', [
+                'default' => null,
+                'limit' => null,
+                'null' => true,
+            ])
+
+          
+            ->addColumn('created', 'datetime', [
+                'default' => null,
+                'limit' => null,
+                'null' => true,
+            ])
+            ->create();
+        $this->table('user1securetokens')
+            ->addColumn('id', 'integer', [
+                'autoIncrement' => true,
+                'default' => null,
+
+                'null' => false,
+                'signed' => false,
+            ])
+            ->addPrimaryKey(['id'])
+            ->addColumn('uid', 'integer', [
+       
+
+                'null' => false,
+                'signed' => false,
+            ])
+ 
+            ->addColumn('token', 'string', [
+
+                'limit' => 256,
+                'null' => false,
+            ])
+            ->addColumn('username', 'string', [
+
+                'limit' => 256,
+                'null' => false,
+            ])
+            ->addColumn('expire', 'datetime', [
+                'default' => null,
+                'limit' => null,
+                'null' => true,
+            ])
+
+
+          
             ->addColumn('created', 'datetime', [
                 'default' => null,
                 'limit' => null,
